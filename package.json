@@ -1,0 +1,66 @@
+{
+  "name": "imagekit-vue",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build:lib": "vue-cli-service build --target lib src/index.js",
+    "build": "vue-cli-service lint --fix; npm run build:lib",
+    "serve": "vue-cli-service serve",
+    "lint": "vue-cli-service lint",
+    "test:unit": "rm -f tests/__snapshots__/storyshots.test.js.snap && vue-cli-service test:unit",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "main": "dist/imagekit-vue.common.js",
+  "browser": "src/index.js",
+  "unpkg": "dist/imagekit-vue.umd.min.js",
+  "dependencies": {
+    "babel-plugin-require-context-hook": "^1.0.0",
+    "core-js": "^3.4.3",
+    "imagekit-javascript": "^1.0.1",
+    "jest-vue-preprocessor": "^1.7.0",
+    "vue": "^2.6.11"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@storybook/addon-actions": "^5.2.8",
+    "@storybook/addon-links": "^5.2.8",
+    "@storybook/addon-storyshots": "^5.2.8",
+    "@storybook/addons": "^5.2.8",
+    "@storybook/vue": "^5.2.8",
+    "@vue/cli-plugin-babel": "^4.1.0",
+    "@vue/cli-plugin-eslint": "^4.1.0",
+    "@vue/cli-plugin-unit-jest": "^4.1.1",
+    "@vue/cli-service": "^4.1.0",
+    "@vue/test-utils": "^1.0.0-beta.30",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
+    "babel-preset-vue": "^2.0.2",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^24.9.0",
+    "vue-loader": "^15.8.3",
+    "vue-template-compiler": "^2.6.11",
+    "webpack": "^4.41.4",
+    "webpack-cli": "^3.3.10"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
+}
