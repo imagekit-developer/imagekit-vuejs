@@ -1,0 +1,6 @@
+node_modules
+.vscode/settings.json
+.vscode/launch.json
+.env
+/dist
+tests/__snapshots__
