@@ -5,20 +5,20 @@
     <IKImage
       :publicKey="publicKey"
       :urlEndpoint="urlEndpoint"
-      src="https://ik.imagekit.io/gqyojxcwzxj/ABC_BV8lzpfOS"
+      :src="src"
     />
     <p>Let's transform this once</p>
     <IKImage
       :publicKey="publicKey"
       :urlEndpoint="urlEndpoint"
-      src="https://ik.imagekit.io/gqyojxcwzxj/ABC_BV8lzpfOS"
+      :src="src"
       v-bind:transformation="[{height:300,width:400}]"
     />
     <p>Let's transform this more than once</p>
     <IKImage
       :publicKey="publicKey"
       :urlEndpoint="urlEndpoint"
-      path="/ABC_BV8lzpfOS"
+      :path="path"
       v-bind:transformation="[{height:300,width:400},{rotation:90}]"
     />
 
@@ -26,13 +26,13 @@
     <IKImage
       :publicKey="publicKey"
       :urlEndpoint="urlEndpoint"
-      src="https://ik.imagekit.io/gqyojxcwzxj/ABC_BV8lzpfOS"
+      :src="src"
       v-bind:lqip="{active:true,quality:20}"
     />
 
     <p>Adding a Image with Context</p>
     <IKContext :publicKey="publicKey" :urlEndpoint="urlEndpoint">
-      <IKImage path="/ABC_BV8lzpfOS" v-bind:transformation="[{height:300,width:400}]" />
+      <IKImage :path="path" v-bind:transformation="[{height:300,width:400}]" />
     </IKContext>
     <p>Upload</p>
     <IKContext
@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import { IKImage, IKContext, IKUpload } from "imagekit-vue";
+import { IKImage, IKContext, IKUpload } from "imagekitio-vue";
 
 export default {
   name: "app",
@@ -60,7 +60,9 @@ export default {
     return {
       urlEndpoint: process.env.VUE_APP_URL_ENDPOINT,
       publicKey: process.env.VUE_APP_PUBLIC_KEY,
-      authenticationEndpoint: process.env.VUE_APP_AUTHENTICATION_ENDPOINT
+      authenticationEndpoint: process.env.VUE_APP_AUTHENTICATION_ENDPOINT,
+      src: "https://ik.imagekit.io/mindship/default-image.jpg",
+      path: "/default-image.jpg"
     };
   }
 };

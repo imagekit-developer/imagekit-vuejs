@@ -6,28 +6,30 @@ export default {
 
 const urlEndpoint = process.env.VUE_APP_URL_ENDPOINT;
 const publicKey = process.env.VUE_APP_PUBLIC_KEY;
+const src = "https://ik.imagekit.io/mindship/default-image.jpg";
+const path = "/default-image.jpg";
 
 export const imageWithSrc = () => ({
   components: { IKImage },
-  template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} src="https://ik.imagekit.io/gqyojxcwzxj/ABC_BV8lzpfOS"/>`,
+  template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} src=${src}/>`,
 });
 
 export const imageWithPath = () => ({
   components: { IKImage },
-  template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} path="/ABC_BV8lzpfOS"/>`,
+  template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} path=${path}/>`,
 });
 
 export const imageWithLQIP = () => ({
   components: { IKImage },
-  template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} src="https://ik.imagekit.io/gqyojxcwzxj/ABC_BV8lzpfOS" v-bind:lqip="{active:true,threshold:20}"/>`,
+  template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} src=${src} v-bind:lqip="{active:true,threshold:20}"/>`,
 });
 
 export const imageWithNoPublicKey = () => ({
   components: { IKImage },
-  template: `<IKImage publicKey="" urlEndpoint=${urlEndpoint} src="https://ik.imagekit.io/gqyojxcwzxj/ABC_BV8lzpfOS"/>`,
+  template: `<IKImage publicKey="" urlEndpoint=${urlEndpoint} src=${src}/>`,
 });
 
 export const imageWithNoUrlEndpoint = () => ({
   components: { IKImage },
-  template: `<IKImage publicKey="${publicKey}" urlEndpoint="" src="https://ik.imagekit.io/gqyojxcwzxj/ABC_BV8lzpfOS"/>`,
+  template: `<IKImage publicKey="${publicKey}" urlEndpoint="" src=${src}/>`,
 });
