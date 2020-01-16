@@ -9,10 +9,10 @@ export default {
   inject: {configurations: {default:""}},
   props: {
     fileName: { type: String, default: "", required: false },
-    useUniqueFileName: {type: Boolean, default:"true", required:false},
+    useUniqueFileName: {type: Boolean, default:true, required:false},
     tags:{type:Array,required:false},
     folder:{ type: String, default: "/", required: false },
-    isPrivateFile: {type: Boolean, default:"false", required:false},
+    isPrivateFile: {type: Boolean, default:false, required:false},
     customCoordinates: { type: String, default: "", required: false },
     responseFields: { type: Array, required: false }
   },
