@@ -1,5 +1,5 @@
 {
-  "name": "imagekit-vue",
+  "name": "imagekitio-vue",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,9 +11,9 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
-  "main": "dist/imagekit-vue.common.js",
+  "main": "dist/imagekitio-vue.common.js",
   "browser": "src/index.js",
-  "unpkg": "dist/imagekit-vue.umd.min.js",
+  "unpkg": "dist/imagekitio-vue.umd.min.js",
   "dependencies": {
     "babel-plugin-require-context-hook": "^1.0.0",
     "core-js": "^3.4.3",
