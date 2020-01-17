@@ -28,7 +28,7 @@ Now link it with, npm link
 ```js
 npm link
 ```
-This will create a global repository link for imagekit-vue
+This will create a global repository link for imagekitio-vue
 
 ### Installing the sample-app
 
@@ -44,9 +44,9 @@ npm install
 
 Now run,
 ```
-npm link imagekit-vue
+npm link imagekitio-vue
 ```
-This should create a copy of `imagekit-vue` library in `node_modules` of `sample-app`
+This should create a copy of `imagekitio-vue` library in `node_modules` of `sample-app`
 
 ## Setting the environment variable
 Create a .env file by renaming the sample.env in examples/sample-app
