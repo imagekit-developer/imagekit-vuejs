@@ -49,6 +49,14 @@
 <script>
 import { IKImage, IKContext, IKUpload } from "imagekitio-vue";
 
+let urlEndpoint= process.env.VUE_APP_URL_ENDPOINT;
+if(urlEndpoint[urlEndpoint.length-1] === "/")
+    urlEndpoint = urlEndpoint.slice(0,urlEndpoint.length-1);
+
+let path = "/default-image.jpg";
+  if(path[0] === "/")
+    path = path.split("/")[1];
+
 export default {
   name: "app",
   components: {
@@ -58,11 +66,11 @@ export default {
   },
   data() {
     return {
-      urlEndpoint: process.env.VUE_APP_URL_ENDPOINT,
+      urlEndpoint: urlEndpoint,
       publicKey: process.env.VUE_APP_PUBLIC_KEY,
       authenticationEndpoint: process.env.VUE_APP_AUTHENTICATION_ENDPOINT,
-      path: "default-image.jpg",
-      src: `${urlEndpoint}${path}`
+      path: path,
+      src: `${urlEndpoint}/${path}`
     };
   }
 };
