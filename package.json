@@ -2,11 +2,11 @@
   "name": "imagekitio-vue",
   "version": "0.1.0",
   "scripts": {
-    "build:lib": "vue-cli-service build --target lib src/index.js",
-    "build": "vue-cli-service lint --fix; npm run build:lib",
-    "serve": "vue-cli-service serve",
-    "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit -u",
+    "build:lib": "./node_modules/.bin/vue-cli-service build --target lib src/index.js",
+    "build": "./node_modules/.bin/vue-cli-service lint --fix; npm run build:lib",
+    "serve": "./node_modules/.bin/vue-cli-service serve",
+    "lint": "./node_modules/.bin/vue-cli-service lint",
+    "test:unit": "./node_modules/.bin/vue-cli-service test:unit -u",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },

@@ -24,7 +24,7 @@ jobs:
       run: |
         npm i -g yarn
         yarn install
-        yarn test
+        yarn test:unit
         yarn build
       env:
         CI: true
