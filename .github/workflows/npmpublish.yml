@@ -25,6 +25,7 @@ jobs:
         npm i -g yarn
         yarn install
         yarn test
+        yarn build
       env:
         CI: true
         VUE_APP_PUBLIC_KEY: ${{ secrets.ik_public_key }}

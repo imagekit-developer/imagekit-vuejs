@@ -6,7 +6,7 @@
     "build": "vue-cli-service lint --fix; npm run build:lib",
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
-    "test:unit": "rm -f tests/__snapshots__/storyshots.test.js.snap && vue-cli-service test:unit",
+    "test:unit": "vue-cli-service test:unit -u",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
