@@ -61,8 +61,8 @@ export default {
       urlEndpoint: process.env.VUE_APP_URL_ENDPOINT,
       publicKey: process.env.VUE_APP_PUBLIC_KEY,
       authenticationEndpoint: process.env.VUE_APP_AUTHENTICATION_ENDPOINT,
-      src: "https://ik.imagekit.io/mindship/default-image.jpg",
-      path: "/default-image.jpg"
+      path: "default-image.jpg",
+      src: `${urlEndpoint}${path}`
     };
   }
 };

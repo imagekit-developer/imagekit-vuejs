@@ -7,7 +7,8 @@ export default {
 
 const urlEndpoint = process.env.VUE_APP_URL_ENDPOINT;
 const publicKey = process.env.VUE_APP_PUBLIC_KEY;
-const src = "https://ik.imagekit.io/mindship/default-image.jpg";
+const path = "default-image.jpg";
+const src = `${urlEndpoint}${path}`;
 
 export const imageWithContext = () => ({
   components: { IKImage, IKContext },
