@@ -16,6 +16,10 @@
   "files": [
     "dist/*"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imagekit-developer/imagekit-vuejs"
+  },
   "dependencies": {
     "babel-plugin-require-context-hook": "^1.0.0",
     "core-js": "^3.4.3",
