@@ -1,7 +1,7 @@
 # ImageKit.io Vue SDK
 
 [![Node CI](https://github.com/imagekit-developer/imagekit-nodejs/workflows/Node%20CI/badge.svg)](https://github.com/imagekit-developer/imagekitio-vuejs/)
-[![npm version](https://img.shields.io/npm/v/imagekitio-vue)](https://www.npmjs.com/package/imagekitio-vuejs) 
+[![npm version](https://img.shields.io/npm/v/imagekitio-vue)](https://www.npmjs.com/package/imagekitio-vue)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Twitter Follow](https://img.shields.io/twitter/follow/imagekitio?label=Follow&style=social)](https://twitter.com/ImagekitIo)
 
