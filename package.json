@@ -13,6 +13,9 @@
   "main": "dist/imagekitio-vue.common.js",
   "browser": "src/index.js",
   "unpkg": "dist/imagekitio-vue.umd.min.js",
+  "files": [
+    "dist/*"
+  ],
   "dependencies": {
     "babel-plugin-require-context-hook": "^1.0.0",
     "core-js": "^3.4.3",
