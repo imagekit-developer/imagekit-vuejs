@@ -23,7 +23,7 @@
   "dependencies": {
     "babel-plugin-require-context-hook": "^1.0.0",
     "core-js": "^3.4.3",
-    "imagekit-javascript": "^1.0.1",
+    "imagekit-javascript": "^1.0.3",
     "jest-vue-preprocessor": "^1.7.0",
     "vue": "^2.6.11"
   },
