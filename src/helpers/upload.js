@@ -1,6 +1,8 @@
 import ImageKit from 'imagekit-javascript';
+const pjson = require('../../package.json');
 
 export const uploadImage = ({ e, file, fileName, useUniqueFileName, tags, folder, isPrivateFile, customCoordinates, responseFields, publicKey, urlEndpoint, authenticationEndpoint }) => {
+
 
   if (!publicKey) {
     throw new Error("Missing publicKey during initialization");
@@ -29,6 +31,7 @@ export const uploadImage = ({ e, file, fileName, useUniqueFileName, tags, folder
   };
 
   const ik = new ImageKit({
+    sdkVersion : `vuejs-${pjson.version}`,
     publicKey: publicKey,
     urlEndpoint: urlEndpoint,
     authenticationEndpoint: authenticationEndpoint

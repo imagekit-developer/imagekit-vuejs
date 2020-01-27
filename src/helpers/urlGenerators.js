@@ -1,4 +1,5 @@
 import ImageKit from 'imagekit-javascript';
+const pjson = require('../../package.json');
 
 export const generateUrl = ({publicKey, urlEndpoint, src, path, transformation}) => {
 
@@ -11,6 +12,7 @@ export const generateUrl = ({publicKey, urlEndpoint, src, path, transformation})
   }
 
   const ik = new ImageKit({
+    sdkVersion : `vuejs-${pjson.version}`,
     publicKey: publicKey,
     urlEndpoint: urlEndpoint,
   });
