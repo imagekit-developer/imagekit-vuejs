@@ -20,11 +20,11 @@ Include the components in your code:
 ## Usage
 
 The library includes 3 Components: 
-* IKContext
+* [IKContext](#IKContext)
 
-* Image
+* [IKImage](#IKImage)
 
-* Upload
+* [IKUpload](#file-upload)
 
 ### IKContext
 
@@ -40,7 +40,7 @@ In order to use the SDK, you need to provide it with a few configuration paramet
 
 _Note: Do not include your Private Key in any client side code, including this SDK or its initialization. If you pass the `privateKey` parameter while initializing this SDK, it throws an error_
 
-### Image
+### IKImage
 
 The image component component defines a ImageKit Image tag. example usage:
 
