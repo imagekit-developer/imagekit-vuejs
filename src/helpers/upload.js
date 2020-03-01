@@ -16,6 +16,18 @@ export const uploadImage = ({ e, file, fileName, useUniqueFileName, tags, folder
     throw new Error("Missing authenticationEndpoint during initialization");
   }
 
+  let newUrlEndpoint = urlEndpoint;
+
+  if(urlEndpoint) {
+    let pathInEndpoint = urlEndpoint.replace('https://ik.imagekit.io/','');
+    let leadingSlashes = pathInEndpoint.match("\/+");
+    if(leadingSlashes){
+      pathInEndpoint = pathInEndpoint.replace(leadingSlashes[0],'/');
+      newUrlEndpoint = "https://ik.imagekit.io/" + pathInEndpoint;
+    }
+  }
+
+
   let onError = (e, err) => {
     e.insertAdjacentHTML(
       "afterend",
@@ -33,7 +45,7 @@ export const uploadImage = ({ e, file, fileName, useUniqueFileName, tags, folder
   const ik = new ImageKit({
     sdkVersion : `vuejs-${pjson.version}`,
     publicKey: publicKey,
-    urlEndpoint: urlEndpoint,
+    urlEndpoint: newUrlEndpoint,
     authenticationEndpoint: authenticationEndpoint
   });
 
