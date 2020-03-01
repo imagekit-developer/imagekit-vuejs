@@ -40,9 +40,9 @@ export default Vue.extend({
             ? configurations.publicKey
             : this.publicKey,
         urlEndpoint:
-          configurations && configurations.urlEndpoint
-            ? configurations.urlEndpoint
-            : this.urlEndpoint,
+          this.urlEndpoint
+            ? this.urlEndpoint
+            : configurations.urlEndpoint,
         src: this.src,
         path: this.path,
         transformation: this.transformation
