@@ -6,7 +6,8 @@
     "build": "./node_modules/.bin/vue-cli-service lint --fix; npm run build:lib",
     "serve": "./node_modules/.bin/vue-cli-service serve",
     "lint": "./node_modules/.bin/vue-cli-service lint",
-    "test:unit": "./node_modules/.bin/vue-cli-service test:unit",
+    "test:dev": "./node_modules/.bin/vue-cli-service test:unit",
+    "test:unit": "./node_modules/.bin/vue-cli-service test:unit -u",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
