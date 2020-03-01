@@ -6,13 +6,9 @@ export default {
 
 const publicKey = process.env.VUE_APP_PUBLIC_KEY;
 
-let urlEndpoint = process.env.VUE_APP_URL_ENDPOINT;
-if(urlEndpoint[urlEndpoint.length-1] === "/")
-    urlEndpoint = urlEndpoint.slice(0,urlEndpoint.length-1);
+const urlEndpoint = process.env.VUE_APP_URL_ENDPOINT;
 
-let path = "/default-image.jpg";
-  if(path[0] === "/")
-    path = path.split("/")[1];
+const path = "/default-image.jpg";
 
 const src = `${urlEndpoint}${path}`;
 
@@ -24,6 +20,16 @@ export const imageWithSrc = () => ({
 export const imageWithPath = () => ({
   components: { IKImage },
   template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} path=${path}/>`,
+});
+
+export const imageWithLeadingSlashesInUrlEndpoint = () => ({
+  components: { IKImage },
+  template: `<IKImage publicKey="${publicKey}" urlEndpoint="https://ik.imagekit.io/mindship////" path=${path}/>`,
+});
+
+export const imageWithTrailingSlashesInPath = () => ({
+  components: { IKImage },
+  template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} path=${`////${path}`}/>`,
 });
 
 export const imageWithLQIP = () => ({
