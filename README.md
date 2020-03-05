@@ -151,3 +151,16 @@ Sample Usage
 ```
 
 `IKUpload` component accepts all the parameters supported by the [ImageKit Upload API](https://docs.imagekit.io/api-reference/upload-file-api/client-side-file-upload#request-structure-multipart-form-data) as props e.g. `tags`, `useUniqueFileName`, `folder` etc.
+
+We also equip the user with two props `onSuccess` and `onError` to handle success and falure respectively, you can simply pass your custom functions to handle the response as you require it to be,
+
+```js
+template: `<IKContext publicKey="${publicKey}" urlEndpoint="https://ik.imagekit.io/your_imagekit_id" authenticationEndpoint="http://www.yourserver.com/auth"><IKUpload fileName="your_desired_filename" :onError="onError" :onSuccess = "onSuccess" /></IKContext>`,
+
+methods: {
+    onError(err) {
+    console.log(err);
+  }, onSuccess(res) {
+    console.log(res);
+  }},
+```
