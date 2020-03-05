@@ -1,5 +1,6 @@
 import ImageKit from 'imagekit-javascript';
 const pjson = require('../../package.json');
+import { parseURL } from '../utils/urlParser';
 
 export const uploadImage = ({ e, file, fileName, useUniqueFileName, tags, folder, isPrivateFile, customCoordinates, responseFields, publicKey, urlEndpoint, authenticationEndpoint, onError, onSuccess }) => {
 
@@ -19,11 +20,13 @@ export const uploadImage = ({ e, file, fileName, useUniqueFileName, tags, folder
   let newUrlEndpoint = urlEndpoint;
 
   if(urlEndpoint) {
-    let pathInEndpoint = urlEndpoint.replace('https://ik.imagekit.io/','');
-    let leadingSlashes = pathInEndpoint.match("\/+");
+    const url_params = parseURL(urlEndpoint);
+    let {protocol, host, pathname } = url_params;
+    pathname = pathname.slice(1);
+    let leadingSlashes = pathname.match("\/+");
     if(leadingSlashes){
-      pathInEndpoint = pathInEndpoint.replace(leadingSlashes[0],'/');
-      newUrlEndpoint = "https://ik.imagekit.io/" + pathInEndpoint;
+      pathname = pathname.replace(leadingSlashes[0],'/');
+      newUrlEndpoint = `${protocol}//${host}/${pathname}`;
     }
   }
 
