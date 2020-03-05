@@ -1,7 +1,7 @@
 import ImageKit from 'imagekit-javascript';
 const pjson = require('../../package.json');
 
-export const uploadImage = ({ e, file, fileName, useUniqueFileName, tags, folder, isPrivateFile, customCoordinates, responseFields, publicKey, urlEndpoint, authenticationEndpoint }) => {
+export const uploadImage = ({ e, file, fileName, useUniqueFileName, tags, folder, isPrivateFile, customCoordinates, responseFields, publicKey, urlEndpoint, authenticationEndpoint, onError, onSuccess }) => {
 
 
   if (!publicKey) {
@@ -26,21 +26,6 @@ export const uploadImage = ({ e, file, fileName, useUniqueFileName, tags, folder
       newUrlEndpoint = "https://ik.imagekit.io/" + pathInEndpoint;
     }
   }
-
-
-  let onError = (e, err) => {
-    e.insertAdjacentHTML(
-      "afterend",
-      `<div>${err}</div>`
-    );
-  };
-
-  let onSuccess = (e) => {
-    e.insertAdjacentHTML(
-      "afterend",
-      `<div>Image Uploaded</div>`
-    );
-  };
 
   const ik = new ImageKit({
     sdkVersion : `vuejs-${pjson.version}`,
@@ -71,9 +56,9 @@ export const uploadImage = ({ e, file, fileName, useUniqueFileName, tags, folder
   ik.upload(params
     , function (err, result) {
       if (err) {
-        onError(e, err);
+        onError(err);
       } else {
-        onSuccess(e);
+        onSuccess(result);
       }
     });
 }

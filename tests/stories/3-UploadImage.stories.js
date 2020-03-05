@@ -10,7 +10,13 @@ const authenticationEndpoint = process.env.VUE_APP_AUTHENTICATION_ENDPOINT;
 
 export const ImageUpload = () => ({
   components: { IKUpload,IKContext },
-  template: `<IKContext publicKey="${publicKey}" urlEndpoint=${urlEndpoint} authenticationEndpoint=${authenticationEndpoint}><IKUpload fileName="new"/></IKContext>`,
+  methods: {
+    onError(err) {
+    console.log(err);
+  }, onSuccess(res) {
+    console.log(res);
+  }},
+  template: `<IKContext publicKey="${publicKey}" urlEndpoint=${urlEndpoint} authenticationEndpoint=${authenticationEndpoint}><IKUpload fileName="'new'" :onError="onError" :onSuccess = "onSuccess" /></IKContext>`,
 });
 
 export const ImageUploadwithAllProps = () => ({

@@ -14,7 +14,9 @@ export default {
     folder:{ type: String, default: "/", required: false },
     isPrivateFile: {type: Boolean, default:false, required:false},
     customCoordinates: { type: String, default: "", required: false },
-    responseFields: { type: Array, required: false }
+    responseFields: { type: Array, required: false },
+    onError : {type: Function, required: false},
+    onSuccess : {type: Function, required: false}
   },
   data() {
     return {
@@ -44,7 +46,9 @@ export default {
         responseFields: this.responseFields,
         publicKey: this.configurations.publicKey,
         urlEndpoint: this.configurations.urlEndpoint,
-        authenticationEndpoint: this.configurations.authenticationEndpoint
+        authenticationEndpoint: this.configurations.authenticationEndpoint,
+        onError: this.onError,
+        onSuccess: this.onSuccess
       });
 
       return;
