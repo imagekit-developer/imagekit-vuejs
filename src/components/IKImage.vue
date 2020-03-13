@@ -29,6 +29,8 @@ export default Vue.extend({
     path: { type: String, default: "", required: false },
     src: { type: String, default: "", required: false },
     transformation: { type: Array, required: false },
+    transformationPosition: {type: String, required: false},
+    queryParameters: {type: String, required: false},
     lqip: { type: Object, required: false }
   },
   computed: {
@@ -45,7 +47,9 @@ export default Vue.extend({
             : configurations.urlEndpoint,
         src: this.src,
         path: this.path,
-        transformation: this.transformation
+        transformation: this.transformation,
+        transformationPosition: this.transformationPosition,
+        queryParameters: this.queryParameters,
       });
 
       return {

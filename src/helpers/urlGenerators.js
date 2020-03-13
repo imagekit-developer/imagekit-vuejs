@@ -2,7 +2,7 @@ import ImageKit from 'imagekit-javascript';
 const pjson = require('../../package.json');
 import { parseURL } from '../utils/urlParser.js';
 
-export const generateUrl = ({publicKey, urlEndpoint, src, path, transformation}) => {
+export const generateUrl = ({publicKey, urlEndpoint, src, path, transformation, transformationPosition, queryParameters}) => {
 
   if(!publicKey) {
     throw new Error("Missing publicKey during initialization");
@@ -41,8 +41,8 @@ export const generateUrl = ({publicKey, urlEndpoint, src, path, transformation})
   });
 
   if(path){
-    return ik.url({path: newPath, transformation: transformation});
+    return ik.url({path: newPath, transformation: transformation, transformationPosition: transformationPosition? transformationPosition: "path", queryParameters: queryParameters});
   } else {
-    return ik.url({src: src, transformation: transformation});
+    return ik.url({src: src, transformation: transformation, transformationPosition: "query", queryParameters: queryParameters});
   }
 }
