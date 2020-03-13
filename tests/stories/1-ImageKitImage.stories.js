@@ -12,8 +12,6 @@ const path = "default-image.jpg";
 
 const src = `${urlEndpoint}${path}`;
 
-const srcWithQuery = `${src}?foo=bar`;
-
 export const imageWithSrc = () => ({
   components: { IKImage },
   template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} src=${src}/>`,
