@@ -6,8 +6,8 @@
     "build": "./node_modules/.bin/vue-cli-service lint --fix; npm run build:lib",
     "serve": "./node_modules/.bin/vue-cli-service serve",
     "lint": "./node_modules/.bin/vue-cli-service lint",
-    "test:dev": "./node_modules/.bin/vue-cli-service test:unit",
-    "test:unit": "./node_modules/.bin/vue-cli-service test:unit -u",
+    "test:unit": "export VUE_APP_PUBLIC_KEY=your_public_key;export VUE_APP_URL_ENDPOINT=https://ik.imagekit.io/your_imagekit_id;export VUE_APP_AUTHENTICATION_ENDPOINT=https://www.example.com/auth;./node_modules/.bin/vue-cli-service test:unit --watchAll=false;unset VUE_APP_PUBLIC_KEY;unset VUE_APP_URL_ENDPOINT;unset VUE_APP_AUTHENTICATION_ENDPOINT",
+    "test:dev": "export VUE_APP_PUBLIC_KEY=your_public_key;export VUE_APP_URL_ENDPOINT=https://ik.imagekit.io/your_imagekit_id;export VUE_APP_AUTHENTICATION_ENDPOINT=https://www.example.com/auth;./node_modules/.bin/vue-cli-service test:unit --watchAll=true;unset VUE_APP_PUBLIC_KEY;unset VUE_APP_URL_ENDPOINT;unset VUE_APP_AUTHENTICATION_ENDPOINT",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -24,7 +24,7 @@
   "dependencies": {
     "babel-plugin-require-context-hook": "^1.0.0",
     "core-js": "^3.4.3",
-    "imagekit-javascript": "^1.0.3",
+    "imagekit-javascript": "^1.1.1",
     "jest-vue-preprocessor": "^1.7.0",
     "vue": "^2.6.11"
   },
