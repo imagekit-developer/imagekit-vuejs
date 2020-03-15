@@ -10,7 +10,7 @@ const urlEndpoint = process.env.VUE_APP_URL_ENDPOINT;
 
 const path = "default-image.jpg";
 
-const src = `${urlEndpoint}${path}`;
+const src = `${urlEndpoint}/${path}`;
 
 export const imageWithSrc = () => ({
   components: { IKImage },
@@ -44,7 +44,7 @@ export const imageWithTrailingSlashesInPath = () => ({
 
 export const imageWithLQIP = () => ({
   components: { IKImage },
-  template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} src=${src} :lqip="{active:'true',threshold:20}"/>`,
+  template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} src=${src} :lqip="{active:'true',threshold:20}" v-bind:transformation="[{height:300,width:400}]"/>`,
 });
 
 export const imageWithNoPublicKey = () => ({

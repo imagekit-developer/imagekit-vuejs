@@ -10,7 +10,7 @@ const urlEndpoint = process.env.VUE_APP_URL_ENDPOINT;
 
 const path = "default-image.jpg";
 
-const src = `${urlEndpoint}${path}`;
+const src = `${urlEndpoint}/${path}`;
 
 export const imageWithTransformation = () => ({
   components: { IKImage },
