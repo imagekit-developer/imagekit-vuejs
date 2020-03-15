@@ -1,7 +1,7 @@
 <template>
   <div v-if="lqip && lqip.active">
-    <Intersect @enter="lqipSrc = imageAttrs.src" @leave="lqipSrc = lqipImage.src">
-      <img class="=ik-image" ref="imageRef" v-bind:src="lqipSrc" />
+    <Intersect @enter="lqipSrc = imageAttrs.src" @leave="lqipSrc = lqipImage.src" @change="lqipSrc = imageAttrs.src">
+      <img class="=ik-image" ref="imageRef" :src="lqipImage.src" />
     </Intersect>
   </div>
   <div v-else>
@@ -12,14 +12,14 @@
 <script>
 import Intersect from "./Intersect";
 import { generateUrl } from "../helpers/urlGenerators";
-
 import Vue from "vue";
-export default Vue.extend({
+
+const vm =  Vue.extend({
   name: "IKImage",
   inject: { configurations: { default: "" } },
   data() {
     return {
-      lqipSrc: ""
+      lqipSrc: "",
     };
   },
   components: { Intersect },
@@ -34,7 +34,7 @@ export default Vue.extend({
     lqip: { type: Object, required: false }
   },
   computed: {
-    imageAttrs() {
+    imageAttrs: function() {
       const { configurations } = this;
       let src = generateUrl({
         publicKey:
@@ -56,25 +56,44 @@ export default Vue.extend({
         src
       };
     },
-    lqipImage() {
+    lqipImage: function() {
       const { lqip, path } = this;
-      let { src } = this;
-      if (lqip !== undefined && lqip.active) {
-        const quality = lqip.quality;
+      const { configurations } = this;
+      let src = generateUrl({
+        publicKey:
+          configurations && configurations.publicKey
+            ? configurations.publicKey
+            : this.publicKey,
+        urlEndpoint:
+          this.urlEndpoint
+            ? this.urlEndpoint
+            : configurations.urlEndpoint,
+        src: this.src,
+        path: this.path,
+        transformation: this.transformation,
+        transformationPosition: this.transformationPosition,
+        queryParameters: this.queryParameters,
+      });
+
+      if (lqip.active) {
+        const quality = lqip.threshold;
         if (path !== "") {
           let newUrl = src.split("tr:");
           if (newUrl[0] === src) {
             let newUrl = src.split("/");
-            newUrl = `${newUrl[0]}//${newUrl[2]}/${
+            srd = `${newUrl[0]}//${newUrl[2]}/${
               newUrl[3]
             }/tr:q-${quality}/${newUrl[4]}`;
-            src = `${newUrl}`;
           } else {
-            newUrl = `${newUrl[0]}tr:q-${quality}${newUrl[1]}`;
-            src = `${newUrl}`;
+            src = `${newUrl[0]}tr:q-${quality}${newUrl[1]}`;
           }
         } else {
-          src = `${src}?tr=q-${quality}`;
+          if(this.transformation !== undefined){
+            src = `${src}%2Cq-${quality}`;
+          }
+          else {
+            src = `${src}&tr=q-${quality}`;
+          }
         }
       }
 
@@ -82,7 +101,9 @@ export default Vue.extend({
         src
       };
     }
-  },
-  mounted: function() {}
+  }
+
 });
+
+export default vm;
 </script>
