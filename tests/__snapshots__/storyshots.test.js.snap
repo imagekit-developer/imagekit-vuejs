@@ -1,0 +1,217 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots IKContext Image With Context 1`] = `
+<div
+  class="ik-context"
+  publickey="your_public_key"
+  urlendpoint="https://ik.imagekit.io/your_imagekit_id"
+>
+  <div>
+    <img
+      class="=ik-image"
+      src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.2"
+    />
+  </div>
+</div>
+`;
+
+exports[`Storyshots IKContext Overriding Url Parameter 1`] = `
+<div
+  class="ik-context"
+  publickey="your_public_key"
+  urlendpoint="https://ik.imagekit.io/your_imagekit_id"
+>
+  <div>
+    <img
+      class="=ik-image"
+      src="https://ik.imagekit.io/utkace/default-image.jpg?ik-sdk-version=vuejs-1.0.2"
+    />
+  </div>
+</div>
+`;
+
+exports[`Storyshots IKImage Image With LQIP 1`] = `
+<div>
+  <img
+    class="=ik-image"
+    src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.2"
+  />
+</div>
+`;
+
+exports[`Storyshots IKImage Image With Leading Slashes In Url Endpoint 1`] = `
+<div>
+  <img
+    class="=ik-image"
+    src="https://ik.imagekit.io/mindship/default-image.jpg/?ik-sdk-version=vuejs-1.0.2"
+  />
+</div>
+`;
+
+exports[`Storyshots IKImage Image With No Public Key 1`] = `<!---->`;
+
+exports[`Storyshots IKImage Image With No Url Endpoint 1`] = `<!---->`;
+
+exports[`Storyshots IKImage Image With Path 1`] = `
+<div>
+  <img
+    class="=ik-image"
+    src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg/?ik-sdk-version=vuejs-1.0.2"
+  />
+</div>
+`;
+
+exports[`Storyshots IKImage Image With Query Parameters 1`] = `
+<div>
+  <img
+    class="=ik-image"
+    src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.2&version=5&name=check"
+  />
+</div>
+`;
+
+exports[`Storyshots IKImage Image With Src 1`] = `
+<div>
+  <img
+    class="=ik-image"
+    src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg/?ik-sdk-version=vuejs-1.0.2"
+  />
+</div>
+`;
+
+exports[`Storyshots IKImage Image With Src Query Parameters 1`] = `
+<div>
+  <img
+    class="=ik-image"
+    src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?foo=bar&ik-sdk-version=vuejs-1.0.2&version=5&name=check"
+  />
+</div>
+`;
+
+exports[`Storyshots IKImage Image With Trailing Slashes In Path 1`] = `
+<div>
+  <img
+    class="=ik-image"
+    src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg/?ik-sdk-version=vuejs-1.0.2"
+  />
+</div>
+`;
+
+exports[`Storyshots IKUpload Image Upload 1`] = `
+<div
+  authenticationendpoint="https://www.example.com/auth"
+  class="ik-context"
+  publickey="your_public_key"
+  urlendpoint="https://ik.imagekit.io/your_imagekit_id"
+>
+  <input
+    type="file"
+  />
+</div>
+`;
+
+exports[`Storyshots IKUpload Image Uploadno Authentication 1`] = `
+<div
+  authenticationendpoint=""
+  class="ik-context"
+  publickey="your_public_key"
+  urlendpoint="https://ik.imagekit.io/your_imagekit_id"
+>
+  <input
+    type="file"
+  />
+</div>
+`;
+
+exports[`Storyshots IKUpload Image Uploadwith All Props 1`] = `
+<div
+  authenticationendpoint="https://www.example.com/auth"
+  class="ik-context"
+  publickey="your_public_key"
+  urlendpoint="https://ik.imagekit.io/your_imagekit_id"
+>
+  <input
+    type="file"
+  />
+</div>
+`;
+
+exports[`Storyshots IKUpload Image Uploadwith No Custom Coordinates 1`] = `
+<div
+  authenticationendpoint="https://www.example.com/auth"
+  class="ik-context"
+  publickey="your_public_key"
+  urlendpoint="https://ik.imagekit.io/your_imagekit_id"
+>
+  <input
+    type="file"
+  />
+</div>
+`;
+
+exports[`Storyshots IKUpload Image Uploadwith No Tags 1`] = `
+<div
+  authenticationendpoint="https://www.example.com/auth"
+  class="ik-context"
+  publickey="your_public_key"
+  urlendpoint="https://ik.imagekit.io/your_imagekit_id"
+>
+  <input
+    type="file"
+  />
+</div>
+`;
+
+exports[`Storyshots Transformations Image With Chained Transformation 1`] = `
+<div>
+  <img
+    class="=ik-image"
+    src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.2&tr=h-300%2Cw-400%3Art-90"
+  />
+</div>
+`;
+
+exports[`Storyshots Transformations Image With Non Existing Transformation With Existing Transformation 1`] = `
+<div>
+  <img
+    class="=ik-image"
+    src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.2&tr=h-300%2Cfoo-bar"
+  />
+</div>
+`;
+
+exports[`Storyshots Transformations Image With Transformation 1`] = `
+<div>
+  <img
+    class="=ik-image"
+    src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.2&tr=h-300%2Cw-400"
+  />
+</div>
+`;
+
+exports[`Storyshots Transformations Image With Transformation Position As Path Passing Src 1`] = `
+<div>
+  <img
+    class="=ik-image"
+    src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.2&tr=h-300%2Cw-400"
+  />
+</div>
+`;
+
+exports[`Storyshots Transformations Image With Transformation Position As Query 1`] = `
+<div>
+  <img
+    class="=ik-image"
+    src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.2&tr=h-300%2Cw-400"
+  />
+</div>
+`;
+
+exports[`Storyshots Transformations Image Withon Existing Transformation 1`] = `
+<div>
+  <img
+    class="=ik-image"
+    src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.2&tr=foo-bar"
+  />
+</div>
+`;
