@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 <template>
   <div class="sample-app">
     <h1>Hi! This is an ImageKit Vue SDK Demo!</h1>
@@ -40,7 +41,7 @@
       :urlEndpoint="urlEndpoint"
       :authenticationEndpoint="authenticationEndpoint"
     >
-      <IKUpload fileName="new_file_1" v-bind:tags="['tag1','tag2']" v-bind:responseFields="['tags']"/>
+      <IKUpload fileName="new_file_1" v-bind:tags="['tag1','tag2']" v-bind:responseFields="['tags']" :onError="onError" :onSuccess = "onSuccess"/>
     </IKContext>
     <p>To use this funtionality please remember to setup the server</p>
   </div>
@@ -72,7 +73,15 @@ export default {
       path: path,
       src: `${urlEndpoint}/${path}`
     };
-  }
+  },
+  methods: {
+    onError(err) {
+    console.log("Error");
+    console.log(err);
+  }, onSuccess(res) {
+    console.log("Success");
+    console.log(res);
+  }},
 };
 </script>
 
