@@ -59,9 +59,13 @@ export const uploadImage = ({ e, file, fileName, useUniqueFileName, tags, folder
   ik.upload(params
     , function (err, result) {
       if (err) {
-        onError(err);
+        if(onError){
+          onError(err);
+        }
       } else {
-        onSuccess(result);
+        if(onSuccess) {
+          onSuccess(result);
+        }
       }
     });
 }
