@@ -22,11 +22,9 @@ Before sample apps can be used, `imagekitio-vue` library needs to be packed and 
 
 1. In the root folder, install dependencies with `npm install`
 2. Build library with `npm run build`
-3. Now create a sys-link of the library by running `npm link`.
-4. Go to `example/sample-app` folder and use `npm install` to install dependencies.
-5. Use `npm link imagekitio-vue`, This should create a copy of `imagekitio-vue` library in `node_modules` of `sample-app`
-6. Configure sample app with required keys. Use sample-app's `Readme.md` for exact details.
-7. Use `npm run serve` from the `example/sample-app` folder to run the app.
+3. Go to `example/sample-app` folder.
+4. Configure sample app with required keys. Use sample-app's `Readme.md` for exact details.
+5. Use `npm run serve` from the `example/sample-app` folder this will install the dependencies alongside our library and run our sample-app.
 
 ## Running sample backend server
 

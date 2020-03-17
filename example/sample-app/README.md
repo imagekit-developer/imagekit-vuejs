@@ -23,13 +23,6 @@ Create the dist:
 npm run build
 ```
 
-Now link it with, npm link
-
-```js
-npm link
-```
-This will create a global repository link for imagekitio-vue
-
 ### Installing the sample-app
 
 Now, Go to `sample-app` by,
@@ -40,11 +33,6 @@ cd example/sample-app
 then,
 ```
 npm install
-```
-
-Now run,
-```
-npm link imagekitio-vue
 ```
 This should create a copy of `imagekitio-vue` library in `node_modules` of `sample-app`
 
@@ -58,7 +46,6 @@ Finally run the app,
 ```
 npm run serve
 ```
-
 
 To run the upload component you also will have set up a server
 
