@@ -12,6 +12,8 @@ const path = "default-image.jpg";
 
 const src = `${urlEndpoint}/${path}`;
 
+let nestedImagePath = "/sample-folder/default-image.jpg";
+
 export const imageWithSrc = () => ({
   components: { IKImage },
   template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} src=${src}/>`,
@@ -42,9 +44,30 @@ export const imageWithTrailingSlashesInPath = () => ({
   template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} path=${`////${path}`}/>`,
 });
 
-export const imageWithLQIP = () => ({
+export const imageWithLQIPWithSrcWithNoTransformation = () => ({
+  components: { IKImage },
+  template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} src=${src} :lqip="{active:'true',threshold:20}"/>`,
+});
+
+export const imageWithLQIPWithSrcWithTransformation = () => ({
   components: { IKImage },
   template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} src=${src} :lqip="{active:'true',threshold:20}" v-bind:transformation="[{height:300,width:400}]"/>`,
+});
+
+
+export const imageWithLQIPWithPathWithNoTransformation = () => ({
+  components: { IKImage },
+  template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} path=${path} :lqip="{active:'true',threshold:20}"/>`,
+});
+
+export const imageWithLQIPWithPathWithTransformation = () => ({
+  components: { IKImage },
+  template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} path=${path} :lqip="{active:'true',threshold:20}" v-bind:transformation="[{height:300,width:400}]"/>`,
+});
+
+export const imageWithLQIPWithNestedPath = () => ({
+  components: { IKImage },
+  template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} path=${nestedImagePath} :lqip="{active:'true',threshold:20}" v-bind:transformation="[{height:300,width:400}]"/>`,
 });
 
 export const imageWithNoPublicKey = () => ({

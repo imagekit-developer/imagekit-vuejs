@@ -30,7 +30,43 @@ exports[`Storyshots IKContext Overriding Url Parameter 1`] = `
 </div>
 `;
 
-exports[`Storyshots IKImage Image With LQIP 1`] = `
+exports[`Storyshots IKImage Image With LQIP With Nested Path 1`] = `
+<div>
+  <img
+    class="ik-image"
+    src="https://ik.imagekit.io/your_imagekit_id/tr:q-20,h-300,w-400/sample-folder/default-image.jpg?ik-sdk-version=vuejs-1.0.2"
+  />
+</div>
+`;
+
+exports[`Storyshots IKImage Image With LQIP With Path With No Transformation 1`] = `
+<div>
+  <img
+    class="ik-image"
+    src="https://ik.imagekit.io/your_imagekit_id/tr:q-20/default-image.jpg?ik-sdk-version=vuejs-1.0.2"
+  />
+</div>
+`;
+
+exports[`Storyshots IKImage Image With LQIP With Path With Transformation 1`] = `
+<div>
+  <img
+    class="ik-image"
+    src="https://ik.imagekit.io/your_imagekit_id/tr:q-20,h-300,w-400/default-image.jpg?ik-sdk-version=vuejs-1.0.2"
+  />
+</div>
+`;
+
+exports[`Storyshots IKImage Image With LQIP With Src With No Transformation 1`] = `
+<div>
+  <img
+    class="ik-image"
+    src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.2&tr=q-20"
+  />
+</div>
+`;
+
+exports[`Storyshots IKImage Image With LQIP With Src With Transformation 1`] = `
 <div>
   <img
     class="ik-image"
