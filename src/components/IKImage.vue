@@ -81,11 +81,11 @@ const vm =  Vue.extend({
           let newUrl = src.split("tr:");
           if (newUrl[0] === src) {
             let newUrl = src.split("/");
-            srd = `${newUrl[0]}//${newUrl[2]}/${
+            src = `${newUrl[0]}//${newUrl[2]}/${
               newUrl[3]
             }/tr:q-${quality}/${newUrl[4]}`;
           } else {
-            src = `${newUrl[0]}tr:q-${quality}${newUrl[1]}`;
+            src = `${newUrl[0]}tr:q-${quality},${newUrl[1]}`;
           }
         } else {
           if(this.transformation !== undefined){
