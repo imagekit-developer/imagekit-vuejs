@@ -15,21 +15,10 @@ Execute following command from the root folder to start testing.
 npm run test:dev
 ```
 
-## Running sample Vue app
+## Running sample frontend Vue app
 
 Please refer to the sample app `Readme.md` for details.
-Before sample apps can be used, `imagekitio-vue` library needs to be packed and installed using the file system within the sample apps. Use the following steps to run any sample app.
-
-1. In the root folder, install dependencies with `npm install`
-2. Build library with `npm run build`
-3. Go to `example/sample-app` folder.
-4. Configure sample app with required keys. Use sample-app's `Readme.md` for exact details.
-5. Use `npm run serve` from the `example/sample-app` folder this will install the dependencies alongside our library and run our sample-app.
 
 ## Running sample backend server
 
-Sample server for upload implementation is available at `example/sample-app/server`. To run the server, follow these steps
-
-1. Create a `.env` file based on `sample.env` and enter your private key.
-2. Use `npm install` to install dependencies. 
-3. Use `npm run server` to start the server. It will expose the [authentication endpoint](https://docs.imagekit.io/api-reference/upload-file-api/client-side-file-upload#how-to-implement-authenticationendpoint-endpoint) on `http://localhost:3000/auth`
+Please refer to the sample app `Readme.md` for details.
