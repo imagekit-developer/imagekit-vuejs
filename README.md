@@ -31,7 +31,11 @@ The library includes 3 Components:
 In order to use the SDK, you need to provide it with a few configuration parameters. The configuration parameters can be applied directly to the `Image` component or using an `IKContext` component. example:
 
 ```js
-template: <IKContext publicKey="your_public_api_key" urlEndpoint="<https://ik.imagekit.io/your_imagekit_id>"><IKImage src="<full_image_url_from_db>"/></IKContext>
+<IKContext 
+  publicKey="your_public_api_key"
+  urlEndpoint="<https://ik.imagekit.io/your_imagekit_id>">
+    <IKImage src="<full_image_url_from_db>"/>
+</IKContext>
 ```
 
 `publicKey` and `urlEndpoint` are mandatory parameters for SDK initialization.
@@ -47,16 +51,22 @@ The image component defines an IKImage tag. Example usage:
 #### Using image path and image hostname or endpoint
 
 ```js
-template: '<IKImage publicKey="your_public_api_key" urlEndpoint="https://ik.imagekit.io/your_imagekit_id" path="/path_to_file"/>'
+<IKImage
+  publicKey="your_public_api_key"
+  urlEndpoint="https://ik.imagekit.io/your_imagekit_id"
+  path="/path_to_file"/>
 ```
 
 #### Using full image URL  
 
 ```js
-template: '<IKImage publicKey="your_public_api_key" urlEndpoint="https://ik.imagekit.io/your_imagekit_id" src="<full_image_url_from_db>"/>'
-  ```
+<IKImage 
+  publicKey="your_public_api_key"
+  urlEndpoint="https://ik.imagekit.io/your_imagekit_id"
+  src="<full_image_url_from_db>"/>'
+```
 
-Supported options:
+#### Supported options:
 
 | Option           | Description                    |
 | :----------------| :----------------------------- |
@@ -120,7 +130,11 @@ The complete list of transformations supported and their usage in ImageKit can b
 #### Applying Transforms
 ```js
 
-template: '<IKImage publicKey="your_public_api_key" urlEndpoint="https://ik.imagekit.io/gqyojxcwzxj/" src="<full_image_url_from_db>" v-bind:transformation="[{height:300,width:400}]" />'
+<IKImage
+  publicKey="your_public_api_key"
+  urlEndpoint="https://ik.imagekit.io/gqyojxcwzxj/"
+  src="<full_image_url_from_db>"
+  v-bind:transformation="[{height:300,width:400}]" />
 ```
 The above image will apply transformation of width = 90 and height = 180 on the image. Since some transformatinos are destructive you might want to control the order in which the transforms are applied.
 
@@ -128,16 +142,24 @@ The above image will apply transformation of width = 90 and height = 180 on the 
 Chained transforms make it easy to specify the order the transform are applied. example: 
 
 ```js
-template: '<IKImage publicKey="your_public_api_key" urlEndpoint="https://ik.imagekit.io/your_imagekit_id" src="<full_image_url_from_db>" v-bind:transformation="[{height:300,width:400},{rotation:90}]"
+<IKImage
+  publicKey="your_public_api_key"
+  urlEndpoint="https://ik.imagekit.io/your_imagekit_id"
+  src="<full_image_url_from_db>"
+  v-bind:transformation="[{height:300,width:400},{rotation:90}]" />
 ```
 In the above case, rotation will be performed first and resizing according to width and aspect ratio will be performed afterwards.
 
 #### Low-Quality Image Placeholders (LQIP) for images
 The SDK supports automatic support for LQIP for your images if you set lqip to true in the image component. example:
 
-  ```js 
-  <IKImage publicKey="your_public_api_key" urlEndpoint="https://ik.imagekit.io/your_imagekit_id" v-bind:lqip="{active:true,threshold:20}"/>
-  ```
+```js 
+<IKImage
+  publicKey="your_public_api_key"
+  urlEndpoint="https://ik.imagekit.io/your_imagekit_id"
+  v-bind:lqip="{active:true,threshold:20}" />
+```
+
 `active` tells the status for lqip. It can be either, `true` or `false`.
 `threshold` decides the quality of the placeholder image. It can be any numeric value, a low number means low quality, and a high number means high quality.
 
@@ -155,12 +177,17 @@ An example of this server is provided in the samples folder of the SDK.
 
 Sample Usage
 ```js
-template: '<IKContext publicKey="your_public_api_key" urlEndpoint="https://ik.imagekit.io/your_imagekit_id" authenticationEndpoint="http://www.yourserver.com/auth"><IKUpload fileName="your_desired_filename"/></IKContext>'
+<IKContext
+  publicKey="your_public_api_key"
+  urlEndpoint="https://ik.imagekit.io/your_imagekit_id"
+  authenticationEndpoint="http://www.yourserver.com/auth">
+    <IKUpload fileName="your_desired_filename"/>
+</IKContext>
 ```
 
-`IKUpload` component accepts all the parameters supported by the [ImageKit Upload API](https://docs.imagekit.io/api-reference/upload-file-api/client-side-file-upload#request-structure-multipart-form-data) as props e.g. `tags`, `useUniqueFileName`, `folder` etc.
+`IKUpload` component accepts all the parameters supported by the [ImageKit Upload API](https://docs.imagekit.io/api-reference/upload-file-api/client-side-file-upload#request-structure-multipart-form-data) e.g. `tags`, `useUniqueFileName`, `folder` etc.
 
-We also equip the user with two props `onSuccess` and `onError` to handle success and falure respectively, you can simply pass your custom functions to handle the response as you require it to be,
+You can also use `onSuccess` and `onError` callbacks to handle success and falure respectively, you can simply pass your custom functions to handle the response from API.
 
 ```js
 template: `<IKContext publicKey="${publicKey}" urlEndpoint="https://ik.imagekit.io/your_imagekit_id" authenticationEndpoint="http://www.yourserver.com/auth"><IKUpload fileName="your_desired_filename" :onError="onError" :onSuccess = "onSuccess" /></IKContext>`,
@@ -174,7 +201,7 @@ methods: {
 ```
 
 ## Demo Application
-The fastest way to get started is by running the demo application. You can run the code locally. The source code is in samples/sample-app. For the instructions in [readme.md](https://github.com/imagekit-developer/imagekit-react/blob/test-case/samples/sample-app/README.md) file within [samples/sample-app](https://github.com/imagekit-developer/imagekit-react/tree/test-case/samples/sample-app) folder.
+The fastest way to get started is by running the demo application. You can run the code locally. The source code is in samples/sample-app. For the instructions in [readme.md](https://github.com/imagekit-developer/imagekit-vuejs/blob/master/samples/sample-app/README.md) file within [samples/sample-app](https://github.com/imagekit-developer/imagekit-vuejs/tree/master/samples/sample-app) folder.
 
 ## Support
 
