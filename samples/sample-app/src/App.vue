@@ -54,7 +54,7 @@ let urlEndpoint= process.env.VUE_APP_URL_ENDPOINT;
 if(urlEndpoint[urlEndpoint.length-1] === "/")
     urlEndpoint = urlEndpoint.slice(0,urlEndpoint.length-1);
 
-let path = "/default-image.jpg";
+let path = "/test_image_hvR29yIZY.jpg";
 
 export default {
   name: "app",

@@ -41,11 +41,13 @@ Create a .env file by renaming the sample.env in examples/sample-app
 
 Fill is the required parameters according to your imagekit account.
 
-## Starting the app
+## Starting the frontend app
 Finally run the app,
 ```bash
 npm run serve
 ```
+
+Open http://localhost:8080/ in the browser.
 
 To run the upload component you also will have set up a server
 

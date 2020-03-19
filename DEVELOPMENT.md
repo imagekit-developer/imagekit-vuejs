@@ -2,7 +2,7 @@
 
 Execute following command from the root folder to build the library. This creates a package in `dist` folder.
 ```sh
-# run `npm install` for first time
+npm install # for first time
 npm run build
 ```
 

@@ -11,27 +11,27 @@ ImageKit is a complete image optimization and transformation solution that comes
 
 ## Installation
 
-  `npm install --save imagekitio-vue`
+`npm install --save imagekitio-vue`
 
 Include the components in your code:
 
-  `import {IKContext} from "imagekitio-vue"`
+`import {IKContext} from "imagekitio-vue"`
 
 ## Usage
 
 The library includes 3 Components: 
 * [IKContext](#IKContext)
 
-* [IKImage](#IKImage)
+* [IKImage - URL generation](#ikimage---url-generation)
 
-* [IKUpload](#file-upload)
+* [IKUpload - File upload](#ikupload---file-upload)
 
 ### IKContext
 
 In order to use the SDK, you need to provide it with a few configuration parameters. The configuration parameters can be applied directly to the `Image` component or using an `IKContext` component. example:
 
 ```js
-    template: <IKContext publicKey="your_public_api_key" urlEndpoint="<https://ik.imagekit.io/your_imagekit_id>"><IKImage src="<full_image_url_from_db>"/></IKContext>
+template: <IKContext publicKey="your_public_api_key" urlEndpoint="<https://ik.imagekit.io/your_imagekit_id>"><IKImage src="<full_image_url_from_db>"/></IKContext>
 ```
 
 `publicKey` and `urlEndpoint` are mandatory parameters for SDK initialization.
@@ -40,25 +40,33 @@ In order to use the SDK, you need to provide it with a few configuration paramet
 
 _Note: Do not include your Private Key in any client-side code, including this SDK or its initialization. If you pass the `privateKey` parameter while initializing this SDK, it throws an error_
 
-### IKImage
+### IKImage - URL generation
 
-The image component defines an Image tag. Example usage:
+The image component defines an IKImage tag. Example usage:
 
 #### Using image path and image hostname or endpoint
 
 ```js
-  template: '<IKImage publicKey="your_public_api_key" urlEndpoint="https://ik.imagekit.io/your_imagekit_id" path="/path_to_file"/>'
+template: '<IKImage publicKey="your_public_api_key" urlEndpoint="https://ik.imagekit.io/your_imagekit_id" path="/path_to_file"/>'
+```
 
-  ```
 #### Using full image URL  
 
-  ```js
-  template: '<IKImage publicKey="your_public_api_key" urlEndpoint="https://ik.imagekit.io/your_imagekit_id" src="<full_image_url_from_db>"/>'
+```js
+template: '<IKImage publicKey="your_public_api_key" urlEndpoint="https://ik.imagekit.io/your_imagekit_id" src="<full_image_url_from_db>"/>'
   ```
-  
-`src` is the complete image URL.
-`path` is the location of the image in the ImageKit cloud. `urlEndpoint` + `path` makes the complete url.
-`transformations` is optional. The transformations to be applied to a given image. It is declared in the form of an array of objects, where each object specifies the transformation you need. The values are mentioned below.
+
+Supported options:
+
+| Option           | Description                    |
+| :----------------| :----------------------------- |
+| urlEndpoint      | Optional. The base URL to be appended before the path of the image. If not specified, the URL Endpoint specified at the time of SDK initialization is used. For example, https://ik.imagekit.io/your_imagekit_id/endpoint/ |
+| path             | Conditional. This is the path at which the image exists. For example, `/path/to/image.jpg`. Either the `path` or `src` parameter need to be specified for URL generation. |
+| src              | Conditional. This is the complete URL of an image already mapped to ImageKit. For example, `https://ik.imagekit.io/your_imagekit_id/endpoint/path/to/image.jpg`. Either the `path` or `src` parameter need to be specified for URL generation. |
+| transformation   | Optional. An array of objects specifying the transformation to be applied in the URL. The transformation name  and the value should be specified as a key-value pair in the object. Different steps of a [chained transformation](https://docs.imagekit.io/features/image-transformations/chained-transformations) can be specified as different objects of the array. The complete list of supported transformations in the SDK and some examples of using them are given later. If you use a transformation name that is not specified in the SDK, it gets applied as it is in the URL. |
+| transformationPostion | Optional. The default value is `path` that places the transformation string as a path parameter in the URL. It can also be specified as `query` which adds the transformation string as the query parameter `tr` in the URL. If you use `src` parameter to create the URL, then the transformation string is always added as a query parameter. |
+| queryParameters  | Optional. These are the other query parameters that you want to add to the final URL. These can be any query parameters and not necessarily related to ImageKit. Especially useful if you want to add some versioning parameter to your URLs. |
+
 
 #### List of supported transformations
 
@@ -136,7 +144,7 @@ The SDK supports automatic support for LQIP for your images if you set lqip to t
 ##### How does the lqip work?
 The component tries to keep it simple. It loads a lower quality image using the quality parameter to load a lower quality image, which is then replaced with the actual quality image later.
 
-#### File Upload
+### IKUpload - File Upload
 The SDK provides a simple Component to upload files to the ImageKit Media Library. It accepts `fileName` parameter as a prop. The file parameter is provided as an input from the user. 
 
 Also, make sure that you have specified `authenticationEndpoint` during SDK initialization. The SDK makes an HTTP GET request to this endpoint and expects a JSON response with three fields i.e. `signature`, `token` and `expire`.  
@@ -147,7 +155,7 @@ An example of this server is provided in the samples folder of the SDK.
 
 Sample Usage
 ```js
- template: '<IKContext publicKey="your_public_api_key" urlEndpoint="https://ik.imagekit.io/your_imagekit_id" authenticationEndpoint="http://www.yourserver.com/auth"><IKUpload fileName="your_desired_filename"/></IKContext>'
+template: '<IKContext publicKey="your_public_api_key" urlEndpoint="https://ik.imagekit.io/your_imagekit_id" authenticationEndpoint="http://www.yourserver.com/auth"><IKUpload fileName="your_desired_filename"/></IKContext>'
 ```
 
 `IKUpload` component accepts all the parameters supported by the [ImageKit Upload API](https://docs.imagekit.io/api-reference/upload-file-api/client-side-file-upload#request-structure-multipart-form-data) as props e.g. `tags`, `useUniqueFileName`, `folder` etc.
