@@ -36,7 +36,7 @@ export const imageWithSrcQueryParameters = () => ({
 
 export const imageWithLeadingSlashesInUrlEndpoint = () => ({
   components: { IKImage },
-  template: `<IKImage publicKey="${publicKey}" urlEndpoint="https://ik.imagekit.io/mindship////" path=${path}/>`,
+  template: `<IKImage publicKey="${publicKey}" urlEndpoint="https://ik.imagekit.io/your_imagekit_id////" path=${path}/>`,
 });
 
 export const imageWithTrailingSlashesInPath = () => ({
