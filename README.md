@@ -5,9 +5,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Twitter Follow](https://img.shields.io/twitter/follow/imagekitio?label=Follow&style=social)](https://twitter.com/ImagekitIo)
 
-Vue SDK for [ImageKit.io](https://imagekit.io) which implements client-side upload and URL generation for use inside a vue application.
+Vue SDK for [ImageKit.io](https://imagekit.io), which implements client-side upload and URL generation for use inside a vue application.
 
-ImageKit is a complete image optimization and transformation solution that comes with an [image CDN](https://imagekit.io/features/imagekit-infrastructure) and media storage. It can be integrated with your existing infrastructure - storages like AWS S3, web servers, your CDN and custom domain names, allowing you to deliver optimized images in minutes with minimal code changes.
+ImageKit is a complete image optimization and transformation solution that comes with an [image CDN](https://imagekit.io/features/imagekit-infrastructure) and media storage. It can be integrated with your existing infrastructure - storage like AWS S3, web servers, your CDN, and custom domain names, allowing you to deliver optimized images in minutes with minimal code changes.
 
 ## Installation
 
@@ -36,13 +36,13 @@ In order to use the SDK, you need to provide it with a few configuration paramet
 
 `publicKey` and `urlEndpoint` are mandatory parameters for SDK initialization.
 `authenticationEndpoint` is essential if you want to use the SDK for client-side uploads.
-`transformationPosition` is optional. The default value for the parametere is `path`. Acceptable values are `path` & `query`
+`transformationPosition` is optional. The default value for this parameter is `path`. Acceptable values are `path` & `query`
 
-_Note: Do not include your Private Key in any client side code, including this SDK or its initialization. If you pass the `privateKey` parameter while initializing this SDK, it throws an error_
+_Note: Do not include your Private Key in any client-side code, including this SDK or its initialization. If you pass the `privateKey` parameter while initializing this SDK, it throws an error_
 
 ### IKImage
 
-The image component component defines a ImageKit Image tag. example usage:
+The image component defines an Image tag. Example usage:
 
 #### Using image path and image hostname or endpoint
 
@@ -56,13 +56,13 @@ The image component component defines a ImageKit Image tag. example usage:
   template: '<IKImage publicKey="your_public_api_key" urlEndpoint="https://ik.imagekit.io/your_imagekit_id" src="<full_image_url_from_db>"/>'
   ```
   
-`src` is the complete URL that is already mapped to ImageKit.
+`src` is the complete image URL.
 `path` is the location of the image in the ImageKit cloud. `urlEndpoint` + `path` makes the complete url.
 `transformations` is optional. The transformations to be applied to a given image. It is declared in the form of an array of objects, where each object specifies the transformation you need. The values are mentioned below.
 
 #### List of supported transformations
 
-The complete list of transformations supported and their usage in ImageKit can be found [here](https://docs.imagekit.io/imagekit-docs/image-transformations). The SDK gives a name to each transformation parameter, making the code simpler and readable. If a transformation is supported in ImageKit, but a name for it cannot be found in the table below, then use the transformation code from ImageKit docs as the name when using in the `url` function.
+The complete list of transformations supported and their usage in ImageKit can be found [here](https://docs.imagekit.io/features/image-transformations). The SDK gives a name to each transformation parameter, making the code simpler and readable. If a transformation is supported in ImageKit, but a name for it cannot be found in the table below, then use the transformation code from ImageKit docs as the name when using in the `url` function.
 
 | Supported Transformation Name | Translates to parameter |
 | ----------------------------- | ----------------------- |
@@ -124,22 +124,22 @@ template: '<IKImage publicKey="your_public_api_key" urlEndpoint="https://ik.imag
 ```
 In the above case, rotation will be performed first and resizing according to width and aspect ratio will be performed afterwards.
 
-#### Low Quality Image Placeholders (LQIP) for images
-The SDK supports automatic support for LQIP for your images, if you set lqip to true in the image component. example:
+#### Low-Quality Image Placeholders (LQIP) for images
+The SDK supports automatic support for LQIP for your images if you set lqip to true in the image component. example:
 
   ```js 
   <IKImage publicKey="your_public_api_key" urlEndpoint="https://ik.imagekit.io/your_imagekit_id" v-bind:lqip="{active:true,threshold:20}"/>
   ```
-`active` tells the status for lqip, it can be either, `true` or `false`
-`threshold` decided the quaility of placeholder image. It can be any numeric value, a low number means low quality, and high number means high quality.
+`active` tells the status for lqip. It can be either, `true` or `false`.
+`threshold` decides the quality of the placeholder image. It can be any numeric value, a low number means low quality, and a high number means high quality.
 
 ##### How does the lqip work?
-The component tries to keep the it simple, it loads a lower quality image using the quality parameter to load a lower quality image, which is then replaced with the actual quality image later.
+The component tries to keep it simple. It loads a lower quality image using the quality parameter to load a lower quality image, which is then replaced with the actual quality image later.
 
 #### File Upload
 The SDK provides a simple Component to upload files to the ImageKit Media Library. It accepts `fileName` parameter as a prop. The file parameter is provided as an input from the user. 
 
-Also make sure that you have specified `authenticationEndpoint` during SDK initialization. The SDK makes an HTTP GET request to this endpoint and expects a JSON response with three fields i.e. `signature`, `token` and `expire`.  
+Also, make sure that you have specified `authenticationEndpoint` during SDK initialization. The SDK makes an HTTP GET request to this endpoint and expects a JSON response with three fields i.e. `signature`, `token` and `expire`.  
 
 [Learn how to implement authenticationEndpoint](https://docs.imagekit.io/api-reference/upload-file-api/client-side-file-upload#how-to-implement-authenticationendpoint-endpoint) on your server.
 
@@ -164,3 +164,18 @@ methods: {
     console.log(res);
   }},
 ```
+
+## Demo Application
+The fastest way to get started is by running the demo application. You can run the code locally. The source code is in samples/sample-app. For the instructions in [readme.md](https://github.com/imagekit-developer/imagekit-react/blob/test-case/samples/sample-app/README.md) file within [samples/sample-app](https://github.com/imagekit-developer/imagekit-react/tree/test-case/samples/sample-app) folder.
+
+## Support
+
+For any feedback or to report any issues or general implementation support please reach out to [support@imagekit.io](mailto:support@imagekit.io)
+
+## Links
+* [Documentation](https://docs.imagekit.io)
+* [Main website](https://imagekit.io)
+
+## License
+
+Released under the MIT license.
