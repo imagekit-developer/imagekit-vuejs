@@ -6,12 +6,19 @@ exports[`Storyshots IKContext Image With Context 1`] = `
   publickey="your_public_key"
   urlendpoint="https://ik.imagekit.io/your_imagekit_id"
 >
+<<<<<<< HEAD
   <div>
     <img
       class="ik-image"
       src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.3"
     />
   </div>
+=======
+  <img
+    class="ik-image"
+    src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.2"
+  />
+>>>>>>> feat: remove div from ImageKit Component
 </div>
 `;
 
@@ -21,6 +28,7 @@ exports[`Storyshots IKContext Overriding Url Parameter 1`] = `
   publickey="your_public_key"
   urlendpoint="https://ik.imagekit.io/your_imagekit_id"
 >
+<<<<<<< HEAD
   <div>
     <img
       class="ik-image"
@@ -35,11 +43,24 @@ exports[`Storyshots IKImage Image With LQIP With Nested Path 1`] = `
   <img
     class="ik-image"
     src="https://ik.imagekit.io/your_imagekit_id/tr:q-20,h-300,w-400/sample-folder/default-image.jpg?ik-sdk-version=vuejs-1.0.3"
+=======
+  <img
+    class="ik-image"
+    src="https://ik.imagekit.io/utkace/default-image.jpg?ik-sdk-version=vuejs-1.0.2"
+>>>>>>> feat: remove div from ImageKit Component
   />
 </div>
 `;
 
+exports[`Storyshots IKImage Image With LQIP With Nested Path 1`] = `
+<img
+  class="ik-image"
+  src="https://ik.imagekit.io/your_imagekit_id/tr:q-20,h-300,w-400/sample-folder/default-image.jpg?ik-sdk-version=vuejs-1.0.2"
+/>
+`;
+
 exports[`Storyshots IKImage Image With LQIP With Path With No Transformation 1`] = `
+<<<<<<< HEAD
 <div>
   <img
     class="ik-image"
@@ -82,6 +103,40 @@ exports[`Storyshots IKImage Image With Leading Slashes In Url Endpoint 1`] = `
     src="https://ik.imagekit.io/mindship/default-image.jpg/?ik-sdk-version=vuejs-1.0.3"
   />
 </div>
+=======
+<img
+  class="ik-image"
+  src="https://ik.imagekit.io/your_imagekit_id/tr:q-20/default-image.jpg?ik-sdk-version=vuejs-1.0.2"
+/>
+`;
+
+exports[`Storyshots IKImage Image With LQIP With Path With Transformation 1`] = `
+<img
+  class="ik-image"
+  src="https://ik.imagekit.io/your_imagekit_id/tr:q-20,h-300,w-400/default-image.jpg?ik-sdk-version=vuejs-1.0.2"
+/>
+`;
+
+exports[`Storyshots IKImage Image With LQIP With Src With No Transformation 1`] = `
+<img
+  class="ik-image"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.2&tr=q-20"
+/>
+`;
+
+exports[`Storyshots IKImage Image With LQIP With Src With Transformation 1`] = `
+<img
+  class="ik-image"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.2&tr=h-300%2Cw-400%2Cq-20"
+/>
+`;
+
+exports[`Storyshots IKImage Image With Leading Slashes In Url Endpoint 1`] = `
+<img
+  class="ik-image"
+  src="https://ik.imagekit.io/mindship/default-image.jpg/?ik-sdk-version=vuejs-1.0.2"
+/>
+>>>>>>> feat: remove div from ImageKit Component
 `;
 
 exports[`Storyshots IKImage Image With No Public Key 1`] = `<!---->`;
@@ -89,6 +144,7 @@ exports[`Storyshots IKImage Image With No Public Key 1`] = `<!---->`;
 exports[`Storyshots IKImage Image With No Url Endpoint 1`] = `<!---->`;
 
 exports[`Storyshots IKImage Image With Path 1`] = `
+<<<<<<< HEAD
 <div>
   <img
     class="ik-image"
@@ -131,6 +187,40 @@ exports[`Storyshots IKImage Image With Trailing Slashes In Path 1`] = `
     src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg/?ik-sdk-version=vuejs-1.0.3"
   />
 </div>
+=======
+<img
+  class="ik-image"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg/?ik-sdk-version=vuejs-1.0.2"
+/>
+`;
+
+exports[`Storyshots IKImage Image With Query Parameters 1`] = `
+<img
+  class="ik-image"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.2&version=5&name=check"
+/>
+`;
+
+exports[`Storyshots IKImage Image With Src 1`] = `
+<img
+  class="ik-image"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg/?ik-sdk-version=vuejs-1.0.2"
+/>
+`;
+
+exports[`Storyshots IKImage Image With Src Query Parameters 1`] = `
+<img
+  class="ik-image"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?foo=bar&ik-sdk-version=vuejs-1.0.2&version=5&name=check"
+/>
+`;
+
+exports[`Storyshots IKImage Image With Trailing Slashes In Path 1`] = `
+<img
+  class="ik-image"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg/?ik-sdk-version=vuejs-1.0.2"
+/>
+>>>>>>> feat: remove div from ImageKit Component
 `;
 
 exports[`Storyshots IKUpload Image Upload 1`] = `
@@ -199,6 +289,7 @@ exports[`Storyshots IKUpload Image Uploadwith No Tags 1`] = `
 `;
 
 exports[`Storyshots Transformations Image With Chained Transformation 1`] = `
+<<<<<<< HEAD
 <div>
   <img
     class="ik-image"
@@ -250,4 +341,45 @@ exports[`Storyshots Transformations Image Withon Existing Transformation 1`] = `
     src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.3&tr=foo-bar"
   />
 </div>
+=======
+<img
+  class="ik-image"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.2&tr=h-300%2Cw-400%3Art-90"
+/>
+`;
+
+exports[`Storyshots Transformations Image With Non Existing Transformation With Existing Transformation 1`] = `
+<img
+  class="ik-image"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.2&tr=h-300%2Cfoo-bar"
+/>
+`;
+
+exports[`Storyshots Transformations Image With Transformation 1`] = `
+<img
+  class="ik-image"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.2&tr=h-300%2Cw-400"
+/>
+`;
+
+exports[`Storyshots Transformations Image With Transformation Position As Path Passing Src 1`] = `
+<img
+  class="ik-image"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.2&tr=h-300%2Cw-400"
+/>
+`;
+
+exports[`Storyshots Transformations Image With Transformation Position As Query 1`] = `
+<img
+  class="ik-image"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.2&tr=h-300%2Cw-400"
+/>
+`;
+
+exports[`Storyshots Transformations Image Withon Existing Transformation 1`] = `
+<img
+  class="ik-image"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.2&tr=foo-bar"
+/>
+>>>>>>> feat: remove div from ImageKit Component
 `;

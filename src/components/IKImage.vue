@@ -1,12 +1,8 @@
 <template>
-  <div v-if="lqip && lqip.active">
-    <Intersect @enter="lqipSrc = imageAttrs.src" @leave="lqipSrc = lqipImage.src" @change="lqipSrc = imageAttrs.src">
+    <Intersect v-if="lqip && lqip.active" @enter="lqipSrc = imageAttrs.src" @leave="lqipSrc = lqipImage.src" @change="lqipSrc = imageAttrs.src">
       <img class="ik-image" ref="imageRef" :src="lqipImage.src" />
     </Intersect>
-  </div>
-  <div v-else>
-    <img class="ik-image" ref="imageRef" v-bind="imageAttrs" />
-  </div>
+    <img v-else class="ik-image" ref="imageRef" v-bind="imageAttrs" />
 </template>
 
 <script>
