@@ -13,14 +13,14 @@
       :publicKey="publicKey"
       :urlEndpoint="urlEndpoint"
       :src="src"
-      v-bind:transformation="[{height:300,width:400}]"
+      :transformation="[{height:300,width:400}]"
     />
     <p>Let's transform this more than once</p>
     <IKImage
       :publicKey="publicKey"
       :urlEndpoint="urlEndpoint"
       :path="path"
-      v-bind:transformation="[{height:300,width:400},{rotation:90}]"
+      :transformation="[{height:300,width:400},{rotation:90}]"
     />
 
     <p>LQIP</p>
@@ -28,12 +28,12 @@
       :publicKey="publicKey"
       :urlEndpoint="urlEndpoint"
       :src="src"
-      v-bind:lqip="{active:true,quality:20}"
+      :lqip="{active:true,threshold:20}"
     />
 
     <p>Adding a Image with Context</p>
     <IKContext :publicKey="publicKey" :urlEndpoint="urlEndpoint">
-      <IKImage :path="path" v-bind:transformation="[{height:300,width:400}]" />
+      <IKImage :path="path" :transformation="[{height:300,width:400}]" />
     </IKContext>
     <p>Upload</p>
     <IKContext
@@ -41,7 +41,7 @@
       :urlEndpoint="urlEndpoint"
       :authenticationEndpoint="authenticationEndpoint"
     >
-      <IKUpload fileName="new_file_1" v-bind:tags="['tag1','tag2']" v-bind:responseFields="['tags']" :onError="onError" :onSuccess = "onSuccess"/>
+      <IKUpload fileName="new_file_1" :tags="['tag1','tag2']" :responseFields="['tags']" :onError="onError" :onSuccess = "onSuccess"/>
     </IKContext>
     <p>To use this funtionality please remember to setup the server</p>
   </div>
@@ -54,7 +54,7 @@ let urlEndpoint= process.env.VUE_APP_URL_ENDPOINT;
 if(urlEndpoint[urlEndpoint.length-1] === "/")
     urlEndpoint = urlEndpoint.slice(0,urlEndpoint.length-1);
 
-let path = "/test_image_hvR29yIZY.jpg";
+let path = "/default-image.jpg";
 
 export default {
   name: "app",
