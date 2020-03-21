@@ -1,6 +1,6 @@
 <template>
-    <Intersect v-if="lqip && lqip.active" @enter="lqipSrc = imageAttrs.src" @leave="lqipSrc = lqipImage.src" @change="lqipSrc = imageAttrs.src">
-      <img class="ik-image" ref="imageRef" :src="lqipImage.src" />
+    <Intersect v-if="lqip && lqip.active" @enter="lqipSrc = imageAttrs.src" @leave="lqipSrc = lqipImage.src">
+      <img class="ik-image" ref="imageRef" :src="lqipSrc?lqipSrc:lqipImage.src" />
     </Intersect>
     <img v-else class="ik-image" ref="imageRef" v-bind="imageAttrs" />
 </template>
@@ -15,7 +15,7 @@ const vm =  Vue.extend({
   inject: { configurations: { default: "" } },
   data() {
     return {
-      lqipSrc: "",
+      lqipSrc: null,
     };
   },
   components: { Intersect },
@@ -26,9 +26,10 @@ const vm =  Vue.extend({
     src: { type: String, default: "", required: false },
     transformation: { type: Array, required: false },
     transformationPosition: {type: String, required: false},
-    queryParameters: {type: String, required: false},
+    queryParameters: {type: Object, required: false},
     lqip: { type: Object, required: false }
   },
+
   computed: {
     imageAttrs: function() {
       const { configurations } = this;
