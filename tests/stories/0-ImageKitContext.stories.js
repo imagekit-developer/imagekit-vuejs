@@ -12,12 +12,12 @@ const path = "/default-image.jpg";
 
 export const imageWithContext = () => ({
   components: { IKImage, IKContext },
-  template: `<IKContext publicKey="${publicKey}" urlEndpoint=${urlEndpoint}><IKImage path="${path}"/></IKContext>`,
+  template: `<IKContext publicKey="${publicKey}" urlEndpoint=${urlEndpoint}><IKImage path="${path}"></IKImage></IKContext>`,
 });
 
 export const OverridingUrlParameter = () => ({
   components: { IKImage, IKContext },
-  template: `<IKContext publicKey="${publicKey}" urlEndpoint=${urlEndpoint}><IKImage path="${path}" urlEndpoint='https://ik.imagekit.io/utkace/'></IKContext>`,
+  template: `<IKContext publicKey="${publicKey}" urlEndpoint=${urlEndpoint}><IKImage path="${path}" urlEndpoint='https://ik.imagekit.io/utkace/'></IKImage></IKContext>`,
 });
 
 

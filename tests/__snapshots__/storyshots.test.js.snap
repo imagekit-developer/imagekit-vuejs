@@ -52,7 +52,7 @@ exports[`Storyshots IKImage Image With LQIP With Src With Transformation 1`] = `
 exports[`Storyshots IKImage Image With Leading Slashes In Url Endpoint 1`] = `
 <img
   class="ik-image"
-  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg/?ik-sdk-version=vuejs-1.0.3"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.3"
 />
 `;
 
@@ -63,7 +63,7 @@ exports[`Storyshots IKImage Image With No Url Endpoint 1`] = `<!---->`;
 exports[`Storyshots IKImage Image With Path 1`] = `
 <img
   class="ik-image"
-  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg/?ik-sdk-version=vuejs-1.0.3"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.3"
 />
 `;
 
@@ -77,7 +77,7 @@ exports[`Storyshots IKImage Image With Query Parameters 1`] = `
 exports[`Storyshots IKImage Image With Src 1`] = `
 <img
   class="ik-image"
-  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg/?ik-sdk-version=vuejs-1.0.3"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.3"
 />
 `;
 
@@ -91,7 +91,7 @@ exports[`Storyshots IKImage Image With Src Query Parameters 1`] = `
 exports[`Storyshots IKImage Image With Trailing Slashes In Path 1`] = `
 <img
   class="ik-image"
-  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg/?ik-sdk-version=vuejs-1.0.3"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.3"
 />
 `;
 
