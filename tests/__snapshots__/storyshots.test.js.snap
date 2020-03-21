@@ -1,29 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots IKContext Image With Context 1`] = `
-<div
-  class="ik-context"
-  publickey="your_public_key"
-  urlendpoint="https://ik.imagekit.io/your_imagekit_id"
->
-  <img
-    class="ik-image"
-    src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.3"
-  />
-</div>
+<img
+  class="ik-image"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.3"
+/>
 `;
 
 exports[`Storyshots IKContext Overriding Url Parameter 1`] = `
-<div
-  class="ik-context"
-  publickey="your_public_key"
-  urlendpoint="https://ik.imagekit.io/your_imagekit_id"
->
-  <img
-    class="ik-image"
-    src="https://ik.imagekit.io/utkace/default-image.jpg?ik-sdk-version=vuejs-1.0.3"
-  />
-</div>
+<img
+  class="ik-image"
+  src="https://ik.imagekit.io/utkace/default-image.jpg?ik-sdk-version=vuejs-1.0.3"
+/>
 `;
 
 exports[`Storyshots IKImage Image With LQIP With Nested Path 1`] = `
@@ -108,68 +96,33 @@ exports[`Storyshots IKImage Image With Trailing Slashes In Path 1`] = `
 `;
 
 exports[`Storyshots IKUpload Image Upload 1`] = `
-<div
-  authenticationendpoint="https://www.example.com/auth"
-  class="ik-context"
-  publickey="your_public_key"
-  urlendpoint="https://ik.imagekit.io/your_imagekit_id"
->
-  <input
-    type="file"
-  />
-</div>
+<input
+  type="file"
+/>
 `;
 
 exports[`Storyshots IKUpload Image Uploadno Authentication 1`] = `
-<div
-  authenticationendpoint=""
-  class="ik-context"
-  publickey="your_public_key"
-  urlendpoint="https://ik.imagekit.io/your_imagekit_id"
->
-  <input
-    type="file"
-  />
-</div>
+<input
+  type="file"
+/>
 `;
 
 exports[`Storyshots IKUpload Image Uploadwith All Props 1`] = `
-<div
-  authenticationendpoint="https://www.example.com/auth"
-  class="ik-context"
-  publickey="your_public_key"
-  urlendpoint="https://ik.imagekit.io/your_imagekit_id"
->
-  <input
-    type="file"
-  />
-</div>
+<input
+  type="file"
+/>
 `;
 
 exports[`Storyshots IKUpload Image Uploadwith No Custom Coordinates 1`] = `
-<div
-  authenticationendpoint="https://www.example.com/auth"
-  class="ik-context"
-  publickey="your_public_key"
-  urlendpoint="https://ik.imagekit.io/your_imagekit_id"
->
-  <input
-    type="file"
-  />
-</div>
+<input
+  type="file"
+/>
 `;
 
 exports[`Storyshots IKUpload Image Uploadwith No Tags 1`] = `
-<div
-  authenticationendpoint="https://www.example.com/auth"
-  class="ik-context"
-  publickey="your_public_key"
-  urlendpoint="https://ik.imagekit.io/your_imagekit_id"
->
-  <input
-    type="file"
-  />
-</div>
+<input
+  type="file"
+/>
 `;
 
 exports[`Storyshots Transformations Image With Chained Transformation 1`] = `
