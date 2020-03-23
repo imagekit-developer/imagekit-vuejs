@@ -32,7 +32,7 @@ export const imageWithChainedTransformation = () => ({
   template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} src=${src} :transformation="[{height:300,width:400},{rotation:90}]"></IKImage>`,
 });
 
-export const imageWithonExistingTransformation = () => ({
+export const imageWithoutExistingTransformation = () => ({
   components: { IKImage },
   template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} src=${src} :transformation="[{foo:'bar'}]"></IKImage>`,
 });

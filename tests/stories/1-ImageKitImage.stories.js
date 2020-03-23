@@ -34,12 +34,12 @@ export const imageWithSrcQueryParameters = () => ({
   template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} src="${src}?foo=bar" :queryParameters="{version:5, name: 'check'}"></IKImage>`,
 });
 
-export const imageWithLeadingSlashesInUrlEndpoint = () => ({
+export const imageWithTrailingSlashesInUrlEndpoint = () => ({
   components: { IKImage },
   template: `<IKImage publicKey="${publicKey}" urlEndpoint="https://ik.imagekit.io/your_imagekit_id////" path=${path}></IKImage>`,
 });
 
-export const imageWithTrailingSlashesInPath = () => ({
+export const imageWithLeadingSlashesInPath = () => ({
   components: { IKImage },
   template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} path=${`////${path}`}></IKImage>`,
 });

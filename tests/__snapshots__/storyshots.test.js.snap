@@ -49,7 +49,7 @@ exports[`Storyshots IKImage Image With LQIP With Src With Transformation 1`] = `
 />
 `;
 
-exports[`Storyshots IKImage Image With Leading Slashes In Url Endpoint 1`] = `
+exports[`Storyshots IKImage Image With Leading Slashes In Path 1`] = `
 <img
   class="ik-image"
   src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.3"
@@ -88,7 +88,7 @@ exports[`Storyshots IKImage Image With Src Query Parameters 1`] = `
 />
 `;
 
-exports[`Storyshots IKImage Image With Trailing Slashes In Path 1`] = `
+exports[`Storyshots IKImage Image With Trailing Slashes In Url Endpoint 1`] = `
 <img
   class="ik-image"
   src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.3"
@@ -101,25 +101,25 @@ exports[`Storyshots IKUpload Image Upload 1`] = `
 />
 `;
 
-exports[`Storyshots IKUpload Image Uploadno Authentication 1`] = `
+exports[`Storyshots IKUpload Image Upload No Authentication 1`] = `
 <input
   type="file"
 />
 `;
 
-exports[`Storyshots IKUpload Image Uploadwith All Props 1`] = `
+exports[`Storyshots IKUpload Image Upload With All Props 1`] = `
 <input
   type="file"
 />
 `;
 
-exports[`Storyshots IKUpload Image Uploadwith No Custom Coordinates 1`] = `
+exports[`Storyshots IKUpload Image Upload With No Custom Coordinates 1`] = `
 <input
   type="file"
 />
 `;
 
-exports[`Storyshots IKUpload Image Uploadwith No Tags 1`] = `
+exports[`Storyshots IKUpload Image Upload With No Tags 1`] = `
 <input
   type="file"
 />
@@ -160,7 +160,7 @@ exports[`Storyshots Transformations Image With Transformation Position As Query 
 />
 `;
 
-exports[`Storyshots Transformations Image Withon Existing Transformation 1`] = `
+exports[`Storyshots Transformations Image Without Existing Transformation 1`] = `
 <img
   class="ik-image"
   src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.3&tr=foo-bar"
