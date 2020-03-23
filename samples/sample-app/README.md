@@ -8,43 +8,31 @@ Run the following commands from your shell.
 
 We will first go to the root,
 
-```js
+```bash
 cd ../../
 ```
 
 Install the node modules,
-```js
+```bash
 npm install
 ```
 
 Create the dist:
 
-```js
+```bash
 npm run build
 ```
-
-Now link it with, npm link
-
-```js
-npm link
-```
-This will create a global repository link for imagekitio-vue
 
 ### Installing the sample-app
 
 Now, Go to `sample-app` by,
-```js
+```bash
 cd example/sample-app
 ```
 
 then,
-```
+```bash
 npm install
-```
-
-Now run,
-```
-npm link imagekitio-vue
 ```
 This should create a copy of `imagekitio-vue` library in `node_modules` of `sample-app`
 
@@ -53,23 +41,23 @@ Create a .env file by renaming the sample.env in examples/sample-app
 
 Fill is the required parameters according to your imagekit account.
 
-## Starting the app
+## Starting the frontend app
 Finally run the app,
-```
+```bash
 npm run serve
 ```
 
+Open http://localhost:8080/ in the browser.
 
 To run the upload component you also will have set up a server
 
 ## Setting up the server
-There is a sample server present in the sample app directory in server directory. To run this server, go to server directory,
+There is a sample server present in the sample app directory in server directory. 
+It takes the `private key` from .env file, so create a .env file by renaming the sample.env in `samples/sample-app/server`
 
-```cd server```, then run
+To run this server, go to server directory `cd server`, then run
 
-```js
+```bash
 npm install
-
 npm run server
 ```
-It takes the `private key` from .env file, so create a .env file by renaming the sample.env in `examples/sample-app/server`

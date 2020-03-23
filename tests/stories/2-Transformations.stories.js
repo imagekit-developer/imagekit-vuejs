@@ -6,22 +6,38 @@ export default {
 
 const publicKey = process.env.VUE_APP_PUBLIC_KEY;
 
-let urlEndpoint = process.env.VUE_APP_URL_ENDPOINT;
-if(urlEndpoint[urlEndpoint.length-1] === "/")
-    urlEndpoint = urlEndpoint.slice(0,urlEndpoint.length-1);
+const urlEndpoint = process.env.VUE_APP_URL_ENDPOINT;
 
-let path = "/default-image.jpg";
-  if(path[0] === "/")
-    path = path.split("/")[1];
+const path = "default-image.jpg";
 
 const src = `${urlEndpoint}/${path}`;
 
 export const imageWithTransformation = () => ({
   components: { IKImage },
-  template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} src=${src} v-bind:transformation="[{height:300,width:400}]" />`,
+  template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} src=${src} :transformation="[{height:300,width:400}]"></IKImage>`,
+});
+
+export const imageWithTransformationPositionAsQuery = () => ({
+  components: { IKImage },
+  template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} path=${path} :transformation="[{height:300,width:400}]" :transformationPosition="'query'"></IKImage>`,
+});
+
+export const imageWithTransformationPositionAsPathPassingSrc = () => ({
+  components: { IKImage },
+  template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} src=${src} :transformation="[{height:300,width:400}]" :transformationPosition="'path'"></IKImage>`,
 });
 
 export const imageWithChainedTransformation = () => ({
   components: { IKImage },
-  template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} src=${src} v-bind:transformation="[{height:300,width:400},{rotation:90}]" />`,
+  template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} src=${src} :transformation="[{height:300,width:400},{rotation:90}]"></IKImage>`,
+});
+
+export const imageWithoutExistingTransformation = () => ({
+  components: { IKImage },
+  template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} src=${src} :transformation="[{foo:'bar'}]"></IKImage>`,
+});
+
+export const imageWithNonExistingTransformationWithExistingTransformation = () => ({
+  components: { IKImage },
+  template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} src=${src} :transformation="[{height:300,foo:'bar'}]"></IKImage>`,
 });

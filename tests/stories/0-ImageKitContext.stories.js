@@ -6,19 +6,18 @@ export default {
 
 const publicKey = process.env.VUE_APP_PUBLIC_KEY;
 
-let urlEndpoint = process.env.VUE_APP_URL_ENDPOINT;
-if(urlEndpoint[urlEndpoint.length-1] === "/")
-    urlEndpoint = urlEndpoint.slice(0,urlEndpoint.length-1);
+const urlEndpoint = process.env.VUE_APP_URL_ENDPOINT;
 
-let path = "/default-image.jpg";
-  if(path[0] === "/")
-    path = path.split("/")[1];
-
-const src = `${urlEndpoint}/${path}`;
+const path = "/default-image.jpg";
 
 export const imageWithContext = () => ({
   components: { IKImage, IKContext },
-  template: `<IKContext publicKey="${publicKey}" urlEndpoint=${urlEndpoint}><IKImage src="${src}"/></IKContext>`,
+  template: `<IKContext publicKey="${publicKey}" urlEndpoint=${urlEndpoint}><IKImage path="${path}"></IKImage></IKContext>`,
+});
+
+export const OverridingUrlParameter = () => ({
+  components: { IKImage, IKContext },
+  template: `<IKContext publicKey="${publicKey}" urlEndpoint=${urlEndpoint}><IKImage path="${path}" urlEndpoint='https://ik.imagekit.io/utkace/'></IKImage></IKContext>`,
 });
 
 

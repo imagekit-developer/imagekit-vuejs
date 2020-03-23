@@ -1,7 +1,8 @@
 import ImageKit from 'imagekit-javascript';
 const pjson = require('../../package.json');
+import { parseURL } from '../utils/urlParser';
 
-export const uploadImage = ({ e, file, fileName, useUniqueFileName, tags, folder, isPrivateFile, customCoordinates, responseFields, publicKey, urlEndpoint, authenticationEndpoint }) => {
+export const uploadImage = ({ e, file, fileName, useUniqueFileName, tags, folder, isPrivateFile, customCoordinates, responseFields, publicKey, urlEndpoint, authenticationEndpoint, onError, onSuccess }) => {
 
 
   if (!publicKey) {
@@ -16,24 +17,23 @@ export const uploadImage = ({ e, file, fileName, useUniqueFileName, tags, folder
     throw new Error("Missing authenticationEndpoint during initialization");
   }
 
-  let onError = (e, err) => {
-    e.insertAdjacentHTML(
-      "afterend",
-      `<div>${err}</div>`
-    );
-  };
+  let newUrlEndpoint = urlEndpoint;
 
-  let onSuccess = (e) => {
-    e.insertAdjacentHTML(
-      "afterend",
-      `<div>Image Uploaded</div>`
-    );
-  };
+  if(urlEndpoint) {
+    const url_params = parseURL(urlEndpoint);
+    let {protocol, host, pathname } = url_params;
+    pathname = pathname.slice(1);
+    let leadingSlashes = pathname.match("\/+");
+    if(leadingSlashes){
+      pathname = pathname.replace(leadingSlashes[0],'/');
+      newUrlEndpoint = `${protocol}//${host}/${pathname}`;
+    }
+  }
 
   const ik = new ImageKit({
     sdkVersion : `vuejs-${pjson.version}`,
     publicKey: publicKey,
-    urlEndpoint: urlEndpoint,
+    urlEndpoint: newUrlEndpoint,
     authenticationEndpoint: authenticationEndpoint
   });
 
@@ -59,9 +59,13 @@ export const uploadImage = ({ e, file, fileName, useUniqueFileName, tags, folder
   ik.upload(params
     , function (err, result) {
       if (err) {
-        onError(e, err);
+        if(onError){
+          onError(err);
+        }
       } else {
-        onSuccess(e);
+        if(onSuccess) {
+          onSuccess(result);
+        }
       }
     });
 }
