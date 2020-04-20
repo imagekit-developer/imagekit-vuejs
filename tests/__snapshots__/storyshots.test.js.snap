@@ -3,56 +3,56 @@
 exports[`Storyshots IKContext Image With Context 1`] = `
 <img
   class="ik-image"
-  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.3"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.4"
 />
 `;
 
 exports[`Storyshots IKContext Overriding Url Parameter 1`] = `
 <img
   class="ik-image"
-  src="https://ik.imagekit.io/utkace/default-image.jpg?ik-sdk-version=vuejs-1.0.3"
+  src="https://ik.imagekit.io/utkace/default-image.jpg?ik-sdk-version=vuejs-1.0.4"
 />
 `;
 
 exports[`Storyshots IKImage Image With LQIP With Nested Path 1`] = `
 <img
   class="ik-image"
-  src="https://ik.imagekit.io/your_imagekit_id/tr:q-20,h-300,w-400/sample-folder/default-image.jpg?ik-sdk-version=vuejs-1.0.3"
+  src="https://ik.imagekit.io/your_imagekit_id/tr:q-20,h-300,w-400/sample-folder/default-image.jpg?ik-sdk-version=vuejs-1.0.4"
 />
 `;
 
 exports[`Storyshots IKImage Image With LQIP With Path With No Transformation 1`] = `
 <img
   class="ik-image"
-  src="https://ik.imagekit.io/your_imagekit_id/tr:q-20/default-image.jpg?ik-sdk-version=vuejs-1.0.3"
+  src="https://ik.imagekit.io/your_imagekit_id/tr:q-20/default-image.jpg?ik-sdk-version=vuejs-1.0.4"
 />
 `;
 
 exports[`Storyshots IKImage Image With LQIP With Path With Transformation 1`] = `
 <img
   class="ik-image"
-  src="https://ik.imagekit.io/your_imagekit_id/tr:q-20,h-300,w-400/default-image.jpg?ik-sdk-version=vuejs-1.0.3"
+  src="https://ik.imagekit.io/your_imagekit_id/tr:q-20,h-300,w-400/default-image.jpg?ik-sdk-version=vuejs-1.0.4"
 />
 `;
 
 exports[`Storyshots IKImage Image With LQIP With Src With No Transformation 1`] = `
 <img
   class="ik-image"
-  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.3&tr=q-20"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.4&tr=q-20"
 />
 `;
 
 exports[`Storyshots IKImage Image With LQIP With Src With Transformation 1`] = `
 <img
   class="ik-image"
-  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.3&tr=h-300%2Cw-400%2Cq-20"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.4&tr=h-300%2Cw-400%2Cq-20"
 />
 `;
 
 exports[`Storyshots IKImage Image With Leading Slashes In Path 1`] = `
 <img
   class="ik-image"
-  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.3"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.4"
 />
 `;
 
@@ -63,35 +63,35 @@ exports[`Storyshots IKImage Image With No Url Endpoint 1`] = `<!---->`;
 exports[`Storyshots IKImage Image With Path 1`] = `
 <img
   class="ik-image"
-  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.3"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.4"
 />
 `;
 
 exports[`Storyshots IKImage Image With Query Parameters 1`] = `
 <img
   class="ik-image"
-  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.3&version=5&name=check"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.4&version=5&name=check"
 />
 `;
 
 exports[`Storyshots IKImage Image With Src 1`] = `
 <img
   class="ik-image"
-  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.3"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.4"
 />
 `;
 
 exports[`Storyshots IKImage Image With Src Query Parameters 1`] = `
 <img
   class="ik-image"
-  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?foo=bar&ik-sdk-version=vuejs-1.0.3&version=5&name=check"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?foo=bar&ik-sdk-version=vuejs-1.0.4&version=5&name=check"
 />
 `;
 
 exports[`Storyshots IKImage Image With Trailing Slashes In Url Endpoint 1`] = `
 <img
   class="ik-image"
-  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.3"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.4"
 />
 `;
 
@@ -128,41 +128,41 @@ exports[`Storyshots IKUpload Image Upload With No Tags 1`] = `
 exports[`Storyshots Transformations Image With Chained Transformation 1`] = `
 <img
   class="ik-image"
-  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.3&tr=h-300%2Cw-400%3Art-90"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.4&tr=h-300%2Cw-400%3Art-90"
 />
 `;
 
 exports[`Storyshots Transformations Image With Non Existing Transformation With Existing Transformation 1`] = `
 <img
   class="ik-image"
-  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.3&tr=h-300%2Cfoo-bar"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.4&tr=h-300%2Cfoo-bar"
 />
 `;
 
 exports[`Storyshots Transformations Image With Transformation 1`] = `
 <img
   class="ik-image"
-  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.3&tr=h-300%2Cw-400"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.4&tr=h-300%2Cw-400"
 />
 `;
 
 exports[`Storyshots Transformations Image With Transformation Position As Path Passing Src 1`] = `
 <img
   class="ik-image"
-  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.3&tr=h-300%2Cw-400"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.4&tr=h-300%2Cw-400"
 />
 `;
 
 exports[`Storyshots Transformations Image With Transformation Position As Query 1`] = `
 <img
   class="ik-image"
-  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.3&tr=h-300%2Cw-400"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.4&tr=h-300%2Cw-400"
 />
 `;
 
 exports[`Storyshots Transformations Image Without Existing Transformation 1`] = `
 <img
   class="ik-image"
-  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.3&tr=foo-bar"
+  src="https://ik.imagekit.io/your_imagekit_id/default-image.jpg?ik-sdk-version=vuejs-1.0.4&tr=foo-bar"
 />
 `;
