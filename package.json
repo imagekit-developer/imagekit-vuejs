@@ -15,7 +15,8 @@
   "browser": "src/index.js",
   "unpkg": "dist/imagekitio-vue.umd.min.js",
   "files": [
-    "dist/*"
+    "dist/*",
+    "src/*"
   ],
   "repository": {
     "type": "git",
