@@ -1,5 +1,3 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Installation
 
 Run the following commands from your shell.
@@ -34,7 +32,6 @@ then,
 ```bash
 npm install
 ```
-This should create a copy of `imagekitio-vue` library in `node_modules` of `sample-app`
 
 ## Setting the environment variable
 Create a .env file by renaming the sample.env in examples/sample-app
