@@ -9,7 +9,7 @@ export default {
       default: () => [0, 0.2]
     },
     root: {
-      type: HTMLElement,
+      type: Object,
       required: false,
       default: () => null
     },

@@ -25,7 +25,7 @@ npm run build
 
 Now, Go to `sample-app` by,
 ```bash
-cd example/sample-app
+cd samples/sample-app
 ```
 
 then,
