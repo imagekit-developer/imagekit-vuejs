@@ -1,6 +1,6 @@
 {
   "name": "imagekitio-vue",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "scripts": {
     "build:lib": "./node_modules/.bin/vue-cli-service build --target lib src/index.js",
     "build": "./node_modules/.bin/vue-cli-service lint --fix; npm run build:lib",
@@ -12,11 +12,9 @@
     "build-storybook": "build-storybook"
   },
   "main": "dist/imagekitio-vue.common.js",
-  "browser": "src/index.js",
   "unpkg": "dist/imagekitio-vue.umd.min.js",
   "files": [
-    "dist/*",
-    "src/*"
+    "dist/*"
   ],
   "repository": {
     "type": "git",
