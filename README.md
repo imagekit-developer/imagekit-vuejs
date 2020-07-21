@@ -201,7 +201,7 @@ methods: {
 ```
 
 ## Demo Application
-The fastest way to get started is by running the demo application. You can run the code locally. The source code is in samples/sample-app. For the instructions in [readme.md](https://github.com/imagekit-developer/imagekit-vuejs/blob/master/samples/sample-app/README.md) file within [samples/sample-app](https://github.com/imagekit-developer/imagekit-vuejs/tree/master/samples/sample-app) folder.
+The fastest way to get started is by running the demo application. You can run the code locally. The source code is in [samples/sample-app](/samples/sample-app). For the instructions in [readme.md](https://github.com/imagekit-developer/imagekit-vuejs/blob/master/samples/sample-app/README.md) file within [samples/sample-app](/samples/sample-app) folder.
 
 ## Support
 
