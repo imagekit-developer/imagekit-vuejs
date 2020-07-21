@@ -14,7 +14,7 @@
   "main": "dist/imagekitio-vue.common.js",
   "unpkg": "dist/imagekitio-vue.umd.min.js",
   "files": [
-    "dist/*"
+    "dist"
   ],
   "repository": {
     "type": "git",
