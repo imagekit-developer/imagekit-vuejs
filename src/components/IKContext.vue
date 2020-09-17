@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "IKContext",
+  name: "ik-context",
 
   inheritAttrs:false,
 

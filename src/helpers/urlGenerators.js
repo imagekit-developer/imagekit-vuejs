@@ -3,7 +3,6 @@ const pjson = require('../../package.json');
 import { parseURL } from '../utils/urlParser.js';
 
 export const generateUrl = ({publicKey, urlEndpoint, src, path, transformation, transformationPosition, queryParameters}) => {
-
   if(!publicKey) {
     throw new Error("Missing publicKey during initialization");
   }

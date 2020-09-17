@@ -4,7 +4,6 @@ import { parseURL } from '../utils/urlParser';
 
 export const uploadImage = ({ e, file, fileName, useUniqueFileName, tags, folder, isPrivateFile, customCoordinates, responseFields, publicKey, urlEndpoint, authenticationEndpoint, onError, onSuccess }) => {
 
-
   if (!publicKey) {
     throw new Error("Missing publicKey during initialization");
   }

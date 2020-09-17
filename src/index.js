@@ -5,7 +5,17 @@ import IKUpload from "./components/IKUpload.vue";
 import Intersect from "./components/Intersect.vue";
 const ImageKit = {
   install: (Vue, options = {}) => {
-    plugin.install(Vue, options.components ? options: {...options, components: {IKContext, IKImage, IKUpload, Intersect}})
+    if (!options.urlEndpoint || options.urlEndpoint.trim() === "") {
+      throw new Error("urlEndpoint is required to initilize ImageKit"); 
+    }
+
+    if (!options.components || options.components.length === 0) {
+      options.components = ["ik-image", "ik-context", "ik-upload"];
+    }
+
+    // options.components.push("intersect");
+
+    plugin.install(Vue, options)
   }
 };
 
