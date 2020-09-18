@@ -2,6 +2,8 @@ import IKContext from "./components/IKContext.vue";
 import IKImage from "./components/IKImage.vue";
 import IKUpload from "./components/IKUpload.vue";
 import Intersect from "./components/Intersect.vue";
+import ImageKit from '@imagekit/imagekit-javascript';
+import pkg from "../package.json";
 
 const componentMapping = {
   "ik-context": IKContext,
@@ -15,30 +17,18 @@ export function install(Vue, options) {
     throw new Error("Imagekit plugin already installed");
   }
 
+  options.defaultOptions = {
+    sdkVersion: `vuejs-${pkg.version}`,
+    publicKey: options.publicKey,
+    urlEndpoint: options.urlEndpoint,
+    authenticationEndpoint: options.authenticationEndpoint
+  };
+
+  options.IkClient = new ImageKit(options.defaultOptions)
+
   Vue.IkInstalled = true;
 
   initComponents(Vue, options);
-}
-
-function registerComponents(Vue, components = {}, defaultConfigurations = {}) {
-  if (!components) { throw new Error("No component found. ") }
-
-  for (let key in components) {
-    const component = components[key];
-
-    if (component) {
-      Vue.component(key, {
-        ...component,
-        data() {
-          return {
-            ...(component.data ? component.data() : {}),
-            defaultConfigurations
-          }
-        }
-
-      })
-    }
-  }
 }
 
 function initComponents(Vue, options) {
@@ -51,11 +41,8 @@ function initComponents(Vue, options) {
         data() {
           return {
             ...(component.data ? component.data() : {}),
-            defaultConfiguration : {
-              publicKey: options.publicKey,
-              urlEndpoint: options.urlEndpoint,
-              authenticationEndpoint: options.authenticationEndpoint,
-            }
+            IkClient: options.IkClient,
+            defaultOptions : options.defaultOptions
           }
         }
       })

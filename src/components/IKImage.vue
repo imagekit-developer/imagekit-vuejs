@@ -11,12 +11,13 @@
 
 <script>
 import Intersect from "./Intersect";
-import { generateUrl } from "../helpers/urlGenerators";
+import ImageKit from '@imagekit/imagekit-javascript';
+import pkg from "../../package.json";
 import Vue from "vue";
 
 export default {
   name: "ik-image",
-  inject: { configurations: { default: {} } },
+  inject: { contextConfigurations: { default: {} } },
   data() {
     return {
       lqipSrc: null
@@ -34,24 +35,27 @@ export default {
     lqip: { type: Object, required: false }
   },
   methods: {
-    getConfiguration: function() {
+    getMergedOptions: function() {
       return {
-        ...this.defaultConfiguration,
-        ...this.configurations
+        ...this.defaultOptions,
+        ...this.contextConfigurations
       };
+    },
+    getClient: function() {
+      return new ImageKit({
+        sdkVersion: `vuejs-${pkg.version}`,
+        urlEndpoint: this.urlEndpoint ? this.urlEndpoint : this.contextConfigurations.urlEndpoint
+      })
     }
   },
   computed: {
     imageAttrs: function() {
-      const configurations = this.getConfiguration();
-      let src = generateUrl({
-        publicKey:
-          configurations && configurations.publicKey
-            ? configurations.publicKey
-            : this.publicKey,
-        urlEndpoint: this.urlEndpoint
-          ? this.urlEndpoint
-          : configurations.urlEndpoint,
+      const mergedOptions = this.getMergedOptions();
+      const IkClient = this.IkClient || this.getClient();
+
+      let src = IkClient.url({
+        publicKey: this.publicKey ? this.publicKey : mergedOptions.publicKey,
+        urlEndpoint: this.urlEndpoint ? this.urlEndpoint : mergedOptions.urlEndpoint,
         src: this.src,
         path: this.path,
         transformation: this.transformation,
@@ -65,15 +69,12 @@ export default {
     },
     lqipImage: function() {
       const { lqip, path } = this;
-      const configurations = this.getConfiguration();
-      let src = generateUrl({
-        publicKey:
-          configurations && configurations.publicKey
-            ? configurations.publicKey
-            : this.publicKey,
-        urlEndpoint: this.urlEndpoint
-          ? this.urlEndpoint
-          : configurations.urlEndpoint,
+      const mergedOptions = this.getMergedOptions();
+      const IkClient = this.IkClient || this.getClient();
+
+      let src = IkClient.url({
+        publicKey: this.publicKey ? this.publicKey : mergedOptions.publicKey,
+        urlEndpoint: this.urlEndpoint ? this.urlEndpoint : mergedOptions.urlEndpoint,
         src: this.src,
         path: this.path,
         transformation: this.transformation,
@@ -100,8 +101,6 @@ export default {
         }
       }
 
-      debugger;
-console.log(src);
       return {
         src
       };

@@ -3,10 +3,12 @@
 </template>
 
 <script>
-import { uploadImage } from "../helpers/upload";
+import ImageKit from '@imagekit/imagekit-javascript';
+import pkg from "../../package.json";
+
 export default {
   name: "ik-upload",
-  inject: { configurations: { default: {} } },
+  inject: { contextConfigurations: { default: {} } },
   props: {
     fileName: { type: String, default: "", required: false },
     useUniqueFileName: { type: Boolean, default: true, required: false },
@@ -24,40 +26,45 @@ export default {
     };
   },
   methods: {
-    getConfiguration: function() {
+    getMergedOptions: function() {
       return {
-        ...this.defaultConfiguration,
-        ...this.configurations
+        ...this.defaultOptions,
+        ...this.contextConfigurations
       };
+    },
+    getClient: function() {
+      return new ImageKit({
+        sdkVersion: `vuejs-${pkg.version}`,
+        urlEndpoint: this.urlEndpoint ? this.urlEndpoint : this.contextConfigurations.urlEndpoint,
+        publicKey: this.urlEndpoint || this.contextConfigurations.urlEndpoint,
+        authenticationEndpoint: this.authenticationEndpoint || this.contextConfigurations.authenticationEndpoint
+      })
     },
     upload() {
       const file = this.$refs.imageFile.files[0];
       const fileSystemFileName = file.name;
-      let useUniqueFileName = this.useUniqueFileName;
-      let isPrivateFile = this.isPrivateFile;
 
-      if (useUniqueFileName === true) useUniqueFileName = "true";
-      if (useUniqueFileName === false) useUniqueFileName = "false";
-      if (isPrivateFile === true) isPrivateFile = "true";
-      if (isPrivateFile === false) isPrivateFile = "false";
+      const mergedOptions = this.getMergedOptions();
+      const IkClient = this.IkClient || this.getClient();
 
-      const configurations = this.getConfiguration();
-
-      uploadImage({
-        e: this.$refs.imageFile,
+      IkClient.upload({
         file: file,
         fileName: this.fileName || fileSystemFileName,
-        useUniqueFileName: useUniqueFileName,
+        useUniqueFileName: this.useUniqueFileName,
         tags: this.tags,
         folder: this.folder,
-        isPrivateFile: isPrivateFile,
+        isPrivateFile: this.isPrivateFile,
         customCoordinates: this.customCoordinates,
-        responseFields: this.responseFields,
-        publicKey: configurations.publicKey,
-        urlEndpoint: configurations.urlEndpoint,
-        authenticationEndpoint: configurations.authenticationEndpoint,
-        onError: this.onError,
-        onSuccess: this.onSuccess
+        responseFields: this.responseFields
+      }, (err, result) => {
+          if (err && typeof this.onError === "function") {
+            this.onError(err);
+          } else if(!err && typeof this.onSuccess === "function") {
+            this.onSuccess(result);
+          }
+      }, {
+        publicKey: this.publicKey || mergedOptions.publicKey,
+        authenticationEndpoint: this.authenticationEndpoint || mergedOptions.authenticationEndpoint,
       });
 
       return;

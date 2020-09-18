@@ -3,6 +3,7 @@
   <div class="sample-app">
     <h1>Hi! This is an ImageKit Vue SDK Demo!</h1>
     <p>Let's add an Image</p>
+    <ik-image :src="src"></ik-image>
     <IKImage
       :publicKey="publicKey"
       :urlEndpoint="urlEndpoint"
@@ -41,18 +42,20 @@
       :urlEndpoint="urlEndpoint"
       :authenticationEndpoint="authenticationEndpoint"
     >
-      <IKUpload fileName="new_file_1" :tags="['tag1','tag2']" :responseFields="['tags']" :onError="onError" :onSuccess = "onSuccess"/>
+      <IKUpload
+        fileName="new_file_1"
+        :tags="['tag1','tag2']"
+        :responseFields="['tags']"
+        :onError="onError"
+        :onSuccess="onSuccess"
+      />
     </IKContext>
     <p>To use this funtionality please remember to setup the server</p>
   </div>
 </template>
 
 <script>
-import { IKImage, IKContext, IKUpload } from "imagekitio-vue";
-
-let urlEndpoint= process.env.VUE_APP_URL_ENDPOINT;
-if(urlEndpoint[urlEndpoint.length-1] === "/")
-    urlEndpoint = urlEndpoint.slice(0,urlEndpoint.length-1);
+import { IKImage, IKContext, IKUpload } from "../../../src";
 
 let path = "/default-image.jpg";
 
@@ -65,21 +68,23 @@ export default {
   },
   data() {
     return {
-      urlEndpoint: urlEndpoint,
-      publicKey: process.env.VUE_APP_PUBLIC_KEY,
-      authenticationEndpoint: process.env.VUE_APP_AUTHENTICATION_ENDPOINT,
+      urlEndpoint: "https://ik.imagekit.io/demo",
+      publicKey: "your_public_key",
+      authenticationEndpoint: "https://www.example.com/auth",
       path: path,
-      src: `${urlEndpoint}${path}`
+      src: `https://ik.imagekit.io/demo${path}`
     };
   },
   methods: {
     onError(err) {
-    console.log("Error");
-    console.log(err);
-  }, onSuccess(res) {
-    console.log("Success");
-    console.log(res);
-  }},
+      console.log("Error");
+      console.log(err);
+    },
+    onSuccess(res) {
+      console.log("Success");
+      console.log(res);
+    }
+  }
 };
 </script>
 

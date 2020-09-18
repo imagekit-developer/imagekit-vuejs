@@ -2,15 +2,15 @@
 export default {
   name: "ik-context",
 
-  inheritAttrs:false,
+  inheritAttrs: false,
 
   provide() {
-    const contextConfigurations = {}
+    const contextConfigurations = {};
     Object.assign(contextConfigurations, this.$attrs);
-    return {configurations:contextConfigurations};
+    return { contextConfigurations: contextConfigurations };
   },
   render() {
-    return this.$scopedSlots.default()
-  },
+    return this.$scopedSlots.default();
+  }
 };
 </script>
