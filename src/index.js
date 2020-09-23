@@ -2,7 +2,6 @@ import * as plugin from "./plugin";
 import IKContext from "./components/IKContext.vue";
 import IKImage from "./components/IKImage.vue";
 import IKUpload from "./components/IKUpload.vue";
-import Intersect from "./components/Intersect.vue";
 
 const ImageKit = {
   install: (Vue, options = {}) => {
@@ -14,8 +13,6 @@ const ImageKit = {
       options.components = ["ik-image", "ik-context", "ik-upload"];
     }
 
-    options.components.push("intersect");
-
     plugin.install(Vue, options)
   }
 };
@@ -23,5 +20,5 @@ const ImageKit = {
 export {
   ImageKit as default,
   ImageKit,
-  IKContext, IKImage, IKUpload, Intersect
+  IKContext, IKImage, IKUpload
 };

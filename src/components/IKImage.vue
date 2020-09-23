@@ -1,17 +1,9 @@
 <template>
-  <Intersect
-    v-if="lqip && lqip.active"
-    @enter="lqipSrc = imageAttrs.src"
-    @leave="lqipSrc = lqipImage.src"
-  >
-    <img class="ik-image" ref="imageRef" :src="lqipSrc?lqipSrc:lqipImage.src" />
-  </Intersect>
-  <img v-else class="ik-image" ref="imageRef" v-bind="imageAttrs" />
+  <img class="ik-image" :src="srcImage" v-bind="$attrs"/>
 </template>
-
 <script>
-import Intersect from "./Intersect";
-import ImageKit from '@imagekit/imagekit-javascript';
+// import Intersect from "./Intersect";
+import ImageKit from 'imagekit-javascript';
 import pkg from "../../package.json";
 import Vue from "vue";
 
@@ -20,10 +12,11 @@ export default {
   inject: { contextConfigurations: { default: {} } },
   data() {
     return {
-      lqipSrc: null
+      intersected: false,
+      observer: null,
+      originalSrcLoaded: false
     };
   },
-  components: { Intersect },
   props: {
     publicKey: { type: String, default: "", required: false },
     urlEndpoint: { type: String, default: "", required: false },
@@ -32,7 +25,8 @@ export default {
     transformation: { type: Array, required: false },
     transformationPosition: { type: String, required: false },
     queryParameters: { type: Object, required: false },
-    lqip: { type: Object, required: false }
+    lqip: { type: Object, default: null, required: false },
+    loading: {type: String, default:""}
   },
   methods: {
     getMergedOptions: function() {
@@ -46,14 +40,97 @@ export default {
         sdkVersion: `vuejs-${pkg.version}`,
         urlEndpoint: this.urlEndpoint ? this.urlEndpoint : this.contextConfigurations.urlEndpoint
       })
+    },
+    triggerOriginalImageLoad: function() {
+      var img = new Image();
+      img.onload = () => {
+        this.originalSrcLoaded = true;
+      }
+      img.src = this.imageAttrs.src;
+    },
+    getEffectiveConnection: function() {
+      try {
+        return navigator.connection.effectiveType;
+      } catch(ex) {
+        return "4g";
+      }
     }
   },
+  mounted() {
+    // use client specific APIs in client-side hooks only
+
+    if(window && 'IntersectionObserver' in window && this.loading === "lazy") {
+        var connectionType = this.getEffectiveConnection();
+        // Values based on native lazy loading in Chrome - https://web.dev/native-lazy-loading/#improved-data-savings-and-distance-from-viewport-thresholds
+        var rootMargin = "1250px";
+        if(connectionType !== "4g") rootMargin = "2500px";
+        this.observer = new IntersectionObserver(entries => {
+        const image = entries[0];
+        if (image && image.isIntersecting) {
+            this.intersected = true;
+            if(this.lqip) this.triggerOriginalImageLoad();
+            this.observer.disconnect();
+          }
+        }, {
+          rootMargin: `${rootMargin} 0px ${rootMargin} 0px`
+        });
+        this.observer.observe(this.$el);
+    } else {
+      // Load image right away
+      if(this.lqip) this.triggerOriginalImageLoad();
+    }
+  },
+  destroyed() {
+    this.observer.disconnect();
+  },
   computed: {
+    srcImage: function() {
+      /*
+        No lazy loading no lqip
+          src=originalImage
+
+        No lazy loading lqip
+          src=lqip
+          src=originalImage (when loaded)
+
+        lazy loading and no lqip
+          src=''
+          onIntersect:
+            src=originalImage
+
+        lazy loading and lqip
+          src=lqip
+          onInterserct:
+            src=originalImage (when loaded)
+      */
+      if(this.loading !== "lazy" && this.lqip === null) {
+        return this.imageAttrs.src;
+      } else if(this.loading !== "lazy" && this.lqip && this.lqip.active) {
+        if(this.originalSrcLoaded) {
+          return this.imageAttrs.src;
+        } else {
+          return this.imageAttrs.lqipSrc;
+        }
+      } else if(this.loading === "lazy" && this.lqip === null) {
+        if(this.intersected) {
+          return this.imageAttrs.src;
+        } else {
+          return "";
+        }
+      } else if(this.loading === "lazy" && this.lqip && this.lqip.active) {
+        if(this.intersected && this.originalSrcLoaded) {
+          return this.imageAttrs.src;
+        } else {
+          return this.imageAttrs.lqipSrc;
+        }
+      }
+      return this.imageAttrs.src;
+    },
     imageAttrs: function() {
       const mergedOptions = this.getMergedOptions();
       const IkClient = this.IkClient || this.getClient();
 
-      let src = IkClient.url({
+      var options = {
         publicKey: this.publicKey ? this.publicKey : mergedOptions.publicKey,
         urlEndpoint: this.urlEndpoint ? this.urlEndpoint : mergedOptions.urlEndpoint,
         src: this.src,
@@ -61,49 +138,27 @@ export default {
         transformation: this.transformation,
         transformationPosition: this.transformationPosition,
         queryParameters: this.queryParameters
-      });
-
-      return {
-        src
       };
-    },
-    lqipImage: function() {
-      const { lqip, path } = this;
-      const mergedOptions = this.getMergedOptions();
-      const IkClient = this.IkClient || this.getClient();
 
-      let src = IkClient.url({
-        publicKey: this.publicKey ? this.publicKey : mergedOptions.publicKey,
-        urlEndpoint: this.urlEndpoint ? this.urlEndpoint : mergedOptions.urlEndpoint,
-        src: this.src,
-        path: this.path,
-        transformation: this.transformation,
-        transformationPosition: this.transformationPosition,
-        queryParameters: this.queryParameters
-      });
+      let result = {};
 
-      if (lqip.active) {
-        const quality = lqip.threshold;
-        if (path !== "") {
-          let newUrl = src.split("tr:");
-          if (newUrl[0] === src) {
-            let newUrl = src.split("/");
-            src = `${newUrl[0]}//${newUrl[2]}/${newUrl[3]}/tr:q-${quality}/${newUrl[4]}`;
-          } else {
-            src = `${newUrl[0]}tr:q-${quality},${newUrl[1]}`;
-          }
-        } else {
-          if (this.transformation !== undefined) {
-            src = `${src}%2Cq-${quality}`;
-          } else {
-            src = `${src}&tr=q-${quality}`;
-          }
-        }
+      result.src = IkClient.url(options);
+
+      if(this.lqip && this.lqip.active && (this.lqip.quality || this.lqip.threshold)) {
+        var quality = parseInt((this.lqip.quality || this.lqip.threshold),10) || 20;
+        var blur = parseInt((this.lqip.blur || this.lqip.blur),10) || 6;
+        var transformation = options.transformation || [];
+        transformation.push({
+          quality,
+          blur
+        })
+        result.lqipSrc = IkClient.url({
+          ...options,
+          transformation
+        })
       }
 
-      return {
-        src
-      };
+      return result;
     }
   }
 };

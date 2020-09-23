@@ -1,15 +1,13 @@
 import IKContext from "./components/IKContext.vue";
 import IKImage from "./components/IKImage.vue";
 import IKUpload from "./components/IKUpload.vue";
-import Intersect from "./components/Intersect.vue";
-import ImageKit from '@imagekit/imagekit-javascript';
+import ImageKit from 'imagekit-javascript';
 import pkg from "../package.json";
 
 const componentMapping = {
   "ik-context": IKContext,
   "ik-image": IKImage,
-  "ik-upload": IKUpload,
-  "intersect": Intersect
+  "ik-upload": IKUpload
 };
 
 export function install(Vue, options) {

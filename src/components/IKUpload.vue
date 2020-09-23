@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import ImageKit from '@imagekit/imagekit-javascript';
+import ImageKit from 'imagekit-javascript';
 import pkg from "../../package.json";
 
 export default {
@@ -15,7 +15,7 @@ export default {
     tags: { type: Array, required: false },
     folder: { type: String, default: "/", required: false },
     isPrivateFile: { type: Boolean, default: false, required: false },
-    customCoordinates: { type: String, default: "", required: false },
+    customCoordinates: { type: String, required: false },
     responseFields: { type: Array, required: false },
     onError: { type: Function, required: false },
     onSuccess: { type: Function, required: false }
