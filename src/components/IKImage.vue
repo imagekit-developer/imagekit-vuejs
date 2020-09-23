@@ -1,11 +1,10 @@
 <template>
-  <img class="ik-image" :src="srcImage" v-bind="$attrs"/>
+  <img class="ik-image" :src="srcImage"/>
 </template>
 <script>
 // import Intersect from "./Intersect";
 import ImageKit from 'imagekit-javascript';
 import pkg from "../../package.json";
-import Vue from "vue";
 
 export default {
   name: "ik-image",
