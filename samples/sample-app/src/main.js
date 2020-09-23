@@ -3,10 +3,10 @@ import App from './App.vue'
 
 Vue.config.productionTip = false
 
-import ImageKit from "../../../src";
+import ImageKit from "imagekitio-vue"
 
 Vue.use(ImageKit, {
-  urlEndpoint: "https://ik.imagekit.io/demo"
+  urlEndpoint: process.env.VUE_APP_URL_ENDPOINT
 })
 
 new Vue({

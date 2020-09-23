@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import { IKImage, IKContext, IKUpload } from "../../../src";
+import { IKImage, IKContext, IKUpload } from "imagekitio-vue";
 
 let path = "/default-image.jpg";
 
