@@ -2,7 +2,6 @@
   <img class="ik-image" :src="srcImage"/>
 </template>
 <script>
-// import Intersect from "./Intersect";
 import ImageKit from 'imagekit-javascript';
 import pkg from "../../package.json";
 
