@@ -3,7 +3,7 @@
 </template>
 <script>
 import ImageKit from 'imagekit-javascript';
-import pkg from "../../package.json";
+import { VERSION } from "../plugin";
 
 export default {
   name: "ik-image",
@@ -35,7 +35,7 @@ export default {
     },
     getClient: function() {
       return new ImageKit({
-        sdkVersion: `vuejs-${pkg.version}`,
+        sdkVersion: `vuejs-${VERSION}`,
         urlEndpoint: this.urlEndpoint ? this.urlEndpoint : this.contextConfigurations.urlEndpoint
       })
     },

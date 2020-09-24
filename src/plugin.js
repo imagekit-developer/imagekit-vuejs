@@ -2,7 +2,7 @@ import IKContext from "./components/IKContext.vue";
 import IKImage from "./components/IKImage.vue";
 import IKUpload from "./components/IKUpload.vue";
 import ImageKit from 'imagekit-javascript';
-import pkg from "../package.json";
+export const VERSION = "1.0.6";
 
 const componentMapping = {
   "ik-context": IKContext,
@@ -16,7 +16,7 @@ export function install(Vue, options) {
   }
 
   options.defaultOptions = {
-    sdkVersion: `vuejs-${pkg.version}`,
+    sdkVersion: `vuejs-${VERSION}`,
     publicKey: options.publicKey,
     urlEndpoint: options.urlEndpoint,
     authenticationEndpoint: options.authenticationEndpoint

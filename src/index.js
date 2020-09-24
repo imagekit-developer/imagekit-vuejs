@@ -2,6 +2,7 @@ import * as plugin from "./plugin";
 import IKContext from "./components/IKContext.vue";
 import IKImage from "./components/IKImage.vue";
 import IKUpload from "./components/IKUpload.vue";
+import { ImageKit as IKCore } from 'imagekit-javascript';
 
 const ImageKit = {
   install: (Vue, options = {}) => {
@@ -20,5 +21,5 @@ const ImageKit = {
 export {
   ImageKit as default,
   ImageKit,
-  IKContext, IKImage, IKUpload
+  IKContext, IKImage, IKUpload, IKCore
 };

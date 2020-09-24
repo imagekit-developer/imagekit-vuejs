@@ -3,8 +3,8 @@
 </template>
 
 <script>
-import ImageKit from 'imagekit-javascript';
-import pkg from "../../package.json";
+import ImageKit from "imagekit-javascript";
+import { VERSION } from "../plugin";
 
 export default {
   name: "ik-upload",
@@ -34,11 +34,15 @@ export default {
     },
     getClient: function() {
       return new ImageKit({
-        sdkVersion: `vuejs-${pkg.version}`,
-        urlEndpoint: this.urlEndpoint ? this.urlEndpoint : this.contextConfigurations.urlEndpoint,
+        sdkVersion: `vuejs-${VERSION}`,
+        urlEndpoint: this.urlEndpoint
+          ? this.urlEndpoint
+          : this.contextConfigurations.urlEndpoint,
         publicKey: this.urlEndpoint || this.contextConfigurations.urlEndpoint,
-        authenticationEndpoint: this.authenticationEndpoint || this.contextConfigurations.authenticationEndpoint
-      })
+        authenticationEndpoint:
+          this.authenticationEndpoint ||
+          this.contextConfigurations.authenticationEndpoint
+      });
     },
     upload() {
       const file = this.$refs.imageFile.files[0];
@@ -47,25 +51,30 @@ export default {
       const mergedOptions = this.getMergedOptions();
       const IkClient = this.IkClient || this.getClient();
 
-      IkClient.upload({
-        file: file,
-        fileName: this.fileName || fileSystemFileName,
-        useUniqueFileName: this.useUniqueFileName,
-        tags: this.tags,
-        folder: this.folder,
-        isPrivateFile: this.isPrivateFile,
-        customCoordinates: this.customCoordinates,
-        responseFields: this.responseFields
-      }, (err, result) => {
+      IkClient.upload(
+        {
+          file: file,
+          fileName: this.fileName || fileSystemFileName,
+          useUniqueFileName: this.useUniqueFileName,
+          tags: this.tags,
+          folder: this.folder,
+          isPrivateFile: this.isPrivateFile,
+          customCoordinates: this.customCoordinates,
+          responseFields: this.responseFields
+        },
+        (err, result) => {
           if (err && typeof this.onError === "function") {
             this.onError(err);
-          } else if(!err && typeof this.onSuccess === "function") {
+          } else if (!err && typeof this.onSuccess === "function") {
             this.onSuccess(result);
           }
-      }, {
-        publicKey: this.publicKey || mergedOptions.publicKey,
-        authenticationEndpoint: this.authenticationEndpoint || mergedOptions.authenticationEndpoint,
-      });
+        },
+        {
+          publicKey: this.publicKey || mergedOptions.publicKey,
+          authenticationEndpoint:
+            this.authenticationEndpoint || mergedOptions.authenticationEndpoint
+        }
+      );
 
       return;
     }
