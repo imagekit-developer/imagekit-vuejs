@@ -52,14 +52,23 @@
       <IKImage :path="path" :transformation="[{height:300,width:400}]" />
     </IKContext>
 
-    <p>Upload</p>
+    <p>File upload</p>
+      <ik-upload 
+        :tags="['tag1','tag2']"
+        :responseFields="['tags']"
+        :onError="onError"
+        :onSuccess="onSuccess"
+        customCoordinates="10,10,100,100"
+      />
+    
+    <p>Upload using exported component</p>
     <IKContext
       :publicKey="publicKey"
       :urlEndpoint="urlEndpoint"
       :authenticationEndpoint="authenticationEndpoint"
     >
       <IKUpload
-        :tags="['tag1','tag2']"
+        :tags="['tag3','tag4']"
         :responseFields="['tags']"
         :onError="onError"
         :onSuccess="onSuccess"
@@ -73,7 +82,14 @@
 </template>
 
 <script>
-import { IKImage, IKContext, IKUpload } from "imagekitio-vue";
+import Vue from 'vue';
+import ImageKit, { IKImage, IKContext, IKUpload } from "../../../src"
+
+Vue.use(ImageKit, {
+  urlEndpoint: process.env.VUE_APP_URL_ENDPOINT,
+  publicKey: process.env.VUE_APP_PUBLIC_KEY,
+  authenticationEndpoint: process.env.VUE_APP_AUTHENTICATION_ENDPOINT
+})
 
 let path = "/default-image.jpg";
 

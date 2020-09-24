@@ -16,7 +16,6 @@ export default {
     };
   },
   props: {
-    publicKey: { type: String, default: "", required: false },
     urlEndpoint: { type: String, default: "", required: false },
     path: { type: String, default: "", required: false },
     src: { type: String, default: "", required: false },
@@ -129,7 +128,6 @@ export default {
       const IkClient = this.IkClient || this.getClient();
 
       var options = {
-        publicKey: this.publicKey ? this.publicKey : mergedOptions.publicKey,
         urlEndpoint: this.urlEndpoint ? this.urlEndpoint : mergedOptions.urlEndpoint,
         src: this.src,
         path: this.path,

@@ -10,6 +10,9 @@ export default {
   name: "ik-upload",
   inject: { contextConfigurations: { default: {} } },
   props: {
+    urlEndpoint: { type: String, default: "", required: false },
+    publicKey: { type: String, default: "", required: false },
+    authenticationEndpoint: { type: String, default: "", required: false },
     fileName: { type: String, default: "", required: false },
     useUniqueFileName: { type: Boolean, default: true, required: false },
     tags: { type: Array, required: false },
@@ -51,6 +54,27 @@ export default {
       const mergedOptions = this.getMergedOptions();
       const IkClient = this.IkClient || this.getClient();
 
+      const publicKey = this.publicKey || mergedOptions.publicKey;
+      const authenticationEndpoint = this.authenticationEndpoint || mergedOptions.authenticationEndpoint;
+
+      if(!publicKey || publicKey.trim() === "") {
+        if(typeof this.onError === "function"){
+          this.onError({
+            message: "Missing publicKey"
+          });
+        }
+        return;
+      }
+
+      if(!authenticationEndpoint || authenticationEndpoint.trim() === "") {
+        if(typeof this.onError === "function"){
+          this.onError({
+            message: "Missing authenticationEndpoint"
+          });
+        }
+        return;
+      }
+
       IkClient.upload(
         {
           file: file,
@@ -70,9 +94,8 @@ export default {
           }
         },
         {
-          publicKey: this.publicKey || mergedOptions.publicKey,
-          authenticationEndpoint:
-            this.authenticationEndpoint || mergedOptions.authenticationEndpoint
+          publicKey,
+          authenticationEndpoint
         }
       );
 
