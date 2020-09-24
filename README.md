@@ -23,9 +23,8 @@ yarn add imagekitio-vue
 
 ## Usage
 
-Register it as a plugin to globally install all components.
-
 ### Initialization
+Register it as a plugin to globally install all components.
 
 ```js
 import ImageKit from "imagekitio-vue"
@@ -44,6 +43,19 @@ Vue.use(ImageKit, {
 `transformationPosition` is optional. The default value for this parameter is `path`. Acceptable values are `path` & `query`
 
 _Note: Do not include your Private Key in any client-side code, including this SDK or its initialization. If you pass the `privateKey` parameter while initializing this SDK, it throws an error_
+
+Or, import components individually.
+```
+import { IKImage, IKContext, IKUpload } from "imagekitio-vue"
+
+export default {
+  components: {
+    IKImage,
+    IKContext,
+    IKUpload
+  }
+}
+```
 
 ### Quick examples
 ```js
@@ -116,19 +128,6 @@ Vue.use(ImageKit, {
   :isPrivateFile=false
   customCoordinates="10,10,100,100"
 />
-```
-
-Or, import components individually.
-```
-import { IKImage, IKContext, IKUpload } from "imagekitio-vue"
-
-export default {
-  components: {
-    IKImage,
-    IKContext,
-    IKUpload
-  }
-}
 ```
 
 ### Demo application

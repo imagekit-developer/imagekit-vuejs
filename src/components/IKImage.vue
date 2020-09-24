@@ -140,7 +140,7 @@ export default {
 
       result.src = IkClient.url(options);
 
-      if(this.lqip && this.lqip.active && (this.lqip.quality || this.lqip.threshold)) {
+      if(this.lqip && this.lqip.active) {
         var quality = parseInt((this.lqip.quality || this.lqip.threshold),10) || 20;
         var blur = parseInt((this.lqip.blur || this.lqip.blur),10) || 6;
         var transformation = options.transformation || [];
