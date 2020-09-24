@@ -1,6 +1,6 @@
 {
   "name": "imagekitio-vue",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "scripts": {
     "build:lib": "./node_modules/.bin/vue-cli-service build --target lib src/index.js",
     "build": "./node_modules/.bin/vue-cli-service lint --fix; npm run build:lib",
@@ -21,11 +21,7 @@
     "url": "https://github.com/imagekit-developer/imagekit-vuejs"
   },
   "dependencies": {
-    "babel-plugin-require-context-hook": "^1.0.0",
-    "core-js": "^3.4.3",
-    "imagekit-javascript": "^1.2.0",
-    "jest-vue-preprocessor": "^1.7.0",
-    "vue": "^2.6.11"
+    "imagekit-javascript": "^1.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
@@ -65,8 +61,12 @@
       "parser": "babel-eslint"
     }
   },
+  "license": "MIT",
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ]
+  ],
+  "peerDependencies": {
+    "vue": "^2.6.12"
+  }
 }
