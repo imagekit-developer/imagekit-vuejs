@@ -83,7 +83,7 @@
 
 <script>
 import Vue from 'vue';
-import ImageKit, { IKImage, IKContext, IKUpload } from "../../../src"
+import ImageKit, { IKImage, IKContext, IKUpload } from "imagekitio-vue"
 
 Vue.use(ImageKit, {
   urlEndpoint: process.env.VUE_APP_URL_ENDPOINT,
