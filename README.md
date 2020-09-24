@@ -220,8 +220,9 @@ transformation = [
 ]
 ```
 
+### List of supported transformations
 <details>
-<summary>List of supported transformations</summary>
+<summary>Expand</summary>
 
 The complete list of transformations supported and their usage in ImageKit can be found [here](https://docs.imagekit.io/features/image-transformations). The SDK gives a name to each transformation parameter, making the code readable. If the property does not match any of the following, it is appended in the URL.
 
