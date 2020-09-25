@@ -80,13 +80,13 @@ Vue.use(ImageKit, {
 // Using chained transformation
 <ik-image
   path="/default-image.jpg"
-  :transformation="[{height:300,width:400}, {rotate:90}]"
+  :transformation="[{height:300,width:400}, {rotation:90}]"
 />
 
 // Imgae from absolute file path
 <ik-image
   src="https://custom-domain.com/default-image.jpg"
-  :transformation="[{height:300,width:400}, {rotate:90}]"
+  :transformation="[{height:300,width:400}, {rotation:90}]"
 />
 
 // Lazy loading
@@ -189,7 +189,7 @@ var imageURL = imagekit.url({
 // Loading imgae from an absolute file path with no transformations
 <ik-image
   src="https://custom-domain.com/default-image.jpg"
-  :transformation="[{height:300,width:400}, {rotate:90}]"
+  :transformation="[{height:300,width:400}, {rotation:90}]"
 />
 
 // Image resizing
@@ -201,7 +201,7 @@ var imageURL = imagekit.url({
 // Using a new tranformation parameter which is not there in this SDK yet.
 <ik-image
   path="/default-image.jpg"
-  :transformation="[{height:300,width:400, custom: 'value'}, {rotate:90}]"
+  :transformation="[{height:300,width:400, custom: 'value'}, {rotation:90}]"
 />
 ```
 
@@ -215,7 +215,7 @@ transformation = [
     width: 400
   },
   {
-    rotate: 90
+    rotation: 90
   }
 ]
 ```
@@ -281,7 +281,7 @@ Chained transforms make it easy to specify the order the transform are applied. 
 // Using chained transformation. First resize and then rotate image to 90 degree.
 <ik-image
   path="/default-image.jpg"
-  :transformation="[{height:300,width:400}, {rotate:90}]"
+  :transformation="[{height:300,width:400}, {rotation:90}]"
 />
 ```
 
