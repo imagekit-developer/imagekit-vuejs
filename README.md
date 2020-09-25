@@ -220,11 +220,11 @@ transformation = [
 ]
 ```
 
+See the complete list of transformations supported in ImageKit [here](https://docs.imagekit.io/features/image-transformations). The SDK gives a name to each transformation parameter e.g. `height` for `h` and `width` for `w` parameter. It makes your code more readable. If the property does not match any of the following supported options, it is added as it is.
+
 ### List of supported transformations
 <details>
 <summary>Expand</summary>
-
-The complete list of transformations supported and their usage in ImageKit can be found [here](https://docs.imagekit.io/features/image-transformations). The SDK gives a name to each transformation parameter, making the code readable. If the property does not match any of the following, it is appended in the URL.
 
 | Supported Transformation Name | Translates to parameter |
 | ----------------------------- | ----------------------- |

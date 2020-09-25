@@ -18,7 +18,7 @@ export default {
     tags: { type: Array, required: false },
     folder: { type: String, default: "/", required: false },
     isPrivateFile: { type: Boolean, default: false, required: false },
-    customCoordinates: { type: String, required: false },
+    customCoordinates: { type: String, default:"", required: false },
     responseFields: { type: Array, required: false },
     onError: { type: Function, required: false },
     onSuccess: { type: Function, required: false }
