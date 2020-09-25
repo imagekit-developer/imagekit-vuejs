@@ -17,6 +17,8 @@ export default {
   },
   props: {
     urlEndpoint: { type: String, default: "", required: false },
+    publicKey: { type: String, default: "", required: false },
+    authenticationEndpoint: { type: String, default: "", required: false },
     path: { type: String, default: "", required: false },
     src: { type: String, default: "", required: false },
     transformation: { type: Array, required: false },
