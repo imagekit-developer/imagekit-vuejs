@@ -3,6 +3,7 @@
 Execute the following command from the root folder to build the library. This creates a package in the `dist` folder.
 ```sh
 yarn install # for first-time
+yarn add vue --peer # Add vue as peer dependency
 yarn build
 ```
 

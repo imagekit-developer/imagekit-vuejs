@@ -2,7 +2,7 @@ import IKContext from "./components/IKContext.vue";
 import IKImage from "./components/IKImage.vue";
 import IKUpload from "./components/IKUpload.vue";
 import ImageKit from 'imagekit-javascript';
-export const VERSION = "1.0.7";
+export const VERSION = "1.0.8";
 
 const componentMapping = {
   "ik-context": IKContext,

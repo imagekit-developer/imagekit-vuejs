@@ -30,10 +30,10 @@ Register it as a plugin to globally install all components.
 import ImageKit from "imagekitio-vue"
 
 Vue.use(ImageKit, {
-  urlEndpoint: your_url_endpoint,
-  // publicKey: your_public_api_key,
-  // authenticationEndpoint: https://your-server.com/auth,
-  // transformationPosition: "path"
+  urlEndpoint: "your_url_endpoint", // Required. Default URL-endpoint is https://ik.imagekit.io/your_imagekit_id
+  publicKey: "your_public_api_key", // optional
+  authenticationEndpoint: "https://www.your-server.com/auth" // optional
+  // transformationPosition: "path" // optional
 })
 ```
 `urlEndpoint` is required to use the SDK. You can get URL-endpoint from your ImageKit dashboard - https://imagekit.io/dashboard#url-endpoints.
@@ -61,12 +61,12 @@ export default {
 ```js
 import ImageKit from "imagekitio-vue"
 Vue.use(ImageKit, {
-  urlEndpoint: your_url_endpoint, // Default URL-endpoint is https://ik.imagekit.io/your_imagekit_id
-  // publicKey: your_public_api_key,
-  // authenticationEndpoint: https://your-server.com/auth
+  urlEndpoint: "your_url_endpoint", // Required. Default URL-endpoint is https://ik.imagekit.io/your_imagekit_id
+  publicKey: "your_public_api_key", // optional
+  authenticationEndpoint: "https://www.your-server.com/auth" // optional
 })
 
-// Image from related file path
+// Rendering image using a relative file path
 <ik-image
   path="/default-image.jpg"
 />
@@ -227,49 +227,63 @@ See the complete list of transformations supported in ImageKit [here](https://do
 <summary>Expand</summary>
 
 | Supported Transformation Name | Translates to parameter |
-| ----------------------------- | ----------------------- |
-| height                        | h                       |
-| width                         | w                       |
-| aspectRatio                   | ar                      |
-| quality                       | q                       |
-| crop                          | c                       |
-| cropMode                      | cm                      |
-| x                             | x                       |
-| y                             | y                       |
-| focus                         | fo                      |
-| format                        | f                       |
-| radius                        | r                       |
-| background                    | bg                      |
-| border                        | bo                      |
-| rotation                      | rt                      |
-| blur                          | bl                      |
-| named                         | n                       |
-| overlayImage                  | oi                      |
-| overlayX                      | ox                      |
-| overlayY                      | oy                      |
-| overlayFocus                  | ofo                     |
-| overlayHeight                 | oh                      |
-| overlayWidth                  | ow                      |
-| overlayText                   | ot                      |
-| overlayTextFontSize           | ots                     |
-| overlayTextFontFamily         | otf                     |
-| overlayTextColor              | otc                     |
-| overlayAlpha                  | oa                      |
-| overlayTextTypography         | ott                     |
-| overlayBackground             | obg                     |
-| overlayImageTrim              | oit                     |
-| progressive                   | pr                      |
-| lossless                      | lo                      |
-| trim                          | t                       |
-| metadata                      | md                      |
-| colorProfile                  | cp                      |
-| defaultImage                  | di                      |
-| dpr                           | dpr                     |
-| effectSharpen                 | e-sharpen               |
-| effectUSM                     | e-usm                   |
-| effectContrast                | e-contrast              |
-| effectGray                    | e-grayscale             |
-| original                      | orig                    |
+|-------------------------------|-------------------------|
+| height | h |
+| width | w |
+| aspectRatio | ar |
+| quality | q |
+| crop | c |
+| cropMode | cm |
+| x | x |
+| y | y |
+| focus | fo |
+| format | f |
+| radius | r |
+| background | bg |
+| border | bo |
+| rotation | rt |
+| blur | bl |
+| named | n |
+| overlayX | ox |
+| overlayY | oy |
+| overlayFocus | ofo |
+| overlayHeight | oh |
+| overlayWidth | ow |
+| overlayImage | oi |
+| overlayImageTrim | oit |
+| overlayImageAspectRatio | oiar |
+| overlayImageBackground | oibg |
+| overlayImageBorder | oib |
+| overlayImageDPR | oidpr |
+| overlayImageQuality | oiq |
+| overlayImageCropping | oic |
+| overlayImageTrim | oit |
+| overlayText | ot |
+| overlayTextFontSize | ots |
+| overlayTextFontFamily | otf |
+| overlayTextColor | otc |
+| overlayTextTransparency | oa |
+| overlayAlpha | oa |
+| overlayTextTypography | ott |
+| overlayBackground | obg |
+| overlayTextEncoded | ote |
+| overlayTextWidth | otw |
+| overlayTextBackground | otbg |
+| overlayTextPadding | otp |
+| overlayTextInnerAlignment | otia |
+| overlayRadius | or |
+| progressive | pr |
+| lossless | lo |
+| trim | t |
+| metadata | md |
+| colorProfile | cp |
+| defaultImage | di |
+| dpr | dpr |
+| effectSharpen | e-sharpen |
+| effectUSM | e-usm |
+| effectContrast | e-contrast |
+| effectGray | e-grayscale |
+| original | orig |
 
 </details>
 
@@ -407,9 +421,9 @@ import Vue from 'vue';
 import ImageKit from "imagekitio-vue"
 
 Vue.use(ImageKit, {
-  urlEndpoint: your_url_endpoint,
-  publicKey: your_public_api_key,
-  authenticationEndpoint: "https://www.your-server.com/auth",
+  urlEndpoint: "your_url_endpoint", // Required. Default URL-endpoint is https://ik.imagekit.io/your_imagekit_id
+  publicKey: "your_public_api_key", // optional
+  authenticationEndpoint: "https://www.your-server.com/auth" // optional
 })
 
 export default {
