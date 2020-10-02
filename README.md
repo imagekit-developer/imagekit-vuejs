@@ -322,7 +322,7 @@ Example usage:
 />
 ```
 
-### Low-quality image placeholders (LQIP)
+### Low-Quality Image placeholders (LQIP)
 To improve user experience, you can use a low-quality blurred variant of the original image as a placeholder while the original image is being loaded in the background. Once the loading of the original image is finished, the placeholder is replaced with the original image.
 
 ```js
