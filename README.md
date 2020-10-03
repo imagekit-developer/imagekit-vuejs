@@ -131,7 +131,7 @@ Vue.use(ImageKit, {
 ```
 
 ### Demo application
-The fastest way to get started is by running the demo application in [samples/sample-app](/samples/sample-app) folder as the [README.md](/samples/sample-app/README.md).
+The fastest way to get started is by running the demo application in [samples/sample-app](/samples/sample-app) folder as per [README.md](/samples/sample-app/README.md).
 
 ### Components
 
