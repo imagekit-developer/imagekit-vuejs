@@ -131,7 +131,8 @@ Vue.use(ImageKit, {
 ```
 
 ### Demo application
-The fastest way to get started is by running the demo application in [samples/sample-app](/samples/sample-app) folder as per [README.md](/samples/sample-app/README.md).
+* The official step by step Vue.js quick start guide - https://docs.imagekit.io/getting-started/quickstart-guides/vuejs.
+* You can also run the demo application in [samples/sample-app](/samples/sample-app) folder as per [README.md](/samples/sample-app/README.md).
 
 ### Components
 
