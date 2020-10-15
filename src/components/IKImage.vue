@@ -80,7 +80,9 @@ export default {
     }
   },
   destroyed() {
-    this.observer.disconnect();
+    if(this.observer) {
+      this.observer.disconnect();
+    }
   },
   computed: {
     srcImage: function() {
