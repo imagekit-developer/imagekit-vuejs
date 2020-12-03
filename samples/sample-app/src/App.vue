@@ -20,23 +20,26 @@
 
     <p>Lazy loading image</p>
     <ik-image
+      class="lazyload"
       path="/default-image.jpg"
-      :transformation="[{height:300,width:400},{rotation:90}]"
+      :transformation="[{height:200,width:200}]"
       loading="lazy"
     />
 
     <p>Progressive image loading wihtout lazy loading</p>
     <ik-image
+      class="lqip"
       path="/default-image.jpg"
-      :transformation="[{height:300,width:400},{rotation:90}]"
+      :transformation="[{height:200,width:200}]"
       :lqip="{active:true,threshold:20}"
     />
 
     <p>Progressive image loading with lazy loading</p>
     <ik-image
+      class="lazyload-lqip"
       path="/default-image.jpg"
-      :transformation="[{height:300,width:400},{rotation:90}]"
-      :lqip="{active:true,threshold:20}"
+      :transformation="[{height:200,width:200}]"
+      :lqip="{active:true,threshold:20,quality:20,blur:30}"
       loading="lazy"
     />
 
