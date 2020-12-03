@@ -1,6 +1,6 @@
 {
   "name": "imagekitio-vue",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "scripts": {
     "build:lib": "./node_modules/.bin/vue-cli-service build --target lib src/index.js",
     "build": "./node_modules/.bin/vue-cli-service lint --fix; npm run build:lib",
