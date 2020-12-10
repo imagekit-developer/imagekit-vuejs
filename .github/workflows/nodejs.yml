@@ -47,7 +47,9 @@ jobs:
         npm install
         cd samples/sample-app
         echo VUE_APP_URL_ENDPOINT = ${{ secrets.ik_url_endopint }} > .env;
+        echo 'ENDPOINT SET'
         echo $VUE_APP_URL_ENDPOINT
+        echo 'BEGIN SAMPLE APP SETUP'
         npm install
         npm run build
 
