@@ -1,6 +1,6 @@
 name: Node CI
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [8.x, 10.x, 12.x]
+        node-version: [10.x, 12.x]
 
     steps:
     - uses: actions/checkout@v1
@@ -21,6 +21,43 @@ jobs:
       run: |
         npm install
         npm run test:unit
+      env:
+        CI: true
+        VUE_APP_PUBLIC_KEY: ${{ secrets.ik_public_key }}
+        VUE_APP_PRIVATE_KEY: ${{ secrets.ik_private_key }}
+        VUE_APP_URL_ENDPOINT: ${{ secrets.ik_url_endopint }}
+
+  e2e:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Setup module and build sample-app
+      run: |
+        npm install
+        cd samples/sample-app
+        echo VUE_APP_URL_ENDPOINT = ${{ secrets.ik_url_endopint }} > .env;
+        echo 'ENDPOINT SET'
+        echo $VUE_APP_URL_ENDPOINT
+        echo 'BEGIN SAMPLE APP SETUP'
+        npm install
+        npm run build
+
+    - name: Run E2E tests
+      uses: cypress-io/github-action@v2
+      with:
+        start: npm run start:sample
+        wait-on: http://localhost:3000
       env:
         CI: true
         VUE_APP_PUBLIC_KEY: ${{ secrets.ik_public_key }}

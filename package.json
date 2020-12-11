@@ -1,11 +1,13 @@
 {
   "name": "imagekitio-vue",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "scripts": {
     "build:lib": "./node_modules/.bin/vue-cli-service build --target lib src/index.js",
     "build": "./node_modules/.bin/vue-cli-service lint --fix; npm run build:lib",
     "serve": "./node_modules/.bin/vue-cli-service serve",
     "lint": "./node_modules/.bin/vue-cli-service lint",
+    "test:e2e": "cypress open",
+    "start:sample": "npx serve -s samples/sample-app/dist -p 3000",
     "test:unit": "export VUE_APP_PUBLIC_KEY=your_public_key;export VUE_APP_URL_ENDPOINT=https://ik.imagekit.io/your_imagekit_id;export VUE_APP_AUTHENTICATION_ENDPOINT=https://www.example.com/auth;./node_modules/.bin/vue-cli-service test:unit --watchAll=false;unset VUE_APP_PUBLIC_KEY;unset VUE_APP_URL_ENDPOINT;unset VUE_APP_AUTHENTICATION_ENDPOINT",
     "test:dev": "export VUE_APP_PUBLIC_KEY=your_public_key;export VUE_APP_URL_ENDPOINT=https://ik.imagekit.io/your_imagekit_id;export VUE_APP_AUTHENTICATION_ENDPOINT=https://www.example.com/auth;./node_modules/.bin/vue-cli-service test:unit --watchAll=true;unset VUE_APP_PUBLIC_KEY;unset VUE_APP_URL_ENDPOINT;unset VUE_APP_AUTHENTICATION_ENDPOINT",
     "storybook": "start-storybook -p 6006",
@@ -38,6 +40,7 @@
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "babel-preset-vue": "^2.0.2",
+    "cypress": "^6.0.1",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "html-webpack-plugin": "^3.2.0",
