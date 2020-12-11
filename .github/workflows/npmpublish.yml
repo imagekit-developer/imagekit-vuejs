@@ -10,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [8.x, 10.x, 12.x]
+        node-version: [10.x, 12.x]
 
     steps:
       - uses: actions/checkout@v1
@@ -27,7 +27,7 @@ jobs:
           CI: true
           VUE_APP_PUBLIC_KEY: ${{ secrets.ik_public_key }}
           VUE_APP_PRIVATE_KEY: ${{ secrets.ik_private_key }}
-          VUE_APP_URL_ENDPOINT: ${{ secrets.ik_url_endopint }}
+          VUE_APP_URL_ENDPOINT: ${{ secrets.ik_url_endpoint }}
 
   publish:
     needs: build
