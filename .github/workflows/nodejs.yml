@@ -25,7 +25,7 @@ jobs:
         CI: true
         VUE_APP_PUBLIC_KEY: ${{ secrets.ik_public_key }}
         VUE_APP_PRIVATE_KEY: ${{ secrets.ik_private_key }}
-        VUE_APP_URL_ENDPOINT: ${{ secrets.IK_URL_ENDPOINT }}
+        VUE_APP_URL_ENDPOINT: ${{ secrets.ik_url_endpoint }}
 
   e2e:
     runs-on: ubuntu-latest
@@ -46,7 +46,7 @@ jobs:
       run: |
         npm install
         cd samples/sample-app
-        echo VUE_APP_URL_ENDPOINT = ${{ secrets.IK_URL_ENDPOINT }} > .env;
+        echo VUE_APP_URL_ENDPOINT = ${{ secrets.ik_url_endpoint }} > .env;
         npm install
         npm run build
 
@@ -59,4 +59,4 @@ jobs:
         CI: true
         VUE_APP_PUBLIC_KEY: ${{ secrets.ik_public_key }}
         VUE_APP_PRIVATE_KEY: ${{ secrets.ik_private_key }}
-        VUE_APP_URL_ENDPOINT: ${{ secrets.IK_URL_ENDPOINT }}
+        VUE_APP_URL_ENDPOINT: ${{ secrets.ik_url_endpoint }}
