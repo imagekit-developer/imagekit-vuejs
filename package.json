@@ -1,6 +1,6 @@
 {
   "name": "imagekitio-vue",
-  "version": "1.0.9",
+  "version": "2.0.0",
   "scripts": {
     "build:lib": "./node_modules/.bin/vue-cli-service build --target lib src/index.js",
     "build": "./node_modules/.bin/vue-cli-service lint --fix; npm run build:lib",
@@ -46,7 +46,7 @@
     "html-webpack-plugin": "^3.2.0",
     "jest": "^24.9.0",
     "vue-loader": "^15.8.3",
-    "vue-template-compiler": "^2.6.11",
+    "vue-template-compiler": "^2.6.14",
     "webpack": "^4.41.4",
     "webpack-cli": "^3.3.10"
   },
@@ -70,6 +70,6 @@
     "last 2 versions"
   ],
   "peerDependencies": {
-    "vue": "^2.6.12"
+    "vue": "^2.6.14"
   }
 }
