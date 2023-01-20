@@ -4,17 +4,17 @@
     <h1>Hi! This is an ImageKit Vue SDK Demo!</h1>
 
     <p>Let's add an Image using global component</p>
-    <ik-image :src="src"></ik-image>
+    <ik-image :src="'https://farm9.staticflickr.com/8295/8007075227_dc958c1fe6_z_d.jpg'"></ik-image>
 
     <p>Transformation - height and width manipulation</p>
     <ik-image
-      :src="src"
+      :src="'https://farm9.staticflickr.com/8295/8007075227_dc958c1fe6_z_d.jpg'"
       :transformation="[{height:300,width:400}]"
     />
 
     <p>Chained transformation</p>
     <ik-image
-       :path="path"
+      :path="path"
       :transformation="[{height:300,width:400},{rotation:90}]"
     />
 
@@ -47,7 +47,7 @@
     <IKImage
       :publicKey="publicKey"
       :urlEndpoint="urlEndpoint"
-      :src="src"
+      :src="'https://farm9.staticflickr.com/8295/8007075227_dc958c1fe6_z_d.jpg'"
     />
 
     <p>Adding a Image with Context</p>
