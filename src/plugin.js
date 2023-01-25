@@ -1,13 +1,15 @@
 import IKContext from "./components/IKContext.vue";
 import IKImage from "./components/IKImage.vue";
 import IKUpload from "./components/IKUpload.vue";
+import IKVideo  from "./components/IKVideo.vue";
 import ImageKit from 'imagekit-javascript';
 export const VERSION = "1.0.9";
 
 const componentMapping = {
   "ik-context": IKContext,
   "ik-image": IKImage,
-  "ik-upload": IKUpload
+  "ik-upload": IKUpload,
+  "ik-video": IKVideo,
 };
 
 export function install(Vue, options) {

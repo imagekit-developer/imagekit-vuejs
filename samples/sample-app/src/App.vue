@@ -14,14 +14,20 @@
 
     <p>Chained transformation</p>
     <ik-image
-      :path="path"
+      :src="'https://farm9.staticflickr.com/8295/8007075227_dc958c1fe6_z_d.jpg'"
+      :transformation="[{height:300,width:400},{rotation:90}]"
+    />
+
+    <p>lazyLoading stop</p>
+    <ik-image
+      :src="'https://farm9.staticflickr.com/8295/8007075227_dc958c1fe6_z_d.jpg'"
       :transformation="[{height:300,width:400},{rotation:90}]"
     />
 
     <p>Lazy loading image</p>
     <ik-image
       class="lazyload"
-      path="/default-image.jpg"
+      src="'https://farm9.staticflickr.com/8295/8007075227_dc958c1fe6_z_d.jpg'"
       :transformation="[{height:200,width:200}]"
       loading="lazy"
     />
@@ -29,7 +35,7 @@
     <p>Progressive image loading wihtout lazy loading</p>
     <ik-image
       class="lqip"
-      path="/default-image.jpg"
+      path="'https://farm9.staticflickr.com/8295/8007075227_dc958c1fe6_z_d.jpg'"
       :transformation="[{height:200,width:200}]"
       :lqip="{active:true,threshold:20}"
     />
@@ -37,7 +43,7 @@
     <p>Progressive image loading with lazy loading</p>
     <ik-image
       class="lazyload-lqip"
-      path="/default-image.jpg"
+      path="'https://farm9.staticflickr.com/8295/8007075227_dc958c1fe6_z_d.jpg'"
       :transformation="[{height:200,width:200}]"
       :lqip="{active:true,threshold:20,quality:20,blur:30}"
       loading="lazy"
@@ -54,6 +60,27 @@
     <IKContext :publicKey="publicKey" :urlEndpoint="urlEndpoint">
       <IKImage :path="path" :transformation="[{height:300,width:400}]" />
     </IKContext>
+
+    <p>Let's add an Video using global component</p>
+    <ik-video
+      :src="'https://ik.imagekit.io/demo/sample-video.mp4'"
+      :transformation="[{height:300,width:400},{rotation:180}]"
+    />
+
+    <p>Adding a Video with Context</p>
+    <IKContext :publicKey="publicKey" :urlEndpoint="urlEndpoint">
+      <IKVideo
+        :src="'https://ik.imagekit.io/demo/sample-video.mp4'"
+        :transformation="[{height:400,width:400}]"
+      />
+    </IKContext>
+
+    <p>Using exported component</p>
+    <IKVideo
+      :urlEndpoint="urlEndpoint"
+      :src="'https://ik.imagekit.io/demo/sample-video.mp4'"
+      :transformation="[{height:300,width:400}]"
+    />
 
     <p>File upload</p>
       <ik-upload 
@@ -86,7 +113,8 @@
 
 <script>
 import Vue from 'vue';
-import ImageKit, { IKImage, IKContext, IKUpload } from "imagekitio-vue"
+// import ImageKit, { IKImage, IKContext, IKUpload } from "imagekitio-vue"
+import ImageKit, { IKImage, IKContext, IKUpload, IKVideo } from "imagekitio-vue"
 
 Vue.use(ImageKit, {
   urlEndpoint: process.env.VUE_APP_URL_ENDPOINT,
@@ -94,14 +122,15 @@ Vue.use(ImageKit, {
   authenticationEndpoint: process.env.VUE_APP_AUTHENTICATION_ENDPOINT
 })
 
-let path = "/default-image.jpg";
+let path = "'https://farm9.staticflickr.com/8295/8007075227_dc958c1fe6_z_d.jpg'";
 
 export default {
   name: "app",
   components: {
     IKImage,
     IKContext,
-    IKUpload
+    IKUpload,
+    IKVideo,
   },
   data() {
     return {
