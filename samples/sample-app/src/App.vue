@@ -88,6 +88,7 @@
         :responseFields="['tags']"
         :onError="onError"
         :onSuccess="onSuccess"
+        :validateFile="validateFile"
         customCoordinates="10,10,100,100"
       />
     
@@ -114,7 +115,7 @@
 <script>
 import Vue from 'vue';
 // import ImageKit, { IKImage, IKContext, IKUpload } from "imagekitio-vue"
-import ImageKit, { IKImage, IKContext, IKUpload, IKVideo } from "imagekitio-vue"
+import ImageKit, { IKImage, IKContext, IKUpload, IKVideo } from "../../../src/index"
 
 Vue.use(ImageKit, {
   urlEndpoint: process.env.VUE_APP_URL_ENDPOINT,
@@ -149,6 +150,13 @@ export default {
     onSuccess(res) {
       console.log("Success");
       console.log(res);
+    },
+    validateFile(res) {
+      console.log(res);
+      if(res.size > 0) {
+        return true
+      }
+      return false
     }
   }
 };
