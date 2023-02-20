@@ -1,16 +1,36 @@
 <script>
-export default {
-  name: "ik-context",
+import { defineComponent, ref } from 'vue';
 
-  inheritAttrs: false,
+export default defineComponent({
+  name: 'ik-context',
+  props: {
+    publicKey: {
+      type: String,
+      required: true
+    },
+    urlEndpoint: {
+      type: String,
+      required: true
+    },
+    slots: {
+      type: Object,
+      default: () => {}
+    }
+  },
+  setup(props) {
+    const contextConfigurations = ref({
+      publicKey: props.publicKey,
+      urlEndpoint: props.urlEndpoint
+    });
 
-  provide() {
-    const contextConfigurations = {};
-    Object.assign(contextConfigurations, this.$attrs);
-    return { contextConfigurations: contextConfigurations };
+    return {
+      contextConfigurations
+    };
   },
   render() {
-    return this.$scopedSlots.default();
+    return this.slots.default ? this.slots.default() : null;
   }
-};
+});
 </script>
+
+<!-- In this code, we've used the `Ref` method to make the `contextConfigurations` object reactive, and we've used a conditional statement to check if `this.slots.default` exists before  -->
