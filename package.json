@@ -33,7 +33,7 @@
     "@storybook/addon-links": "^5.2.8",
     "@storybook/addon-storyshots": "^5.3.21",
     "@storybook/addons": "^5.2.8",
-    "@storybook/vue": "^5.3.21",
+    "@storybook/vue3": "^6.5.16",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-plugin-unit-jest": "^4.1.1",
