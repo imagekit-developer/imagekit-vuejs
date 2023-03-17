@@ -30,8 +30,9 @@ export default {
   setup(props) {
     const file = ref('')
     const configurations = inject('contextConfigurations');
+
     const upload = (event) => {
-      console.log(event,"---upload")
+      
       file.value = event.target.files[0];
       
       if (!file.value) {
@@ -75,7 +76,7 @@ export default {
 
       IkClient.upload(
         {
-          file: file,
+          file: file.value,
           fileName: props.fileName || fileSystemFileName,
           useUniqueFileName: props.useUniqueFileName,
           tags: props.tags,

@@ -131,7 +131,6 @@ export default defineComponent ({
     },
     imageAttrs: function() {
       const mergedOptions = this.getMergedOptions();
-      console.log(mergedOptions,"----ik")
       const IkClient = this.getClient();
       var options = {
         urlEndpoint: this.urlEndpoint ? this.urlEndpoint : mergedOptions.urlEndpoint,
