@@ -8,41 +8,39 @@
       :path = "path"
       :transformation="[{height:300,width:400},{rotation:360}]"
     />
-     <!-- <IKContext :publicKey="publicKey" :urlEndpoint="urlEndpoint" :slots="{default: () => $attrs}">
-      <IKImage :path="path" :transformation="[{height:300,width:400}]" />
+  
+    <p>IK Image with context</p>
+    <IKContext :publicKey="publicKey" :urlEndpoint="urlEndpoint">
+      <template v-slot:default>
+        <IKImage :path="path" :transformation='[{height:300,width:400}]' :urlEndpoint="urlEndpoint"/>
+      </template>
     </IKContext>
-
+    
     <p>Using exported component</p>
-    <IKVideo
-      :urlEndpoint="urlEndpoint"
-      :src="'https://ik.imagekit.io/demo/sample-video.mp4'"
-      :transformation="[{height:300,width:400,q:50}]"
-    />
+      <IKVideo
+        :urlEndpoint="urlEndpoint"
+        :src="'https://ik.imagekit.io/demo/sample-video.mp4'"
+        :transformation="[{height:300,width:400,q:50}]"
+      />
 
-    <ik-video
-      :urlEndpoint="urlEndpoint"
-      :src="'https://ik.imagekit.io/demo/sample-video.mp4'"
-      :transformation="[{height:300,width:400,q:50}]"
-    />
-
-      <p>File upload2</p>
+    <p>File upload2</p>
       <IKUpload
         :urlEndpoint="urlEndpoint"
+        :publicKey="publicKey"
         :authenticationEndpoint="authenticationEndpoint"
         :tags="['tag1','tag2']"
         :responseFields="['tags']"
         :onError="onError"
         :onSuccess="onSuccess"
         customCoordinates="10,10,100,100"
-      /> -->
-
+      />
   </div>
 </template>
 
 <script>
 
-import ImageKit, { IKImage } from '../../../src/index'
-// import ImageKit, { IKImage, IKContext, IKVideo, IKUpload } from 'vue3-imagekitio'
+// import ImageKit, { IKImage, IKContext, IKVideo, IKUpload } from '../../../src/index'
+import ImageKit, { IKImage, IKUpload, IKContext, IKVideo, } from 'imagekitio-vue'
 import { createApp } from 'vue';
 
 const app = createApp({});
@@ -59,9 +57,9 @@ export default {
   name: 'App',
   components: {
     IKImage,
-    // IKContext,
-    // IKVideo,
-    // IKUpload,
+    IKContext,
+    IKVideo,
+    IKUpload,
   },
   data() {
     return {

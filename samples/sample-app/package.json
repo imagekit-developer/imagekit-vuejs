@@ -10,6 +10,7 @@
   "dependencies": {
     "core-js": "^3.8.3",
     "imagekit-javascript": "^1.3.5",
+    "imagekitio-vue": "file:../../imagekitio-vue-0.1.0.tgz",
     "vue": "^3.2.47"
   },
   "devDependencies": {
