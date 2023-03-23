@@ -23,6 +23,7 @@
     "url": "https://github.com/imagekit-developer/imagekit-vuejs"
   },
   "dependencies": {
+    "babel-eslint": "^10.1.0",
     "imagekit-javascript": "^1.3.5",
     "vue": "^3.2.47"
   },
