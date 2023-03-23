@@ -1,7 +1,8 @@
 <template>
     <video class="ik-video" controls :src="srcVideo" />
-  </template>
-  <script>
+</template>
+
+<script>
   import ImageKit from 'imagekit-javascript';
   import { VERSION } from "../plugin";
   
