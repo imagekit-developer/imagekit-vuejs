@@ -1,3 +1,4 @@
+import { defineComponent, h } from 'vue';
 import IKImage from '../../src/components/IKImage.vue';
 
 export default {
@@ -5,39 +6,80 @@ export default {
 };
 
 const publicKey = process.env.VUE_APP_PUBLIC_KEY;
-
 const urlEndpoint = process.env.VUE_APP_URL_ENDPOINT;
-
 const path = "default-image.jpg";
-
 const src = `${urlEndpoint}/${path}`;
 
-export const imageWithTransformation = () => ({
+export const imageWithTransformation = defineComponent({
   components: { IKImage },
-  template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} src=${src} :transformation="[{height:300,width:400}]"></IKImage>`,
+  render() {
+    return h(IKImage, {
+      publicKey: publicKey,
+      urlEndpoint: urlEndpoint,
+      src: src,
+      transformation: [{ height: 300, width: 400 }]
+    });
+  }
 });
 
-export const imageWithTransformationPositionAsQuery = () => ({
+export const imageWithTransformationPositionAsQuery = defineComponent({
   components: { IKImage },
-  template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} path=${path} :transformation="[{height:300,width:400}]" :transformationPosition="'query'"></IKImage>`,
+  render() {
+    return h(IKImage, {
+      publicKey: publicKey,
+      urlEndpoint: urlEndpoint,
+      path: path,
+      transformation: [{ height: 300, width: 400 }],
+      transformationPosition: 'query'
+    });
+  }
 });
 
-export const imageWithTransformationPositionAsPathPassingSrc = () => ({
+export const imageWithTransformationPositionAsPathPassingSrc = defineComponent({
   components: { IKImage },
-  template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} src=${src} :transformation="[{height:300,width:400}]" :transformationPosition="'path'"></IKImage>`,
+  render() {
+    return h(IKImage, {
+      publicKey: publicKey,
+      urlEndpoint: urlEndpoint,
+      src: src,
+      transformation: [{ height: 300, width: 400 }],
+      transformationPosition: 'path'
+    });
+  }
 });
 
-export const imageWithChainedTransformation = () => ({
+export const imageWithChainedTransformation = defineComponent({
   components: { IKImage },
-  template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} src=${src} :transformation="[{height:300,width:400},{rotation:90}]"></IKImage>`,
+  render() {
+    return h(IKImage, {
+      publicKey: publicKey,
+      urlEndpoint: urlEndpoint,
+      src: src,
+      transformation: [{ height: 300, width: 400 }, { rotation: 90 }]
+    });
+  }
 });
 
-export const imageWithoutExistingTransformation = () => ({
+export const imageWithoutExistingTransformation = defineComponent({
   components: { IKImage },
-  template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} src=${src} :transformation="[{foo:'bar'}]"></IKImage>`,
+  render() {
+    return h(IKImage, {
+      publicKey: publicKey,
+      urlEndpoint: urlEndpoint,
+      src: src,
+      transformation: [{ foo: 'bar' }]
+    });
+  }
 });
 
-export const imageWithNonExistingTransformationWithExistingTransformation = () => ({
+export const imageWithNonExistingTransformationWithExistingTransformation = defineComponent({
   components: { IKImage },
-  template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} src=${src} :transformation="[{height:300,foo:'bar'}]"></IKImage>`,
+  render() {
+    return h(IKImage, {
+      publicKey: publicKey,
+      urlEndpoint: urlEndpoint,
+      src: src,
+      transformation: [{ height: 300, foo: 'bar' }]
+    });
+  }
 });
