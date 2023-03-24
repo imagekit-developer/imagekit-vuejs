@@ -26,30 +26,18 @@ export default {
     validateFile: { type: Function, required: false },
     onUploadStart: { type: Function, required: false }
   },
-  // emits: ['onUploadStart'],
+
   setup(props) {
     const file = ref('')
     const configurations = inject('contextConfigurations');
 
     const upload = (event) => {
-      
       file.value = event.target.files[0];
-      
       if (!file.value) {
         return;
       }
 
-      // this.$emit('onUploadStart', event)
-      // if (this.onUploadStart && typeof this.onUploadStart === "function") {
-      // this.onUploadStart(event);
-      // } 
-      
-      // if(this.validateFile && !this.validateFile(file)) {
-      //   return
-      // }
-
       const fileSystemFileName = file.value.name;
-
       const mergedOptions = getMergedOptions();
       const IkClient = getClient();
 
@@ -128,93 +116,5 @@ export default {
       file: {}
     };
   },
-  methods: {
-    // getMergedOptions: function() {
-    //   return {
-    //     ...this.defaultOptions,
-    //     ...this.contextConfigurations
-    //   };
-    // },
-    // getClient: function() {
-    //   return new ImageKit({
-    //     sdkVersion: `vuejs-${VERSION}`,
-    //     urlEndpoint: this.urlEndpoint
-    //       ? this.urlEndpoint
-    //       : this.contextConfigurations.urlEndpoint,
-    //     publicKey: this.urlEndpoint || this.contextConfigurations.urlEndpoint,
-    //     authenticationEndpoint:
-    //       this.authenticationEndpoint ||
-    //       this.contextConfigurations.authenticationEndpoint
-    //   });
-    // },
-    // upload(event) {
-    //   const file = this.$refs.imageFile.files[0];
-    //   console.log(this.$refs.imageFile,"---upload")
-    //   if (!file) {
-    //     return;
-    //   }
-
-    //   this.$emit('onUploadStart', event)
-    //   if (this.onUploadStart && typeof this.onUploadStart === "function") {
-    //   this.onUploadStart(event);
-    //   } 
-      
-    //   if(this.validateFile && !this.validateFile(file)) {
-    //     return
-    //   }
-
-    //   const fileSystemFileName = file.name;
-
-    //   const mergedOptions = this.getMergedOptions();
-    //   const IkClient = this.IkClient || this.getClient();
-
-    //   const publicKey = this.publicKey || mergedOptions.publicKey;
-    //   const authenticationEndpoint = this.authenticationEndpoint || mergedOptions.authenticationEndpoint;
-
-    //   if(!publicKey || publicKey.trim() === "") {
-    //     if(typeof this.onError === "function"){
-    //       this.onError({
-    //         message: "Missing publicKey"
-    //       });
-    //     }
-    //     return;
-    //   }
-
-    //   if(!authenticationEndpoint || authenticationEndpoint.trim() === "") {
-    //     if(typeof this.onError === "function"){
-    //       this.onError({
-    //         message: "Missing authenticationEndpoint"
-    //       });
-    //     }
-    //     return;
-    //   }
-
-    //   IkClient.upload(
-    //     {
-    //       file: file,
-    //       fileName: this.fileName || fileSystemFileName,
-    //       useUniqueFileName: this.useUniqueFileName,
-    //       tags: this.tags,
-    //       folder: this.folder,
-    //       isPrivateFile: this.isPrivateFile,
-    //       customCoordinates: this.customCoordinates,
-    //       responseFields: this.responseFields
-    //     },
-    //     (err, result) => {
-    //       if (err && typeof this.onError === "function") {
-    //         this.onError(err);
-    //       } else if (!err && typeof this.onSuccess === "function") {
-    //         this.onSuccess(result);
-    //       }
-    //     },
-    //     {
-    //       publicKey,
-    //       authenticationEndpoint
-    //     }
-    //   );
-
-    //   return;
-    // }
-  }
 };
 </script>

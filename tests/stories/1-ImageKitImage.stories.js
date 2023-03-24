@@ -70,3 +70,13 @@ export const imageWithLQIPWithNestedPath = () => defineComponent({
   components: { IKImage },
   template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} path=${nestedImagePath} :lqip="{active:'true',threshold:20}" :transformation="[{height:300,width:400}]"></IKImage>`,
 });
+
+export const imageWithNoPublicKey = () => defineComponent({
+  components: { IKImage },
+  template: `<IKImage publicKey="" urlEndpoint=${urlEndpoint} src=${src}></IKImage>`,
+});
+
+export const imageWithNoUrlEndpoint = () => defineComponent({
+  components: { IKImage },
+  template: `<IKImage publicKey="${publicKey}" urlEndpoint="" src=${src}></IKImage>`,
+});
