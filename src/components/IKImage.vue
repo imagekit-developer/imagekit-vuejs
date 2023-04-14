@@ -1,11 +1,13 @@
 <template>
   <img class="ik-image" :src="srcImage"/>
 </template>
+
 <script>
+import { defineComponent } from 'vue';
 import ImageKit from 'imagekit-javascript';
 import { VERSION } from "../plugin";
 
-export default {
+export default defineComponent ({
   name: "ik-image",
   inject: { contextConfigurations: { default: {} } },
   data() {
@@ -29,11 +31,11 @@ export default {
   },
   methods: {
     getMergedOptions: function() {
-      return {
-        ...this.defaultOptions,
-        ...this.contextConfigurations
-      };
-    },
+        return {
+          ...this.defaultOptions,
+          ...this.contextConfigurations
+        };
+      },
     getClient: function() {
       return new ImageKit({
         sdkVersion: `vuejs-${VERSION}`,
@@ -79,7 +81,7 @@ export default {
       if(this.lqip) this.triggerOriginalImageLoad();
     }
   },
-  destroyed() {
+  beforeUnmount() {
     if(this.observer) { 
       this.observer.disconnect();
     }
@@ -129,8 +131,7 @@ export default {
     },
     imageAttrs: function() {
       const mergedOptions = this.getMergedOptions();
-      const IkClient = this.IkClient || this.getClient();
-
+      const IkClient = this.getClient();
       var options = {
         urlEndpoint: this.urlEndpoint ? this.urlEndpoint : mergedOptions.urlEndpoint,
         src: this.src,
@@ -139,7 +140,7 @@ export default {
         transformationPosition: this.transformationPosition,
         queryParameters: this.queryParameters
       };
-
+      console.log(options,"opt")
       let result = {};
 
       result.src = IkClient.url(options);
@@ -161,5 +162,5 @@ export default {
       return result;
     }
   }
-};
+});
 </script>
