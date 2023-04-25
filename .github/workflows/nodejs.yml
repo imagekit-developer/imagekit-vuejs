@@ -38,11 +38,11 @@ jobs:
           file: ./coverage/lcov.info
           flags: unittests
 
-      env:
-        NODE_ENV: production
-        VUE_APP_PUBLIC_KEY: ${{ secrets.ik_public_key }}
-        VUE_APP_PRIVATE_KEY: ${{ secrets.ik_private_key }}
-        VUE_APP_URL_ENDPOINT: ${{ secrets.ik_url_endpoint }}
+    env:
+      CI: true
+      VUE_APP_PUBLIC_KEY: ${{ secrets.ik_public_key }}
+      VUE_APP_PRIVATE_KEY: ${{ secrets.ik_private_key }}
+      VUE_APP_URL_ENDPOINT: ${{ secrets.ik_url_endpoint }}
 
   e2e:
     runs-on: ubuntu-latest
