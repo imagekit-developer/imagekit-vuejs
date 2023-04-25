@@ -8,7 +8,7 @@ import { ImageKit as IKCore } from "imagekit-javascript";
 const ImageKit = {
   install(app, options = {}) {
     if (!options.urlEndpoint || options.urlEndpoint.trim() === "") {
-      throw new Error("urlEndpoint is required to initilize ImageKit");
+      throw new Error("urlEndpoint is required to initialize ImageKit");
     }
 
     if (!options.components || options.components.length === 0) {
