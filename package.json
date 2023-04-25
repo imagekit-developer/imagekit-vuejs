@@ -13,7 +13,8 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "test:ci": "jest --coverage && codecov",
-    "test:cov": "jest --coverage"
+    "test:cov": "jest --coverage",
+    "codecov": "codecov"
   },
   "main": "dist/imagekitio-vue.common.js",
   "unpkg": "dist/imagekitio-vue.umd.min.js",
