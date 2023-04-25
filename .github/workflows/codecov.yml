@@ -1,6 +1,9 @@
 name: Node CI with Codecov
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
