@@ -40,3 +40,23 @@ export const ImageUploadNoAuthentication = () => defineComponent({
   template: `<IKContext publicKey="${publicKey}" urlEndpoint=${urlEndpoint} authenticationEndpoint=""><IKUpload fileName="new" publicKey="${publicKey}" urlEndpoint=${urlEndpoint} authenticationEndpoint=${authenticationEndpoint}/></IKContext>`,
 });
 
+export const ImageUploadWithNoResponseFields = () => defineComponent({
+  components: { IKUpload,IKContext },
+  template: `<IKContext publicKey="${publicKey}" urlEndpoint=${urlEndpoint} authenticationEndpoint=${authenticationEndpoint}><IKUpload fileName="'new'" v-bind:useUniqueFileName="true" v-bind:tags="['tag1', 'tag2', 'tag3']" v-bind:folder="'/'" v-bind:isPrivateFile="true" v-bind:customCoordinates="'0,0,0,0'" publicKey="${publicKey}" urlEndpoint=${urlEndpoint} authenticationEndpoint=${authenticationEndpoint}/></IKContext>`,
+});
+
+export const ImageUploadWithNoFolder = () => defineComponent({
+  components: { IKUpload,IKContext },
+  template: `<IKContext publicKey="${publicKey}" urlEndpoint=${urlEndpoint} authenticationEndpoint=${authenticationEndpoint}><IKUpload fileName="'new'" v-bind:useUniqueFileName="true" v-bind:tags="['tag1', 'tag2', 'tag3']" v-bind:isPrivateFile="true" v-bind:customCoordinates="'0,0,0,0'" v-bind:responseFields="['tags', 'isPrivateFile', 'customCoordinates']" publicKey="${publicKey}" urlEndpoint=${urlEndpoint} authenticationEndpoint=${authenticationEndpoint}/></IKContext>`,
+});
+
+export const ImageUploadWithNoFileName = () => defineComponent({
+  components: { IKUpload,IKContext },
+  template: `<IKContext publicKey="${publicKey}" urlEndpoint=${urlEndpoint} authenticationEndpoint=${authenticationEndpoint}><IKUpload v-bind:useUniqueFileName="true" v-bind:tags="['tag1', 'tag2', 'tag3']" v-bind:folder="'/'" v-bind:isPrivateFile="true" v-bind:customCoordinates="'0,0,0,0'" v-bind:responseFields="['tags', 'isPrivateFile', 'customCoordinates']" publicKey="${publicKey}" urlEndpoint=${urlEndpoint} authenticationEndpoint=${authenticationEndpoint}/></IKContext>`,
+});
+
+export const ImageUploadWithEmptyFileName = () => defineComponent({
+  components: { IKUpload,IKContext },
+  template: `<IKContext publicKey="${publicKey}" urlEndpoint=${urlEndpoint} authenticationEndpoint=${authenticationEndpoint}><IKUpload fileName="" v-bind:useUniqueFileName="true" v-bind:tags="['tag1', 'tag2', 'tag3']" v-bind:folder="'/'" v-bind:isPrivateFile="true" v-bind:customCoordinates="'0,0,0,0'" v-bind:responseFields="['tags', 'isPrivateFile', 'customCoordinates']" publicKey="${publicKey}" urlEndpoint=${urlEndpoint} authenticationEndpoint=${authenticationEndpoint}/></IKContext>`,
+});
+

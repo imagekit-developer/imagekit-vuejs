@@ -13,10 +13,10 @@ const src = `${urlEndpoint}/${path}`;
 
 export const imageWithContext = () => defineComponent({
   components: { IKImage, IKContext },
-  template: `<IKContext publicKey="${publicKey}" urlEndpoint=${urlEndpoint}><IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} src=${src}/></IKContext>`,
+  template: `<IKContext publicKey="${publicKey}" urlEndpoint=${urlEndpoint}><IKImage urlEndpoint=${urlEndpoint} src=${src}/></IKContext>`,
 });
 
 export const OverridingUrlParameter = () => defineComponent({
   components: { IKImage, IKContext },
-  template: `<IKContext publicKey="${publicKey}" urlEndpoint=${urlEndpoint}><IKImage path="${path}" urlEndpoint=${urlEndpoint} publicKey="${publicKey}></IKImage></IKContext>`,
+  template: `<IKContext publicKey="${publicKey}" urlEndpoint=${urlEndpoint}><IKImage path="${path}" urlEndpoint=${urlEndpoint}></IKImage></IKContext>`,
 });

@@ -351,7 +351,6 @@
     <p>IK Image component</p>
     <IKImage
       :urlEndpoint="urlEndpoint"
-      :publicKey="publicKey"
       :path = "path"
       :transformation="[{height:300,width:400},{rotation:360}]"
       :lqip="{active:true,threshold:20,quality:20,blur:30}"
@@ -381,6 +380,8 @@
         :responseFields="['tags']"
         :onError="onError"
         :onSuccess="onSuccess"
+        :onUploadStart="onUploadStart"
+        :validateFile="validateFile"
         customCoordinates="10,10,100,100"
       />
   </div>
@@ -421,24 +422,31 @@ export default {
   },
   methods: {
     onError(err) {
+    try {
       console.log("Error");
       console.log(err);
-    },
-    onSuccess(res) {
+    } catch (e) {
+      console.error(e);
+    }
+  },
+  onSuccess(res) {
+    try {
       console.log("Success");
       console.log(res);
+    } catch (e) {
+      console.error(e);
+    }
+  },
+  validateFile(res) {
+      if (res.size > 0) {
+        return true;
+      }
+      return false;
     },
-    // validateFile(res) {
-    //   console.log("---res",res);
-    //   if(res.size > 0) {
-    //     return true
-    //   }
-    //   return false
-    // },
-    // onUploadStart(event) {
-    //   console.log("---res",event);
-    //   console.log(event.target.value);
-    // }
+    onUploadStart(event) {
+      console.log("Upload started");
+      console.log(event);
+    },
   }
 };
 
