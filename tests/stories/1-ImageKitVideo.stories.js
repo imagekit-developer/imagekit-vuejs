@@ -44,3 +44,28 @@ export const videoWithLeadingSlashesInPath = () => defineComponent({
   components: { IKVideo },
   template: `<IKVideo publicKey="${publicKey}" urlEndpoint=${urlEndpoint} path=${`////${path}`}></IKVideo>`,
 });
+
+export const videoWithTransformation = () => defineComponent({
+  components: { IKVideo },
+  template: `<IKVideo publicKey="${publicKey}" urlEndpoint=${urlEndpoint} path=${path} :transformation="[{height: 300}, {width: 400}]"></IKVideo>`,
+});
+
+export const videoWithTransformationPosition = () => defineComponent({
+  components: { IKVideo },
+  template: `<IKVideo publicKey="${publicKey}" urlEndpoint=${urlEndpoint} path=${path} transformationPosition="${path}"></IKVideo>`,
+});
+
+export const videoWithFallbackSrc = () => defineComponent({
+  components: { IKVideo },
+  template: `<IKVideo publicKey="${publicKey}" urlEndpoint=${urlEndpoint} path="/non-existent-video.mp4" src=${src}></IKVideo>`,
+});
+
+export const videoWithPlaybackRates = () => defineComponent({
+  components: { IKVideo },
+  template: `<IKVideo publicKey="${publicKey}" urlEndpoint=${urlEndpoint} path=${path} :playbackRates="[0.5, 1.0, 1.5]"></IKVideo>`,
+});
+
+export const videoWithLoop = () => defineComponent({
+  components: { IKVideo },
+  template: `<IKVideo publicKey="${publicKey}" urlEndpoint=${urlEndpoint} path=${path} :loop="true"></IKVideo>`,
+});

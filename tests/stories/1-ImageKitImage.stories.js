@@ -66,6 +66,11 @@ export const imageWithLQIPWithPathWithTransformation = () => defineComponent({
   template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} path=${path} :lqip="{active:'true',threshold:20}" :transformation="[{height:300,width:400}]"></IKImage>`,
 });
 
+export const imageWithTransformationPosition = () => defineComponent({
+  components: { IKImage },
+  template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} path=${path} transformationPosition=${path} :transformation="[{height:300,width:400}]"></IKImage>`,
+});
+
 export const imageWithLQIPWithNestedPath = () => defineComponent({
   components: { IKImage },
   template: `<IKImage publicKey="${publicKey}" urlEndpoint=${urlEndpoint} path=${nestedImagePath} :lqip="{active:'true',threshold:20}" :transformation="[{height:300,width:400}]"></IKImage>`,
