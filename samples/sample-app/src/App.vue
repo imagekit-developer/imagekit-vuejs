@@ -104,15 +104,8 @@
 
 <script>
 
-// import ImageKit, { IKImage, IKContext, IKVideo, IKUpload } from '../../../src/index'
 import ImageKit, { IKImage, IKUpload, IKContext, IKVideo, } from 'imagekitio-vue'
 import { createApp } from 'vue';
-
-// const ImageKit = require('../../../src/index');
-// const IKImage = require('../../../src/index');
-// const IKContext = require('../../../src/index');
-// const IKVideo = require('../../../src/index');
-// const IKUpload = require('../../../src/index');
 
 const app = createApp({});
 
