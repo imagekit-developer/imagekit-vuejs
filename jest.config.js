@@ -14,5 +14,12 @@ module.exports = {
   testMatch: [
     "**/tests/**/*.test.(js|jsx|ts|tsx)|**/__snapshots__/*.(js|jsx|ts|tsx)"
   ],
+  coverageReporters: ['json', 'lcov', 'text', 'clover'],
+  collectCoverageFrom: [
+    'src/**/*.{js,vue}',
+    '!src/main.js', 
+    '!src/router/index.js',
+    '!**/node_modules/**'
+  ],
   testURL: "http://localhost/"
 };
