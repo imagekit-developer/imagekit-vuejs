@@ -70,6 +70,7 @@ jobs:
         run: |
           cd samples/sample-app
           npm install
+          npm install ../../imagekitio-vue-1.1.0.tgz
           npm run build
 
       - name: Start the app and run E2E tests
