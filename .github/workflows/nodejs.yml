@@ -30,6 +30,7 @@ jobs:
         run: |
           npm run build
           npm run test:unit
+          npm pack
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
@@ -61,7 +62,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: npm install
+        run:  | 
+          npm install
+          npm pack
 
       - name: Build sample app
         run: |
