@@ -66,7 +66,7 @@ Vue.use(ImageKit, {
   authenticationEndpoint: "https://www.your-server.com/auth" // optional
 })
 
-// Rendering image using a relative file path
+// Rendering an image using a relative file path
 <ik-image
   path="/default-image.jpg"
 />
