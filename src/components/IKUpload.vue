@@ -1,12 +1,3 @@
-<template>
-  <input
-    type="file"
-    ref="imageFile"
-    @change="upload($event)"
-    @click="$emit('onUploadStart')"
-  />
-</template>
-
 <script>
 import ImageKit from "imagekit-javascript";
 import { VERSION } from "../plugin";
@@ -31,16 +22,33 @@ export default {
     validateFile: { type: Function, required: false },
     onUploadStart: { type: Function, required: false },
   },
-
   setup(props) {
-    const file = ref("");
+    const file = ref(null);
     const configurations = inject("contextConfigurations");
+
+    const getClient = () => {
+      return new ImageKit({
+        sdkVersion: `vuejs-${VERSION}`,
+        urlEndpoint: props.urlEndpoint
+          ? props.urlEndpoint
+          : configurations.urlEndpoint,
+        publicKey: props.urlEndpoint || configurations.urlEndpoint,
+        authenticationEndpoint:
+          props.authenticationEndpoint || configurations.authenticationEndpoint,
+      });
+    };
 
     const upload = (event) => {
       file.value = event.target.files[0];
       if (!file.value) {
         return;
       }
+
+      const getMergedOptions = () => {
+        return {
+          configurations,
+        };
+      };
 
       const fileSystemFileName = file.value.name;
       const mergedOptions = getMergedOptions();
@@ -112,31 +120,34 @@ export default {
 
       return;
     };
-    const getMergedOptions = () => {
-      return {
-        configurations,
-      };
+
+    const onUploadClick = () => {
+      props.onUploadStart && props.onUploadStart();
     };
 
-    const getClient = () => {
-      return new ImageKit({
-        sdkVersion: `vuejs-${VERSION}`,
-        urlEndpoint: props.urlEndpoint
-          ? props.urlEndpoint
-          : configurations.urlEndpoint,
-        publicKey: props.urlEndpoint || configurations.urlEndpoint,
-        authenticationEndpoint:
-          props.authenticationEndpoint || configurations.authenticationEndpoint,
-      });
+    const onMounted = () => {
+      const inputElement = document.createElement("input");
+      inputElement.type = "file";
+      inputElement.addEventListener("change", upload);
+      inputElement.addEventListener("click", onUploadClick);
+
+      document.body.appendChild(inputElement);
     };
 
-    return {
-      upload,
+    const onBeforeUnmount = () => {
+      const inputElement = document.querySelector("input[type='file']");
+      if (inputElement) {
+        inputElement.removeEventListener("change", upload);
+        inputElement.removeEventListener("click", onUploadClick);
+        inputElement.parentNode.removeChild(inputElement);
+      }
     };
-  },
-  data() {
+
+    onMounted();
+
     return {
-      file: {},
+      file,
+      onBeforeUnmount,
     };
   },
 };
