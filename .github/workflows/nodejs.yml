@@ -30,7 +30,6 @@ jobs:
         run: |
           npm run build
           npm run test:unit
-          # npm pack
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
@@ -75,9 +74,8 @@ jobs:
       - name: Start the app and run E2E tests
         uses: cypress-io/github-action@v2
         with:
-          path: ./samples/sample-app
-          start: npm run serve
-          wait-on: http://localhost:8080
+          start: npm run start:sample
+          wait-on: http://localhost:3000
         env:
           CI: true
           VUE_APP_PUBLIC_KEY: ${{ secrets.ik_public_key }}
