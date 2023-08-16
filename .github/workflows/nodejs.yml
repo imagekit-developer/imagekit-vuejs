@@ -1,6 +1,6 @@
 name: Vue 3 CI/CD
 
-on: [push, pull_request]
+on: [push, workflow_dispatch]
 
 jobs:
   build:
