@@ -77,7 +77,7 @@ jobs:
       - name: Start the app and run E2E tests
         uses: cypress-io/github-action@v2
         with:
-          start: cd samples/sample-app && npm run start
+          start: cd samples/sample-app && npm run serve
           wait-on: http://localhost:8080
         env:
           CI: true
