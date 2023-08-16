@@ -26,7 +26,7 @@ jobs:
         run: |
           npm run build
           npm run test:unit
-          npm pack
+          # npm pack
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
@@ -60,19 +60,20 @@ jobs:
       - name: Install dependencies
         run:  | 
           npm install
-          npm pack
+          npm run build
+          # npm pack
 
       - name: Build sample app
         run: |
           cd samples/sample-app
           npm install
-          npm install ../../imagekitio-vue-1.1.0.tgz
+          # npm install ../../imagekitio-vue-1.1.0.tgz
           npm run build
 
       - name: Start the app and run E2E tests
         uses: cypress-io/github-action@v2
         with:
-          start: cd samples/sample-app && npm run start
+          start: cd samples/sample-app && npm run serve
           wait-on: http://localhost:8080
         env:
           CI: true
