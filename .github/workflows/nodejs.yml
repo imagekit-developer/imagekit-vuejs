@@ -65,19 +65,18 @@ jobs:
         run:  | 
           npm install
           npm run build
-          # npm pack
 
       - name: Build sample app
         run: |
           cd samples/sample-app
-          npm install
-          # npm install ../../imagekitio-vue-1.1.0.tgz
+          npm install 
           npm run build
 
       - name: Start the app and run E2E tests
         uses: cypress-io/github-action@v2
         with:
-          start: cd samples/sample-app && npm run serve
+          path: ./samples/sample-app
+          start: npm run serve
           wait-on: http://localhost:8080
         env:
           CI: true
