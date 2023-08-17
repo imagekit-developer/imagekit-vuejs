@@ -60,13 +60,8 @@
       neque, id consequat dui hendrerit placerat. Nullam quis vehicula felis. Nunc ex elit, ultrices.
     </p>
     <p>IK Image component</p>
-    <IKImage
-      :urlEndpoint="urlEndpoint"
-      :path = "path"
-      :transformation="[{height:200,width:200},{rotation:360}]"
-      :lqip="{active:true,threshold:20,quality:20,blur:30}"
-      loading="lazy"
-    />
+    <IKImage :urlEndpoint="urlEndpoint" :path="path" :transformation="[{ height: 200, width: 200 }, { rotation: 360 }]"
+      :lqip="{ active: true, threshold: 20, quality: 20, blur: 30 }" loading="lazy" />
 
     <p>Lazy loading</p>
     <!-- tr:h-200,w-200/default-image.jpg -->
@@ -96,9 +91,10 @@
       :transformation="[{ height: 300, width: 400, q: 50 }]" />
 
     <p>File upload2</p>
-    <IKUpload :urlEndpoint="urlEndpoint" :publicKey="publicKey" :authenticationEndpoint="authenticationEndpoint"
-      :tags="['tag1', 'tag2']" :responseFields="['tags']" :onError="onError" :onSuccess="onSuccess"
-      :onUploadStart="onUploadStart" :validateFile="validateFile" customCoordinates="10,10,100,100" />
+    <!-- :authenticationEndpoint="authenticationEndpoint" -->
+    <IKUpload :urlEndpoint="urlEndpoint" :publicKey="publicKey" :authenticator="authenticator" :tags="['tag1', 'tag2']"
+      :responseFields="['tags']" :onError="onError" :onSuccess="onSuccess" :onUploadStart="onUploadStart"
+      :validateFile="validateFile" customCoordinates="10,10,100,100" />
   </div>
 </template>
 
@@ -112,7 +108,7 @@ const app = createApp({});
 app.use(ImageKit, {
   urlEndpoint: process.env.VUE_APP_URL_ENDPOINT,
   publicKey: process.env.VUE_APP_PUBLIC_KEY,
-  authenticationEndpoint: process.env.VUE_APP_AUTHENTICATION_ENDPOINT
+  // authenticationEndpoint: process.env.VUE_APP_AUTHENTICATION_ENDPOINT
 })
 
 let path = "/default-image.jpg";
@@ -129,7 +125,7 @@ export default {
     return {
       urlEndpoint: process.env.VUE_APP_URL_ENDPOINT,
       publicKey: process.env.VUE_APP_PUBLIC_KEY,
-      authenticationEndpoint: process.env.VUE_APP_AUTHENTICATION_ENDPOINT,
+      // authenticationEndpoint: process.env.VUE_APP_AUTHENTICATION_ENDPOINT,
       path: path,
       src: `${process.env.VUE_APP_URL_ENDPOINT}/${path}`
     };
@@ -161,6 +157,37 @@ export default {
       console.log("Upload started");
       console.log(event);
     },
+    authenticator() {
+      return new Promise((resolve, reject) => {
+        var url = 'http://localhost:3001/auth'; // Use the full URL with the protocol
+        if (url.indexOf("?") === -1) {
+          url += `?t=${Math.random().toString()}`;
+        } else {
+          url += `&t=${Math.random().toString()}`;
+        }
+
+        // Make the Fetch API request
+        fetch(url, { method: 'GET', mode: 'cors' }) // Enable CORS mode
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then(body => {
+            var obj = {
+              signature: body.signature,
+              expire: body.expire,
+              token: body.token
+            };
+            resolve(obj);
+          })
+          .catch(error => {
+            reject([error]);
+          });
+      });
+    }
+
   }
 };
 
