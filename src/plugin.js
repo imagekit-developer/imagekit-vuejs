@@ -22,7 +22,7 @@ export function install(Vue, options) {
     sdkVersion: `vuejs-${VERSION}`,
     publicKey: options.publicKey,
     urlEndpoint: options.urlEndpoint,
-    authenticationEndpoint: options.authenticationEndpoint
+    // authenticationEndpoint: options.authenticationEndpoint
   };
 
   options.IkClient = new ImageKit(options.defaultOptions)
@@ -42,7 +42,7 @@ function initComponents(Vue, options) {
           return {
             ...(component.setup ? component.setup() : {}),
             IkClient: options.IkClient,
-            defaultOptions : options.defaultOptions
+            defaultOptions: options.defaultOptions
           }
         }
       })

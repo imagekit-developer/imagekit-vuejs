@@ -9,7 +9,8 @@ export default {
   props: {
     urlEndpoint: { type: String, default: "", required: false },
     publicKey: { type: String, default: "", required: false },
-    authenticationEndpoint: { type: String, default: "", required: false },
+    // authenticationEndpoint: { type: String, default: "", required: false },
+    authenticator: { type: Function, required: true },
     fileName: { type: String, default: "", required: false },
     useUniqueFileName: { type: Boolean, default: true, required: false },
     tags: { type: Array, required: false },
@@ -33,8 +34,8 @@ export default {
           ? props.urlEndpoint
           : configurations.urlEndpoint,
         publicKey: props.urlEndpoint || configurations.urlEndpoint,
-        authenticationEndpoint:
-          props.authenticationEndpoint || configurations.authenticationEndpoint,
+        // authenticationEndpoint:
+        //   props.authenticationEndpoint || configurations.authenticationEndpoint,
       });
     };
 
@@ -55,8 +56,8 @@ export default {
       const IkClient = getClient();
 
       const publicKey = props.publicKey || mergedOptions.publicKey;
-      const authenticationEndpoint =
-        props.authenticationEndpoint || mergedOptions.authenticationEndpoint;
+      // const authenticationEndpoint =
+      //   props.authenticationEndpoint || mergedOptions.authenticationEndpoint;
 
       if (!publicKey || publicKey.trim() === "") {
         if (typeof props.onError === "function") {
@@ -67,14 +68,42 @@ export default {
         return;
       }
 
-      if (!authenticationEndpoint || authenticationEndpoint.trim() === "") {
-        if (typeof props.onError === "function") {
+      // if (!authenticationEndpoint || authenticationEndpoint.trim() === "") {
+      //   if (typeof props.onError === "function") {
+      //     props.onError({
+      //       message: "Missing authenticationEndpoint",
+      //     });
+      //   }
+      //   return;
+      // }
+
+      if (!props.authenticator) {
+        if (props.onError && typeof props.onError === "function") {
           props.onError({
-            message: "Missing authenticationEndpoint",
+            message: "The authenticator function is not provided."
           });
         }
         return;
       }
+
+      if (typeof props.authenticator !== 'function') {
+        if (props.onError && typeof props.onError === "function") {
+          props.onError({
+            message: "The provided authenticator is not a function."
+          })
+        }
+        return;
+      }
+
+      if (props.authenticator.length !== 0) {
+        if (props.onError && typeof props.onError === "function") {
+          props.onError({
+            message: "The authenticator function should not accept any parameters. Please provide a parameterless function reference."
+          })
+        }
+        return;
+      }
+
 
       if (typeof props.validateFile === "function") {
         const validationResult = props.validateFile(file.value);
@@ -92,31 +121,90 @@ export default {
         props.onUploadStart();
       }
 
-      IkClient.upload(
-        {
-          file: file.value,
-          fileName: props.fileName || fileSystemFileName,
-          useUniqueFileName: props.useUniqueFileName,
-          tags: props.tags,
-          folder: props.folder,
-          isPrivateFile: props.isPrivateFile,
-          customCoordinates: props.customCoordinates,
-          responseFields: props.responseFields,
-        },
-        (err, result) => {
-          if (err && typeof props.onError === "function") {
-            props.onError(err);
-            console.error(err); // add this line to log the error to the console
-          } else if (!err && typeof props.onSuccess === "function") {
-            props.onSuccess(result);
-            console.log(result); // add this line to log the success response to the console
-          }
-        },
-        {
-          publicKey,
-          authenticationEndpoint,
+      const authPromise = props.authenticator()
+
+      if (!(authPromise instanceof Promise)) {
+        if (props.onError && typeof props.onError === "function") {
+          props.onError({
+            message: "The authenticator function is expected to return a Promise instance."
+          });
         }
-      );
+        return;
+      }
+
+      authPromise
+        .then(({ signature, token, expire }) => {
+          IkClient.upload(
+            {
+              file: file.value,
+              fileName: props.fileName || fileSystemFileName,
+              useUniqueFileName: props.useUniqueFileName,
+              tags: props.tags,
+              folder: props.folder,
+              isPrivateFile: props.isPrivateFile,
+              customCoordinates: props.customCoordinates,
+              responseFields: props.responseFields,
+              signature,
+              token,
+              expire
+            },
+            (err, result) => {
+              if (err && typeof props.onError === "function") {
+                props.onError(err);
+                console.error(err); // add this line to log the error to the console
+              } else if (!err && typeof props.onSuccess === "function") {
+                props.onSuccess(result);
+                console.log(result); // add this line to log the success response to the console
+              }
+            },
+            {
+              publicKey,
+              // authenticationEndpoint,
+            }
+          );
+        })
+        .catch((data) => {
+          var error;
+          if (data instanceof Array) {
+            error = data[0];
+          }
+          else {
+            error = data
+          }
+
+          if (props.onError && typeof props.onError === "function") {
+            props.onError({
+              message: String(error)
+            });
+          }
+          return;
+        })
+
+      // IkClient.upload(
+      //   {
+      //     file: file.value,
+      //     fileName: props.fileName || fileSystemFileName,
+      //     useUniqueFileName: props.useUniqueFileName,
+      //     tags: props.tags,
+      //     folder: props.folder,
+      //     isPrivateFile: props.isPrivateFile,
+      //     customCoordinates: props.customCoordinates,
+      //     responseFields: props.responseFields,
+      //   },
+      //   (err, result) => {
+      //     if (err && typeof props.onError === "function") {
+      //       props.onError(err);
+      //       console.error(err); // add this line to log the error to the console
+      //     } else if (!err && typeof props.onSuccess === "function") {
+      //       props.onSuccess(result);
+      //       console.log(result); // add this line to log the success response to the console
+      //     }
+      //   },
+      //   {
+      //     publicKey,
+      //     // authenticationEndpoint,
+      //   }
+      // );
 
       return;
     };
