@@ -68,6 +68,7 @@ jobs:
       - name: Build sample app
         run: |
           cd samples/sample-app
+          echo VUE_APP_URL_ENDPOINT = ${{ secrets.ik_url_endopint }} > .env;
           npm install 
           npm run build
 
