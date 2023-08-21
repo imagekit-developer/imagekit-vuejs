@@ -9,7 +9,6 @@ export default {
   props: {
     urlEndpoint: { type: String, default: "", required: false },
     publicKey: { type: String, default: "", required: false },
-    // authenticationEndpoint: { type: String, default: "", required: false },
     authenticator: { type: Function, required: true },
     fileName: { type: String, default: "", required: false },
     useUniqueFileName: { type: Boolean, default: true, required: false },
@@ -34,8 +33,6 @@ export default {
           ? props.urlEndpoint
           : configurations.urlEndpoint,
         publicKey: props.urlEndpoint || configurations.urlEndpoint,
-        // authenticationEndpoint:
-        //   props.authenticationEndpoint || configurations.authenticationEndpoint,
       });
     };
 
@@ -56,8 +53,6 @@ export default {
       const IkClient = getClient();
 
       const publicKey = props.publicKey || mergedOptions.publicKey;
-      // const authenticationEndpoint =
-      //   props.authenticationEndpoint || mergedOptions.authenticationEndpoint;
 
       if (!publicKey || publicKey.trim() === "") {
         if (typeof props.onError === "function") {
@@ -67,15 +62,6 @@ export default {
         }
         return;
       }
-
-      // if (!authenticationEndpoint || authenticationEndpoint.trim() === "") {
-      //   if (typeof props.onError === "function") {
-      //     props.onError({
-      //       message: "Missing authenticationEndpoint",
-      //     });
-      //   }
-      //   return;
-      // }
 
       if (!props.authenticator) {
         if (props.onError && typeof props.onError === "function") {
@@ -159,7 +145,6 @@ export default {
             },
             {
               publicKey,
-              // authenticationEndpoint,
             }
           );
         })
@@ -179,33 +164,6 @@ export default {
           }
           return;
         })
-
-      // IkClient.upload(
-      //   {
-      //     file: file.value,
-      //     fileName: props.fileName || fileSystemFileName,
-      //     useUniqueFileName: props.useUniqueFileName,
-      //     tags: props.tags,
-      //     folder: props.folder,
-      //     isPrivateFile: props.isPrivateFile,
-      //     customCoordinates: props.customCoordinates,
-      //     responseFields: props.responseFields,
-      //   },
-      //   (err, result) => {
-      //     if (err && typeof props.onError === "function") {
-      //       props.onError(err);
-      //       console.error(err); // add this line to log the error to the console
-      //     } else if (!err && typeof props.onSuccess === "function") {
-      //       props.onSuccess(result);
-      //       console.log(result); // add this line to log the success response to the console
-      //     }
-      //   },
-      //   {
-      //     publicKey,
-      //     // authenticationEndpoint,
-      //   }
-      // );
-
       return;
     };
 

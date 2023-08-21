@@ -22,7 +22,6 @@ export function install(Vue, options) {
     sdkVersion: `vuejs-${VERSION}`,
     publicKey: options.publicKey,
     urlEndpoint: options.urlEndpoint,
-    // authenticationEndpoint: options.authenticationEndpoint
   };
 
   options.IkClient = new ImageKit(options.defaultOptions)

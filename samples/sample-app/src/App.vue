@@ -91,7 +91,6 @@
       :transformation="[{ height: 300, width: 400, q: 50 }]" />
 
     <p>File upload2</p>
-    <!-- :authenticationEndpoint="authenticationEndpoint" -->
     <IKUpload :urlEndpoint="urlEndpoint" :publicKey="publicKey" :authenticator="authenticator" :tags="['tag1', 'tag2']"
       :responseFields="['tags']" :onError="onError" :onSuccess="onSuccess" :onUploadStart="onUploadStart"
       :validateFile="validateFile" customCoordinates="10,10,100,100" />
@@ -108,7 +107,6 @@ const app = createApp({});
 app.use(ImageKit, {
   urlEndpoint: process.env.VUE_APP_URL_ENDPOINT,
   publicKey: process.env.VUE_APP_PUBLIC_KEY,
-  // authenticationEndpoint: process.env.VUE_APP_AUTHENTICATION_ENDPOINT
 })
 
 let path = "/default-image.jpg";
@@ -125,7 +123,6 @@ export default {
     return {
       urlEndpoint: process.env.VUE_APP_URL_ENDPOINT,
       publicKey: process.env.VUE_APP_PUBLIC_KEY,
-      // authenticationEndpoint: process.env.VUE_APP_AUTHENTICATION_ENDPOINT,
       path: path,
       src: `${process.env.VUE_APP_URL_ENDPOINT}/${path}`
     };
