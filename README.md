@@ -62,6 +62,14 @@ Example implementation for `authenticator` using `XMLHttpRequest`.
 
 *Note*: Avoid generating security parameters on the client side. Always send a request to your backend to retrieve security parameters, as the generation of these parameters necessitates the use of your Imagekit `privateKey`, which must not be included in client-side code.
 
+                          
+| IMAGEKIT-VUEJS VERSION             | VUEJS VERSION                    |
+| :----------------|:----------------------------- |
+| ^2.0.0 | ^3.0.0 |
+| 1.0.9 | ^2.6.12 |
+| 1.0.5 and below | ^2.6.11 |
+
+
 ## Installation
 
 ```shell
