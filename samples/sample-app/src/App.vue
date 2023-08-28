@@ -87,8 +87,12 @@
     </IKContext>
 
     <p>Using exported component</p>
-    <IKVideo :urlEndpoint="urlEndpoint" :src="'https://ik.imagekit.io/demo/sample-video.mp4'"
-      :transformation="[{ height: 300, width: 400, q: 50 }]" />
+    <IKVideo class="ikvideo-default" :urlEndpoint="urlEndpoint" :src="'https://ik.imagekit.io/demo/sample-video.mp4'"
+      :transformation="[{ height: 200, width: 200 }]" />
+
+    <p>Video with some advance transformation</p>
+    <IKVideo class="ikvideo-with-tr" :urlEndpoint="urlEndpoint" :src="'https://ik.imagekit.io/demo/sample-video.mp4'"
+      :transformation="[{ height: 200, width: 600, b: '5_red', q: 95 }]" />
 
     <p>File upload2</p>
     <IKUpload :urlEndpoint="urlEndpoint" :publicKey="publicKey" :authenticator="authenticator" :tags="['tag1', 'tag2']"

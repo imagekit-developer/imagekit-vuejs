@@ -12,10 +12,6 @@ export default defineComponent({
       type: String,
       required: true
     },
-    // slots: {
-    //   type: Object,
-    //   default: () => {}
-    // }
   },
   setup(props, { slots }) {
     const contextConfigurations = ref({
@@ -25,7 +21,7 @@ export default defineComponent({
 
     return {
       contextConfigurations,
-      slots 
+      slots
     };
   },
   render() {
