@@ -158,40 +158,33 @@ export default {
       console.log("Upload started");
       console.log(event);
     },
-    authenticator() {
-      return new Promise((resolve, reject) => {
-        var url = 'http://localhost:3001/auth'; // Use the full URL with the protocol
-        if (url.indexOf("?") === -1) {
-          url += `?t=${Math.random().toString()}`;
-        } else {
-          url += `&t=${Math.random().toString()}`;
-        }
+    authenticator(){
+    return new Promise((resolve, reject) => {
+      var url = "server_endpoint"; // Use the full URL with the protocol
 
-        // Make the Fetch API request
-        fetch(url, { method: 'GET', mode: 'cors' }) // Enable CORS mode
-          .then(response => {
-            if (!response.ok) {
-              throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-          })
-          .then(body => {
-            var obj = {
-              signature: body.signature,
-              expire: body.expire,
-              token: body.token
-            };
-            resolve(obj);
-          })
-          .catch(error => {
-            reject([error]);
-          });
-      });
-    }
-
+      // Make the Fetch API request
+      fetch(url, { method: "GET", mode: "cors" }) // Enable CORS mode
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((body) => {
+          var obj = {
+            signature: body.signature,
+            expire: body.expire,
+            token: body.token,
+          };
+          resolve(obj);
+        })
+        .catch((error) => {
+          reject([error]);
+        });
+    });
   }
+}
 };
-
 </script>
 
 <style>

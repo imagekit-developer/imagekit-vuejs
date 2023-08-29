@@ -15,49 +15,33 @@ ImageKit Vue.js SDK allows you to use real-time [image resizing](https://docs.im
 * Previously, when using this SDK, we had to pass `authenticationEndpoint` which is used by SDK internally for fetching security parameters i.e `signature`, `token`, and `expire`.
 * In version 2.0.0, we have deprecated the use of the `authenticationEndpoint` parameter. Instead, the SDK now introduces a new parameter named `authenticator`. This parameter expects an asynchronous function that resolves with an object containing the necessary security parameters i.e `signature`, `token`, and `expire`.
 
-Example implementation for `authenticator` using `XMLHttpRequest`.
+Example implementation for `authenticator` using `Fetch API`.
 
 ``` javascript
-
- const authenticator = () => {
+const authenticator = () => {
     return new Promise((resolve, reject) => {
-      var xhr = new XMLHttpRequest();
-      xhr.timeout = 6000; //modify if required
-      var url = 'server_endpoint';
-      if (url.indexOf("?") === -1) {
-        url += `?t=${Math.random().toString()}`;
-      } else {
-        url += `&t=${Math.random().toString()}`;
-      }
-      xhr.open('GET', url);
-      xhr.ontimeout = function (e) {
-        reject(["Authentication request timed out in 60 seconds", xhr]);
-      };
-      xhr.addEventListener("load", () => {
-        if (xhr.status === 200) {
-          try {
-            var body = JSON.parse(xhr.responseText);
-            var obj = {
-              signature: body.signature,
-              expire: body.expire,
-              token: body.token
-            }
-            resolve(obj);
-          } catch (ex) {
-            reject([ex, xhr]);
+      var url = "server_endpoint"; // Use the full URL with the protocol
+
+      // Make the Fetch API request
+      fetch(url, { method: "GET", mode: "cors" }) // Enable CORS mode
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
           }
-        } else {
-          try {
-            var error = JSON.parse(xhr.responseText);
-            reject([error, xhr]);
-          } catch (ex) {
-            reject([ex, xhr]);
-          }
-        }
-      });
-      xhr.send();
-    })
-  }
+          return response.json();
+        })
+        .then((body) => {
+          var obj = {
+            signature: body.signature,
+            expire: body.expire,
+            token: body.token,
+          };
+          resolve(obj);
+        })
+        .catch((error) => {
+          reject([error]);
+        });
+    });
 ```
 
 *Note*: Avoid generating security parameters on the client side. Always send a request to your backend to retrieve security parameters, as the generation of these parameters necessitates the use of your Imagekit `privateKey`, which must not be included in client-side code.
