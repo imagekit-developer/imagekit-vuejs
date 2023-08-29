@@ -61,9 +61,9 @@ jobs:
           npm install
           npm run build
 
-      - name: Build sample app
+      - name: Build Test app
         run: |
-          cd samples/sample-app
+          cd tests/test-app
           echo VUE_APP_URL_ENDPOINT = ${{ secrets.ik_url_endopint }} > .env;
           npm install 
           npm run build
@@ -71,7 +71,7 @@ jobs:
       - name: Start the app and run E2E tests
         uses: cypress-io/github-action@v2
         with:
-          start: npm run start:sample
+          start: npm run start:test-app
           wait-on: http://localhost:3000
         env:
           CI: true
