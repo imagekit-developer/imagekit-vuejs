@@ -305,6 +305,50 @@ var imageURL = imagekit.url({
 });
 ```
 
+## IKContext
+
+In order to use the SDK, you need to provide it with a few configuration parameters. You can use a parent `IKContext` component to define common options for all children `IKImage`, `IKVideo` or `IKupload` compoents. For example:
+
+```js
+// Register as plugin
+import ImageKit from "imagekitio-vue"
+import { createApp } from 'vue';
+
+const app = createApp({});
+
+app.use(ImageKit, {
+  urlEndpoint: "https://ik.imagekit.io/your_imagekit_id",
+})
+
+// Using global configuration
+// https://ik.imagekit.io/your_imagekit_id/default-image.jpg
+<IKImage 
+  path="/default-image.jpg"/>
+
+// Defining urlEndpoint in IKContext
+<IKContext
+  urlEndpoint="https://www.custom-domain.com/">
+    // https://www.custom-domain.com/default-image.jpg
+    // urlEndpoint is taken from the parent IKContext
+    <IKImage path="/default-image.jpg"/>
+</IKContext >
+
+// Using exported component
+<IKContext
+  :publicKey="your_url_endpoint"
+  :urlEndpoint="your_public_api_key"
+  :authenticator={()=>Promise} 
+  // This promise  resolves with an object containing the necessary security parameters i.e `signature`, `token`, and `expire`.
+>
+>
+  <IKUpload
+    :tags="['tag3','tag4']"
+    :responseFields="['tags']"
+    :onSuccess="onSuccess"
+  />
+</IKContext>
+```
+
 ## Image resizing
 
 `IKImage` components accept the following props:
@@ -596,7 +640,14 @@ The SDK provides the `IKUpload` component to upload files to the [ImageKit Media
 | isPrivateFile | Boolean | Optional. Accepts `true` of `false`. The default value is `false`. Specify whether to mark the file as private or not. This is only relevant for image type files|
 | customCoordinates   | String | Optional. Define an important area in the image. This is only relevant for image type files. To be passed as a string with the `x` and `y` coordinates of the top-left corner, and `width` and `height` of the area of interest in format `x,y,width,height`. For example - `10,10,100,100` |
 | responseFields   | Array of string | Optional. Values of the fields that you want upload API to return in the response. For example, set the value of this field to `["tags", "customCoordinates", "isPrivateFile"]` to get value of `tags`, `customCoordinates`, and `isPrivateFile` in the response. |
-| onSuccess   | Function callback | Optional. Called if the upload is successful. The first and only argument is the response JOSN from the upload API |
+| extensions   | Array of object | Optional. Array of object for [applying extensions](https://docs.imagekit.io/extensions/overview) on the image. |
+| webhookUrl   | String | Optional. Final status of pending extensions will be sent to this URL. |
+| overwriteFile   | Boolean | Optional. Default is true. If overwriteFile is set to false and useUniqueFileName is also false, and a file already exists at the exact location, upload API will return an error immediately. |
+| overwriteAITags   | Boolean | Optional. Default is true. If set to true and a file already exists at the exact location, its AITags will be removed. Set overwriteAITags to false to preserve AITags. |
+| overwriteCustomMetadata   | Boolean | Optional. Default is true. If the request does not have customMetadata , overwriteCustomMetadata is set to true and a file already exists at the exact location, exiting customMetadata will be removed. In case the request body has customMetadata, setting overwriteCustomMetadata to false has no effect and request's customMetadata is set on the asset. |
+| customMetadata   | Object | Optional. JSON key-value data to be associated with the asset. |
+| ref   | Reference | Optional. Reference to the core HTMLInputElement.|
+| onSuccess   | Function callback | Optional. Called if the upload is successful. The first and only argument is the response JSON from the upload API |
 | onError   | Function callback | Optional. Called if upload results in an error. The first and only argument is the error received from the upload API |
 | urlEndpoint      | String | Optional. If not specified, the URL-endpoint specified at the time of [SDK initialization](#initialization) is used. For example, https://ik.imagekit.io/your_imagekit_id/endpoint/ |
 | publicKey      | String | Optional. If not specified, the `publicKey` specified at the time of [SDK initialization](#initialization) is used.|
@@ -609,6 +660,8 @@ Sample file upload:
 ```js
 <template>
   <IKUpload 
+    :onUploadStart="onUploadStart" 
+    :onUploadProgress="onUploadProgress"
     :tags="['tag1','tag2']"
     :responseFields="['tags']"
     :onError="onError"
@@ -618,7 +671,7 @@ Sample file upload:
 </template>
 
 <script>
-import ImageKit from "imagekitio-vue"
+import { IKUpload } from "imagekitio-vue"
 import { createApp } from 'vue';
 
 const app = createApp({});
@@ -643,53 +696,113 @@ export default {
       console.log("Success");
       console.log(res);
     }
+    onUploadProgress(evt) {
+      console.log("Inprogress ... ", evt);
+    };
+    onUploadStart(evt) {
+      console.log("Upload started");
+    },
   }
 };
 </script>
 ```
 
-## IKContext
+#### Abort upload
 
-In order to use the SDK, you need to provide it with a few configuration parameters. You can use a parent `IKContext` component to define common options for all children `IKImage`, `IKVideo` or `IKupload` compoents. For example:
+ref can be passed to obtain access to the IKUpload component's instance. Calling the `triggerAbortUpload` method will abort the upload if any is in progress.
+
+Example Usage
 
 ```js
-// Register as plugin
-import ImageKit from "imagekitio-vue"
+<template>
+  <IKUpload 
+    ref="childComponentRef" 
+    :publicKey="publicKey" 
+    :urlEndpoint="urlEndpoint"
+    :authenticator="authenticator"
+    :tags="['tag1','tag2']"
+    :responseFields="['tags']"
+    :onError="onError"
+    :onSuccess="onSuccess"
+    customCoordinates="10,10,100,100"
+  />
+  <button @click="abortChildUpload">Abort Child Upload</button>
+</template>
+
+<script>
+import { IKUpload } from "imagekitio-vue"
 import { createApp } from 'vue';
 
 const app = createApp({});
 
 app.use(ImageKit, {
-  urlEndpoint: "https://ik.imagekit.io/your_imagekit_id",
+  urlEndpoint: "your_url_endpoint", // Required. Default URL-endpoint is https://ik.imagekit.io/your_imagekit_id
+  publicKey: "your_public_api_key", // optional
 })
 
-// Using global configuration
-// https://ik.imagekit.io/your_imagekit_id/default-image.jpg
-<IKImage 
-  path="/default-image.jpg"/>
+export default {
+  name: "app",
+  components: {},
+  data() {
+    return {};
+  },
+  methods: {
+    onError(err) {
+      console.log("Error");
+      console.log(err);
+    },
+    onSuccess(res) {
+      console.log("Success");
+      console.log(res);
+    }
+    abortChildUpload() {
+      this.$refs.childComponentRef.triggerAbortUpload();
+      console.log("Upload aborted")
+    },
+  }
+};
+</script>
+```
 
-// Defining urlEndpoint in IKContext
-<IKContext
-  urlEndpoint="https://www.custom-domain.com/">
-    // https://www.custom-domain.com/default-image.jpg
-    // urlEndpoint is taken from the parent IKContext
-    <IKImage path="/default-image.jpg"/>
-</IKContext >
+## IKCore
 
-// Using exported component
-<IKContext
-  :publicKey="your_url_endpoint"
-  :urlEndpoint="your_public_api_key"
-  :authenticator={()=>Promise} 
-  // This promise  resolves with an object containing the necessary security parameters i.e `signature`, `token`, and `expire`.
->
->
-  <IKUpload
-    :tags="['tag3','tag4']"
-    :responseFields="['tags']"
-    :onSuccess="onSuccess"
+Accessing the underlying [ImageKit javascript SDK](https://github.com/imagekit-developer/imagekit-javascript) is possible using the `IKCore` import. For example:
+
+```js
+import { IKCore } from "imagekitio-vue"
+// Generate image URL
+var imagekit = new IKCore({
+    publicKey: "your_public_api_key",
+    urlEndpoint: "https://ik.imagekit.io/your_imagekit_id",
+});
+//https://ik.imagekit.io/your_imagekit_id/endpoint/tr:h-300,w-400/default-image.jpg
+var imageURL = imagekit.url({
+    path: "/default-image.jpg",
+    urlEndpoint: "https://ik.imagekit.io/your_imagekit_id/endpoint/",
+    transformation: [{
+        "height": "300",
+        "width": "400"
+    }]
+});
+```
+
+## Error Handling
+
+You can use `ErrorBoundary` to handle errors anywhere in their child component tree. Log those errors or display a fallback UI instead of the crashed component tree. For example:
+
+```js
+// urlEndpoint should be present in IKImage or parent IKContext component; otherwise, it will throw an error. For example:
+<ErrorBoundary>
+  <IKImage
+    path = "/default-image.jpg"
+    transformation={[
+      {
+        height:300,
+        width:400
+      }
+    ]}
   />
-</IKContext>
+</ErrorBoundary>
 ```
 
 ## Support
