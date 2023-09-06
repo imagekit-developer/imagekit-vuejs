@@ -82,7 +82,7 @@
     <p>IK Image with context</p>
     <IKContext :publicKey="publicKey" :urlEndpoint="urlEndpoint">
       <template v-slot:default>
-        <IKImage :path="path" :transformation='[{ height: 300, width: 400 }]' :urlEndpoint="urlEndpoint" />
+        <IKImage :path="path" :transformation='[{ height: 300, width: 400 }]' />
       </template>
     </IKContext>
 
@@ -94,10 +94,13 @@
     <IKVideo class="ikvideo-with-tr" :urlEndpoint="urlEndpoint" :src="'https://ik.imagekit.io/demo/sample-video.mp4'"
       :transformation="[{ height: 200, width: 600, b: '5_red', q: 95 }]" />
 
-    <p>File upload2</p>
-    <IKUpload :urlEndpoint="urlEndpoint" :publicKey="publicKey" :authenticator="authenticator" :tags="['tag1', 'tag2']"
-      :responseFields="['tags']" :onError="onError" :onSuccess="onSuccess" :onUploadStart="onUploadStart"
-      :validateFile="validateFile" customCoordinates="10,10,100,100" />
+    <p>File upload</p>
+    <IKContext :publicKey="publicKey" :urlEndpoint="urlEndpoint">
+      <IKUpload ref="childComponentRef" :authenticator="authenticator" :tags="['tag1', 'tag2']"
+        :responseFields="['tags']" :onError="onError" :onSuccess="onSuccess" :onUploadStart="onUploadStart" :onUploadProgress="onUploadProgress"
+        :validateFile="validateFile" customCoordinates="10,10,100,100" />
+    </IKContext>
+    <button @click="abortChildUpload">Abort Child Upload</button>
   </div>
 </template>
 
@@ -158,32 +161,40 @@ export default {
       console.log("Upload started");
       console.log(event);
     },
+    onUploadProgress(event) {
+      console.log(`Upload inprogress ... (${(event.loaded*100/event.total).toFixed(2)}% Done)`)
+      console.log(event)
+    },
+    abortChildUpload() {
+      this.$refs.childComponentRef.triggerAbortUpload();
+      console.log("Upload aborted")
+    },
     authenticator(){
-    return new Promise((resolve, reject) => {
-      var url = "server_endpoint"; // Use the full URL with the protocol
+      return new Promise((resolve, reject) => {
+        var url = process.env.VUE_APP_AUTHENTICATION_ENDPOINT;
 
-      // Make the Fetch API request
-      fetch(url, { method: "GET", mode: "cors" }) // Enable CORS mode
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then((body) => {
-          var obj = {
-            signature: body.signature,
-            expire: body.expire,
-            token: body.token,
-          };
-          resolve(obj);
-        })
-        .catch((error) => {
-          reject([error]);
-        });
-    });
+        // Make the Fetch API request
+        fetch(url, { method: "GET", mode: "cors" }) // Enable CORS mode
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then((body) => {
+            var obj = {
+              signature: body.signature,
+              expire: body.expire,
+              token: body.token,
+            };
+            resolve(obj);
+          })
+          .catch((error) => {
+            reject([error]);
+          });
+      });
+    }
   }
-}
 };
 </script>
 

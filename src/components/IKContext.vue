@@ -1,5 +1,5 @@
 <script>
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, provide, onBeforeMount } from 'vue';
 
 export default defineComponent({
   name: 'ik-context',
@@ -17,6 +17,10 @@ export default defineComponent({
     const contextConfigurations = ref({
       publicKey: props.publicKey,
       urlEndpoint: props.urlEndpoint
+    });
+
+    onBeforeMount(() => {
+      provide('contextConfigurations', contextConfigurations);
     });
 
     return {
