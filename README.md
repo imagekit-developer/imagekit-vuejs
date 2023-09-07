@@ -786,25 +786,6 @@ var imageURL = imagekit.url({
 });
 ```
 
-## Error Handling
-
-You can use `ErrorBoundary` to handle errors anywhere in their child component tree. Log those errors or display a fallback UI instead of the crashed component tree. For example:
-
-```js
-// urlEndpoint should be present in IKImage or parent IKContext component; otherwise, it will throw an error. For example:
-<ErrorBoundary>
-  <IKImage
-    path = "/default-image.jpg"
-    transformation={[
-      {
-        height:300,
-        width:400
-      }
-    ]}
-  />
-</ErrorBoundary>
-```
-
 ## Support
 
 For any feedback or to report any issues or general implementation support, please reach out to [support@imagekit.io](mailto:support@imagekit.io)
