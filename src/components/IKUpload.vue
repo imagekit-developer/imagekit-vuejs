@@ -1,3 +1,9 @@
+<template>
+  <div>
+    <input type="file" @change="upload" @click="onUploadClick" />
+  </div>
+</template>
+
 <script>
 import ImageKit from "imagekit-javascript";
 import { VERSION } from "../plugin";
@@ -5,7 +11,6 @@ import { inject, ref } from "vue";
 
 export default {
   name: "ik-upload",
-  inject: { contextConfigurations: { default: {} } },
   props: {
     urlEndpoint: { type: String, default: "", required: false },
     publicKey: { type: String, default: "", required: false },
@@ -17,22 +22,31 @@ export default {
     isPrivateFile: { type: Boolean, default: false, required: false },
     customCoordinates: { type: String, default: "", required: false },
     responseFields: { type: Array, required: false },
+    extensions: { type: Array, required: false },
+    webhookUrl: { type: String, required: false },
+    overwriteFile: { type: Boolean, default: true, required: false },
+    overwriteAITags: { type: Boolean, default: true, required: false },
+    overwriteTags: { type: Boolean, default: true, required: false },
+    overwriteCustomMetadata: { type: Boolean, default: true, required: false },
+    customMetadata: { type: Object, required: false },
     onError: { type: Function, required: false },
     onSuccess: { type: Function, required: false },
     validateFile: { type: Function, required: false },
     onUploadStart: { type: Function, required: false },
+    onUploadProgress: { type: Function, required: false }
   },
   setup(props) {
+    const xhrRef = ref(null);
     const file = ref(null);
-    const configurations = inject("contextConfigurations");
+    const contextConfigurations = inject("contextConfigurations");
 
     const getClient = () => {
       return new ImageKit({
         sdkVersion: `vuejs-${VERSION}`,
         urlEndpoint: props.urlEndpoint
           ? props.urlEndpoint
-          : configurations.urlEndpoint,
-        publicKey: props.urlEndpoint || configurations.urlEndpoint,
+          : contextConfigurations.value.urlEndpoint,
+        publicKey: props.publicKey || contextConfigurations.value.publicKey,
       });
     };
 
@@ -44,7 +58,7 @@ export default {
 
       const getMergedOptions = () => {
         return {
-          configurations,
+          ...contextConfigurations.value,
         };
       };
 
@@ -107,6 +121,17 @@ export default {
         props.onUploadStart();
       }
 
+      const xhr = new XMLHttpRequest();
+      xhrRef.value = xhr; // Store the XMLHttpRequest reference
+
+      const progressCb = (e) => {
+        if (props.onUploadProgress && typeof props.onUploadProgress === 'function') {
+          props.onUploadProgress(e);
+        }
+      };
+
+      xhr.upload.addEventListener('progress', progressCb);
+
       const authPromise = props.authenticator()
 
       if (!(authPromise instanceof Promise)) {
@@ -130,9 +155,17 @@ export default {
               isPrivateFile: props.isPrivateFile,
               customCoordinates: props.customCoordinates,
               responseFields: props.responseFields,
+              extensions: props.extensions,
+              webhookUrl: props.webhookUrl,
+              overwriteFile: props.overwriteFile,
+              overwriteAITags: props.overwriteAITags,
+              overwriteTags: props.overwriteTags,
+              overwriteCustomMetadata: props.overwriteCustomMetadata,
+              customMetadata: props.customMetadata,
               signature,
               token,
-              expire
+              expire,
+              xhr
             },
             (err, result) => {
               if (err && typeof props.onError === "function") {
@@ -142,6 +175,7 @@ export default {
                 props.onSuccess(result);
                 console.log(result); // add this line to log the success response to the console
               }
+              xhr.upload.removeEventListener('progress', progressCb);
             },
             {
               publicKey,
@@ -167,34 +201,28 @@ export default {
       return;
     };
 
+    const abortUpload = () => {
+      if (xhrRef.value && xhrRef.value.readyState !== 4) {
+        xhrRef.value.abort(); // Abort the ongoing upload
+        xhrRef.value = null; // Reset the XMLHttpRequest reference
+      }
+    };
+
     const onUploadClick = () => {
       props.onUploadStart && props.onUploadStart();
     };
 
-    const onMounted = () => {
-      const inputElement = document.createElement("input");
-      inputElement.type = "file";
-      inputElement.addEventListener("change", upload);
-      inputElement.addEventListener("click", onUploadClick);
-
-      document.body.appendChild(inputElement);
-    };
-
-    const onBeforeUnmount = () => {
-      const inputElement = document.querySelector("input[type='file']");
-      if (inputElement) {
-        inputElement.removeEventListener("change", upload);
-        inputElement.removeEventListener("click", onUploadClick);
-        inputElement.parentNode.removeChild(inputElement);
-      }
-    };
-
-    onMounted();
-
     return {
       file,
-      onBeforeUnmount,
+      upload,
+      onUploadClick,
+      abortUpload
     };
   },
+  methods:{
+    triggerAbortUpload() {
+      this.abortUpload();
+    },
+  }
 };
 </script>

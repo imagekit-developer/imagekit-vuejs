@@ -139,7 +139,6 @@ export default defineComponent({
         transformationPosition: this.transformationPosition,
         queryParameters: this.queryParameters
       };
-      console.log(options, "opt")
       let result = {};
 
       result.src = IkClient.url(options);
