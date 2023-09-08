@@ -12,11 +12,15 @@ export default defineComponent({
       type: String,
       required: true
     },
+    authenticator: {
+      type: Function
+    }
   },
   setup(props, { slots }) {
     const contextConfigurations = ref({
       publicKey: props.publicKey,
-      urlEndpoint: props.urlEndpoint
+      urlEndpoint: props.urlEndpoint,
+      authenticator: props.authenticator
     });
 
     onBeforeMount(() => {

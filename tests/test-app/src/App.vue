@@ -95,8 +95,8 @@
       :transformation="[{ height: 200, width: 600, b: '5_red', q: 95 }]" />
 
     <p>File upload</p>
-    <IKContext :publicKey="publicKey" :urlEndpoint="urlEndpoint">
-      <IKUpload ref="childComponentRef" :authenticator="authenticator" :tags="['tag1', 'tag2']"
+    <IKContext :publicKey="publicKey" :urlEndpoint="urlEndpoint" :authenticator="authenticator">
+      <IKUpload ref="childComponentRef" :tags="['tag1', 'tag2']"
         :responseFields="['tags']" :onError="onError" :onSuccess="onSuccess" :onUploadStart="onUploadStart" :onUploadProgress="onUploadProgress"
         :validateFile="validateFile" customCoordinates="10,10,100,100" />
     </IKContext>
