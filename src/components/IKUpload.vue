@@ -67,6 +67,7 @@ export default {
       const IkClient = getClient();
 
       const publicKey = props.publicKey || mergedOptions.publicKey;
+      const authenticator = props.authenticator || mergedOptions.authenticator;
 
       if (!publicKey || publicKey.trim() === "") {
         if (typeof props.onError === "function") {
@@ -77,7 +78,7 @@ export default {
         return;
       }
 
-      if (!props.authenticator) {
+      if (!authenticator) {
         if (props.onError && typeof props.onError === "function") {
           props.onError({
             message: "The authenticator function is not provided."
@@ -86,7 +87,7 @@ export default {
         return;
       }
 
-      if (typeof props.authenticator !== 'function') {
+      if (typeof authenticator !== 'function') {
         if (props.onError && typeof props.onError === "function") {
           props.onError({
             message: "The provided authenticator is not a function."
@@ -95,7 +96,7 @@ export default {
         return;
       }
 
-      if (props.authenticator.length !== 0) {
+      if (authenticator.length !== 0) {
         if (props.onError && typeof props.onError === "function") {
           props.onError({
             message: "The authenticator function should not accept any parameters. Please provide a parameterless function reference."
@@ -132,7 +133,7 @@ export default {
 
       xhr.upload.addEventListener('progress', progressCb);
 
-      const authPromise = props.authenticator()
+      const authPromise = authenticator();
 
       if (!(authPromise instanceof Promise)) {
         if (props.onError && typeof props.onError === "function") {
