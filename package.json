@@ -27,8 +27,7 @@
   },
   "dependencies": {
     "babel-eslint": "^10.1.0",
-    "imagekit-javascript": "^2.0.0",
-    "vue": "^3.2.47"
+    "imagekit-javascript": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
