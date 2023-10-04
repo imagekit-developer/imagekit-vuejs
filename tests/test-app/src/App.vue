@@ -96,9 +96,11 @@
 
     <p>File upload</p>
     <IKContext :publicKey="publicKey" :urlEndpoint="urlEndpoint" :authenticator="authenticator">
-      <IKUpload ref="childComponentRef" :tags="['tag1', 'tag2']"
+      <IKUpload ref="childComponentRef" :tags="['tag1', 'tag2']" class="file-upload-ik"
         :responseFields="['tags']" :onError="onError" :onSuccess="onSuccess" :onUploadStart="onUploadStart" :onUploadProgress="onUploadProgress"
         :validateFile="validateFile" customCoordinates="10,10,100,100" />
+      <p>Your above uploaded file will appear here </p>
+      <IKImage :src="uploadedImageSource" :transformation='[{ height: 200, width: 200 }]' class="uploaded-img-ik"/>
     </IKContext>
     <button @click="abortChildUpload">Abort Child Upload</button>
   </div>
@@ -130,8 +132,9 @@ export default {
     return {
       urlEndpoint: process.env.VUE_APP_URL_ENDPOINT,
       publicKey: process.env.VUE_APP_PUBLIC_KEY,
-      path: path,
-      src: `${process.env.VUE_APP_URL_ENDPOINT}/${path}`
+      path,
+      src: `${process.env.VUE_APP_URL_ENDPOINT}/${path}`,
+      uploadedImageSource: ''
     };
   },
   methods: {
@@ -147,6 +150,7 @@ export default {
       try {
         console.log("Success");
         console.log(res);
+        this.uploadedImageSource = res.url
       } catch (e) {
         console.error(e);
       }
