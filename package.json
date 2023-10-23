@@ -1,17 +1,20 @@
 {
   "name": "imagekitio-vue",
-  "version": "1.0.9",
+  "version": "2.0.0",
   "scripts": {
     "build:lib": "./node_modules/.bin/vue-cli-service build --target lib src/index.js",
     "build": "./node_modules/.bin/vue-cli-service lint --fix; npm run build:lib",
     "serve": "./node_modules/.bin/vue-cli-service serve",
     "lint": "./node_modules/.bin/vue-cli-service lint",
     "test:e2e": "cypress open",
-    "start:sample": "npx serve -s samples/sample-app/dist -p 3000",
+    "start:test-app": "npx serve -s tests/test-app/dist -p 3000",
     "test:unit": "export VUE_APP_PUBLIC_KEY=your_public_key;export VUE_APP_URL_ENDPOINT=https://ik.imagekit.io/your_imagekit_id;export VUE_APP_AUTHENTICATION_ENDPOINT=https://www.example.com/auth;./node_modules/.bin/vue-cli-service test:unit --watchAll=false;unset VUE_APP_PUBLIC_KEY;unset VUE_APP_URL_ENDPOINT;unset VUE_APP_AUTHENTICATION_ENDPOINT",
     "test:dev": "export VUE_APP_PUBLIC_KEY=your_public_key;export VUE_APP_URL_ENDPOINT=https://ik.imagekit.io/your_imagekit_id;export VUE_APP_AUTHENTICATION_ENDPOINT=https://www.example.com/auth;./node_modules/.bin/vue-cli-service test:unit --watchAll=true;unset VUE_APP_PUBLIC_KEY;unset VUE_APP_URL_ENDPOINT;unset VUE_APP_AUTHENTICATION_ENDPOINT",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "test:ci": "jest --coverage && codecov",
+    "test:cov": "jest --coverage",
+    "codecov": "codecov"
   },
   "main": "dist/imagekitio-vue.common.js",
   "unpkg": "dist/imagekitio-vue.umd.min.js",
@@ -23,32 +26,40 @@
     "url": "https://github.com/imagekit-developer/imagekit-vuejs"
   },
   "dependencies": {
-    "imagekit-javascript": "^1.3.5"
+    "babel-eslint": "^10.1.0",
+    "cypress-file-upload": "^5.0.8",
+    "imagekit-javascript": "^2.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.7.7",
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
     "@storybook/addon-actions": "^5.2.8",
     "@storybook/addon-links": "^5.2.8",
-    "@storybook/addon-storyshots": "^5.2.8",
+    "@storybook/addon-storyshots": "^5.3.21",
     "@storybook/addons": "^5.2.8",
-    "@storybook/vue": "^5.2.8",
-    "@vue/cli-plugin-babel": "^4.1.0",
-    "@vue/cli-plugin-eslint": "^4.1.0",
+    "@storybook/vue3": "^6.5.16",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-plugin-unit-jest": "^4.1.1",
-    "@vue/cli-service": "^4.1.0",
-    "@vue/test-utils": "^1.0.0-beta.30",
-    "babel-eslint": "^10.0.3",
+    "@vue/cli-service": "~5.0.0",
+    "@vue/test-utils": "^1.3.4",
+    "babel-jest": "^29.4.3",
     "babel-loader": "^8.0.6",
     "babel-preset-vue": "^2.0.2",
-    "cypress": "^6.0.1",
-    "eslint": "^5.16.0",
-    "eslint-plugin-vue": "^5.0.0",
+    "codecov": "^3.8.3",
+    "cypress": "^13.3.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-vue": "^8.0.3",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^24.9.0",
+    "vue-jest": "^3.0.7",
     "vue-loader": "^15.8.3",
     "vue-template-compiler": "^2.6.11",
     "webpack": "^4.41.4",
     "webpack-cli": "^3.3.10"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.47"
   },
   "eslintConfig": {
     "root": true,
@@ -56,20 +67,19 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
+      "plugin:vue/vue3-essential",
       "eslint:recommended"
     ],
     "rules": {},
     "parserOptions": {
-      "parser": "babel-eslint"
+      "parser": "@babel/eslint-parser"
     }
   },
   "license": "MIT",
   "browserslist": [
     "> 1%",
-    "last 2 versions"
-  ],
-  "peerDependencies": {
-    "vue": "^2.6.12"
-  }
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
 }
