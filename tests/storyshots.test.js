@@ -1,4 +1,5 @@
 import initStoryshots from '@storybook/addon-storyshots';
+import {jest} from '@jest/globals'
 
 initStoryshots({ /* configuration options */ });
 

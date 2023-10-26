@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "core-js": "^3.8.3",
-    "imagekitio-vue": "file:../../",
+    "imagekitio-vue": "file:../../dist/imagekitio-vue.common.js",
     "vue": "^3.2.47"
   },
   "devDependencies": {
