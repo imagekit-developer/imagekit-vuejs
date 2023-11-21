@@ -1,4 +1,4 @@
-describe('ImageKit React SDK', () => {
+describe('ImageKit Vue SDK', () => {
   const APP_HOST =  Cypress.env().APP_HOST;
   describe('Lazyload', () => {
     it('should have empty src before reaching lazyload threshold', () => {

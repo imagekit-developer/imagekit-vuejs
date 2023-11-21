@@ -7,7 +7,7 @@
     "serve": "./node_modules/.bin/vue-cli-service serve",
     "lint": "./node_modules/.bin/vue-cli-service lint",
     "test:e2e": "cypress open",
-    "start:test-app": "npx serve -s tests/test-app/dist -p 3000",
+    "start:test-app": "npx serve -s tests/test-app/dist -p 3000 & cd tests/test-app/server && node server", 
     "test:unit": "export VUE_APP_PUBLIC_KEY=your_public_key;export VUE_APP_URL_ENDPOINT=https://ik.imagekit.io/your_imagekit_id;export VUE_APP_AUTHENTICATION_ENDPOINT=https://www.example.com/auth;./node_modules/.bin/vue-cli-service test:unit --watchAll=false;unset VUE_APP_PUBLIC_KEY;unset VUE_APP_URL_ENDPOINT;unset VUE_APP_AUTHENTICATION_ENDPOINT",
     "test:dev": "export VUE_APP_PUBLIC_KEY=your_public_key;export VUE_APP_URL_ENDPOINT=https://ik.imagekit.io/your_imagekit_id;export VUE_APP_AUTHENTICATION_ENDPOINT=https://www.example.com/auth;./node_modules/.bin/vue-cli-service test:unit --watchAll=true;unset VUE_APP_PUBLIC_KEY;unset VUE_APP_URL_ENDPOINT;unset VUE_APP_AUTHENTICATION_ENDPOINT",
     "storybook": "start-storybook -p 6006",
