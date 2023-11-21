@@ -74,7 +74,7 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           start: npm run start:test-app
-          wait-on: 'http://localhost:3000, http://localhost:3001'
+          wait-on: http://localhost:3000
         env:
           CI: true
           VUE_APP_PUBLIC_KEY: ${{ secrets.ik_public_key }}
