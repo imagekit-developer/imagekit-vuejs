@@ -67,6 +67,8 @@ jobs:
           echo VUE_APP_URL_ENDPOINT = ${{ secrets.ik_url_endopint }} > .env;
           npm install 
           npm run build
+          cd server
+          npm install 
 
       - name: Start the app and run E2E tests
         uses: cypress-io/github-action@v2
