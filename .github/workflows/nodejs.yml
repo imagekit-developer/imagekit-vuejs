@@ -38,7 +38,7 @@ jobs:
       CI: true
       VUE_APP_PUBLIC_KEY: ${{ secrets.ik_public_key }}
       VUE_APP_PRIVATE_KEY: ${{ secrets.ik_private_key }}
-      VUE_APP_URL_ENDPOINT: ${{ secrets.ik_url_endpoint }}
+      VUE_APP_URL_ENDPOINT: "https://ik.imagekit.io/sdktestingik"
 
   e2e:
     runs-on: ubuntu-latest
@@ -64,8 +64,7 @@ jobs:
       - name: Build Test app
         run: |
           cd tests/test-app
-          echo VUE_APP_URL_ENDPOINT = ${{ secrets.ik_url_endpoint }}
-          echo VUE_APP_URL_ENDPOINT = ${{ secrets.ik_url_endpoint }} > .env;
+          echo VUE_APP_URL_ENDPOINT = "https://ik.imagekit.io/sdktestingik" > .env;
           echo VUE_APP_PUBLIC_KEY = ${{ secrets.ik_public_key }} >> .env;
           echo VUE_APP_AUTHENTICATION_ENDPOINT = 'http://localhost:3001/auth' >> .env;
           npm install 
@@ -84,5 +83,5 @@ jobs:
           CI: true
           VUE_APP_PUBLIC_KEY: ${{ secrets.ik_public_key }}
           VUE_APP_PRIVATE_KEY: ${{ secrets.ik_private_key }}
-          VUE_APP_URL_ENDPOINT: ${{ secrets.ik_url_endpoint }}
+          VUE_APP_URL_ENDPOINT: "https://ik.imagekit.io/sdktestingik"
           VUE_APP_AUTHENTICATION_ENDPOINT: http://localhost:3001/auth
