@@ -64,12 +64,10 @@ jobs:
       - name: Build Test app
         run: |
           cd tests/test-app
-          echo VUE_APP_URL_ENDPOINT = ${{ secrets.ik_url_endpoint }};
-          echo VUE_APP_PUBLIC_KEY = ${{ secrets.ik_public_key }};
-          echo VUE_APP_AUTHENTICATION_ENDPOINT = 'http://localhost:3001/auth';
           echo VUE_APP_URL_ENDPOINT = ${{ secrets.ik_url_endpoint }} > .env;
           echo VUE_APP_PUBLIC_KEY = ${{ secrets.ik_public_key }} >> .env;
           echo VUE_APP_AUTHENTICATION_ENDPOINT = 'http://localhost:3001/auth' >> .env;
+          cat .env
           npm install 
           npm run build
           cd server
