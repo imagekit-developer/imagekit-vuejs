@@ -66,7 +66,7 @@ jobs:
           cd tests/test-app
           echo VUE_APP_URL_ENDPOINT = "https://ik.imagekit.io/sdktestingik" > .env;
           echo VUE_APP_PUBLIC_KEY = ${{ secrets.ik_public_key }} >> .env;
-          echo VUE_APP_AUTHENTICATION_ENDPOINT = 'http://localhost:3001/auth' >> .env;
+          echo VUE_APP_AUTHENTICATION_ENDPOINT = 'http://127.0.0.1:3001/auth' >> .env;
           npm install 
           npm run build
           cd server
@@ -77,11 +77,11 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           start: npm run start:test-app
-          wait-on: http://localhost:3000
+          wait-on: http://127.0.0.1:3000
         env:
           DEBUG: 'cypress:server:browsers:electron'
           CI: true
           VUE_APP_PUBLIC_KEY: ${{ secrets.ik_public_key }}
           VUE_APP_PRIVATE_KEY: ${{ secrets.ik_private_key }}
           VUE_APP_URL_ENDPOINT: "https://ik.imagekit.io/sdktestingik"
-          VUE_APP_AUTHENTICATION_ENDPOINT: http://localhost:3001/auth
+          VUE_APP_AUTHENTICATION_ENDPOINT: http://127.0.0.1:3001/auth
