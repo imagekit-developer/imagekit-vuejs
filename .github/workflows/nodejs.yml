@@ -91,7 +91,7 @@ jobs:
       - name: Start the app and run E2E tests
         uses: cypress-io/github-action@v4
         with:
-          wait-on: http://localhost:3000
+          wait-on: https://blessed-monthly-mongoose.ngrok-free.app
           headless: true
         env:
           DEBUG: 'cypress:server:browsers:electron'
