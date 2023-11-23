@@ -82,11 +82,15 @@ jobs:
           echo "App started successfully"
           npx wait-on http://localhost:3000
           echo "App is ready"
+      
+      - name: Check the app for Cypress
+        timeout-minutes: 5
+        run: |
+          lsof -i :3000
 
       - name: Start the app and run E2E tests
         uses: cypress-io/github-action@v4
         with:
-          start: npm run start:test-app
           wait-on: http://localhost:3000
           browser: chrome
           headed: true
