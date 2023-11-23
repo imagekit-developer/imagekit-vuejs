@@ -75,7 +75,6 @@ jobs:
           cat .env
           npm install
 
-
       - name: Start the app and run E2E tests
         uses: cypress-io/github-action@v4
         with:
