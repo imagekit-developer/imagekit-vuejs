@@ -81,7 +81,6 @@ jobs:
           npm run start:test-app > /dev/null 2>&1 &
           echo "App started successfully"
           npx wait-on http://localhost:3000
-          npx wait-on http://localhost:3001
           echo "App is ready"
       
       - name: Check the app for Cypress
