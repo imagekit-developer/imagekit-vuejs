@@ -78,7 +78,7 @@ jobs:
       - name: Start the app for Cypress
         timeout-minutes: 5
         run: |
-          npm run start:test-app > /dev/null 2>&1 &
+          npm run start:test-app -- --host 0.0.0.0 > /dev/null 2>&1 &
           echo "App started successfully"
           npx wait-on http://localhost:3000
           echo "App is ready"
