@@ -76,12 +76,12 @@ jobs:
           npm install
 
       - name: Start the app for Cypress
+        timeout-minutes: 5
         run: |
           npm run start:test-app
-
-      - name: Wait for the app to start
-        run: |
+          echo "App started successfully"
           npx wait-on http://localhost:3000
+          echo "App is ready"
 
       - name: Start the app and run E2E tests
         uses: cypress-io/github-action@v4
