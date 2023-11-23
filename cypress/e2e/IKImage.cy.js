@@ -1,6 +1,5 @@
 describe('ImageKit Vue SDK', () => {
   const APP_HOST =  Cypress.env().APP_HOST;
-  console.log({APP_HOST},'=============')
   describe('Lazyload', () => {
     it('should have empty src before reaching lazyload threshold', () => {
       cy.visit(APP_HOST, { timeout: 30000 });
