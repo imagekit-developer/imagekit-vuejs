@@ -88,7 +88,7 @@ jobs:
           lsof -i :3001
 
       - name: Start ngrok with NGROK_OPTS
-        run: npx ngrok http 3000 -authtoken $NGROK_AUTH_TOKEN -inspect=false -log=stdout -host-header="localhost:3000" -subdomain=blessed-monthly-mongoose.ngrok-free.app
+        run: npx ngrok http 3000 --authtoken $NGROK_AUTH_TOKEN --inspect=false --log=stdout --host-header="localhost:3000" --domain=blessed-monthly-mongoose.ngrok-free.app
         env:
           NGROK_OPTS: "--ngrok-args=--skip-browser-update"
       
