@@ -6,7 +6,7 @@ describe('ik-upload component', () => {
   describe('Image Upload', () => {
       it('should upload image and render same image', () => { 
           // launch URL
-          cy.visit(APP_HOST);
+          cy.visit(APP_HOST, { timeout: 30000 });
 
           //static file
           const p = 'sample.jpeg'

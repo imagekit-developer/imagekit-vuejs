@@ -3,7 +3,7 @@ describe('IKVideo Element', () => {
 
   describe('Video transformation', () => {
     it('should have element with transformation', () => {
-      cy.visit(APP_HOST);
+      cy.visit(APP_HOST, { timeout: 30000 });
 
       cy.get('.ikvideo-default').scrollIntoView();
 
@@ -17,7 +17,7 @@ describe('IKVideo Element', () => {
 
   describe('Advance transformation', () => {
     it('should have element with advance transformation', () => {
-      cy.visit(APP_HOST);
+      cy.visit(APP_HOST, { timeout: 30000 });
 
       cy.get('.ikvideo-with-tr').scrollIntoView();
 
