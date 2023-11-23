@@ -94,6 +94,7 @@ jobs:
           wait-on: http://localhost:3000
           browser: chrome
           headed: true
+          browser-start-timeout: 20000
         env:
           DEBUG: 'cypress:server:browsers:electron'
           CI: true
