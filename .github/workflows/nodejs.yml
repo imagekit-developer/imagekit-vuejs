@@ -36,9 +36,9 @@ jobs:
 
     env:
       CI: true
-      VUE_APP_PUBLIC_KEY: ${{ secrets.ik_public_key }}
+      VUE_APP_PUBLIC_KEY: public_X140up/8w//8965Hp/pI8VCM6QY=
       VUE_APP_PRIVATE_KEY: ${{ secrets.ik_private_key }}
-      VUE_APP_URL_ENDPOINT: ${{ secrets.ik_url_endpoint }}
+      VUE_APP_URL_ENDPOINT: https://ik.imagekit.io/igi7ywjzdi
 
   e2e:
     runs-on: ubuntu-latest
@@ -64,13 +64,13 @@ jobs:
       - name: Build Test app
         run: |
           cd tests/test-app
-          echo VUE_APP_URL_ENDPOINT = ${{ secrets.ik_url_endpoint }} >> $GITHUB_ENV;
-          echo VUE_APP_PUBLIC_KEY = ${{ secrets.ik_public_key }} >> $GITHUB_ENV;
-          echo VUE_APP_AUTHENTICATION_ENDPOINT = 'http://localhost:3001/auth' >> $GITHUB_ENV;
+          echo VUE_APP_URL_ENDPOINT = https://ik.imagekit.io/igi7ywjzdi > .env;
+          echo VUE_APP_PUBLIC_KEY = public_X140up/8w//8965Hp/pI8VCM6QY= >> .env;
+          echo VUE_APP_AUTHENTICATION_ENDPOINT = 'http://localhost:3001/auth' >> .env;
           npm install 
           npm run build
           cd server
-          echo VUE_APP_PRIVATE_KEY = ${{ secrets.ik_private_key }} >> $GITHUB_ENV;
+          echo VUE_APP_PRIVATE_KEY = ${{ secrets.ik_private_key }} > .env;
           npm install
 
       - name: Start the app for Cypress
@@ -97,7 +97,7 @@ jobs:
       #   env:
       #     DEBUG: 'cypress:server:browsers:electron'
       #     CI: true
-      #     VUE_APP_PUBLIC_KEY: ${{ secrets.ik_public_key }}
+      #     VUE_APP_PUBLIC_KEY: public_X140up/8w//8965Hp/pI8VCM6QY=
       #     VUE_APP_PRIVATE_KEY: ${{ secrets.ik_private_key }}
-      #     VUE_APP_URL_ENDPOINT: ${{ secrets.ik_url_endpoint }}
+      #     VUE_APP_URL_ENDPOINT: https://ik.imagekit.io/igi7ywjzdi
       #     VUE_APP_AUTHENTICATION_ENDPOINT: http://localhost:3001/auth
