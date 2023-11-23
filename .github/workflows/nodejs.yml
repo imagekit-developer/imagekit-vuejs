@@ -73,14 +73,22 @@ jobs:
           cd server
           echo VUE_APP_PRIVATE_KEY = ${{ secrets.ik_private_key }} > .env;
           cat .env
-          npm install 
-          cd ../../..
-          npm run start:test-app
+          npm install
+
+      - name: Start the app for Cypress
+        run: npm run start:test-app
+
+      - name: Wait for the app to start
+        run: npx wait-on http://localhost:3000
 
       - name: Start the app and run E2E tests
         uses: cypress-io/github-action@v4
         with:
+          # wait-on: http://localhost:3000
+          # start: npm run start:test-app
           wait-on: http://localhost:3000
+          browser: chrome
+          headed: true
           browser: chrome
           headed: true
         env:
