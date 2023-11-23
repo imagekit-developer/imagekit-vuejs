@@ -86,6 +86,7 @@ jobs:
       - name: Start the app and run E2E tests
         uses: cypress-io/github-action@v4
         with:
+          start: npm run start:test-app
           wait-on: http://localhost:3000
           browser: chrome
           headed: true
