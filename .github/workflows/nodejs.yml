@@ -76,10 +76,12 @@ jobs:
           npm install
 
       - name: Start the app for Cypress
-        run: npm run start:test-app
+        run: |
+          npm run start:test-app
 
       - name: Wait for the app to start
-        run: npx wait-on http://localhost:3000
+        run: |
+          npx wait-on http://localhost:3000
 
       - name: Start the app and run E2E tests
         uses: cypress-io/github-action@v4
