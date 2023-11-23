@@ -74,7 +74,7 @@ jobs:
           npm install 
 
       - name: Start the app and run E2E tests
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v6
         with:
           start: npm run start:test-app
           wait-on: http://localhost:3000
