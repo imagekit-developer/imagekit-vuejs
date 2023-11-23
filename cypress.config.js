@@ -5,7 +5,7 @@ module.exports = defineConfig({
   screenshotsFolder: "./cypress/screenshots",
   videosFolder: "./cypress/videos",
   env: {
-    APP_HOST: "https://blessed-monthly-mongoose.ngrok-free.app",
+    APP_HOST: "http://127.0.0.1:3000/",
   },
   e2e: {
     setupNodeEvents(on, config) {
