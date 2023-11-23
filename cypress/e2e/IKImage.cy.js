@@ -3,13 +3,11 @@ describe('ImageKit Vue SDK', () => {
   describe('Lazyload', () => {
     it('should have empty src before reaching lazyload threshold', () => {
       cy.visit(APP_HOST);
-      cy.wait(10000);
       cy.get('.lazyload').should('have.attr', 'src').and('equal', '');
     });
 
     it('should have actual src after reaching lazyload threshold', () => {
       cy.visit(APP_HOST);
-      cy.wait(10000);
       cy.get('.lazyload').scrollIntoView();
 
       cy.wait(500);
@@ -23,7 +21,6 @@ describe('ImageKit Vue SDK', () => {
   describe('Lazyload with LQIP', () => {
     it('should have lqip src before reaching threshold', () => {
       cy.visit(APP_HOST);
-      cy.wait(10000);
       cy.get('.lazyload-lqip')
         .should('have.attr', 'src')
         .and('include', 'tr:h-200,w-200:q-20,bl-30/default-image.jpg');
@@ -31,7 +28,6 @@ describe('ImageKit Vue SDK', () => {
 
     it('should have actual src after reaching element', () => {
       cy.visit(APP_HOST);
-      cy.wait(10000);
       cy.get('.lazyload-lqip').scrollIntoView();
 
       cy.wait(1000);
@@ -46,7 +42,6 @@ describe('ImageKit Vue SDK', () => {
     // unable to test this because actual image load always finishes too quickly
     it.skip('should have lqip src before image is loaded', () => {
       cy.visit(APP_HOST);
-      cy.wait(10000);
       cy.get('.lqip')
         .should('have.attr', 'src')
         .and('include', 'tr:h-200,w-200:q-20,bl-30/default-image.jpg');
@@ -54,7 +49,6 @@ describe('ImageKit Vue SDK', () => {
 
     it('should have actual src after image is loaded', () => {
       cy.visit(APP_HOST);
-      cy.wait(10000);
       cy.get('.lqip').scrollIntoView();
 
       cy.wait(500);

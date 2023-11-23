@@ -67,10 +67,12 @@ jobs:
           echo VUE_APP_URL_ENDPOINT = "https://ik.imagekit.io/sdktestingik" > .env;
           echo VUE_APP_PUBLIC_KEY = ${{ secrets.ik_public_key }} >> .env;
           echo VUE_APP_AUTHENTICATION_ENDPOINT = 'http://localhost:3001/auth' >> .env;
+          cat .env
           npm install 
           npm run build
           cd server
           echo VUE_APP_PRIVATE_KEY = ${{ secrets.ik_private_key }} > .env;
+          cat .env
           npm install 
 
       - name: Start the app and run E2E tests
