@@ -64,15 +64,20 @@ jobs:
       - name: Build Test app
         run: |
           cd tests/test-app
-          echo VUE_APP_URL_ENDPOINT = ${{ secrets.ik_url_endopint }} > .env;
+          echo VUE_APP_URL_ENDPOINT = ${{ secrets.ik_url_endpoint }} > .env;
+          echo VUE_APP_PUBLIC_KEY = ${{ secrets.ik_public_key }} >> .env;
+          echo VUE_APP_AUTHENTICATION_ENDPOINT = 'http://localhost:3001/auth' >> .env;
           npm install 
           npm run build
+          cd server
+          echo VUE_APP_PRIVATE_KEY = ${{ secrets.ik_private_key }} > .env;
+          npm install 
 
       - name: Start the app and run E2E tests
         uses: cypress-io/github-action@v2
         with:
           start: npm run start:test-app
-          wait-on: 'http://localhost:3000, http://localhost:3001'
+          wait-on: http://localhost:3000
         env:
           CI: true
           VUE_APP_PUBLIC_KEY: ${{ secrets.ik_public_key }}
