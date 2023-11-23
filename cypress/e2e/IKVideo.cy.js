@@ -3,6 +3,10 @@ describe('IKVideo Element', () => {
 
   describe('Video transformation', () => {
     it('should have element with transformation', () => {
+      cy.intercept('GET', '**/*', (req) => {
+        // Set the custom header
+        req.headers['ngrok-skip-browser-warning'] = 'true';
+      });
       cy.visit(APP_HOST, { timeout: 30000 });
 
       cy.get('.ikvideo-default').scrollIntoView();
@@ -17,6 +21,10 @@ describe('IKVideo Element', () => {
 
   describe('Advance transformation', () => {
     it('should have element with advance transformation', () => {
+      cy.intercept('GET', '**/*', (req) => {
+        // Set the custom header
+        req.headers['ngrok-skip-browser-warning'] = 'true';
+      });
       cy.visit(APP_HOST, { timeout: 30000 });
 
       cy.get('.ikvideo-with-tr').scrollIntoView();

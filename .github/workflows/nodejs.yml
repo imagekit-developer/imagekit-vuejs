@@ -87,16 +87,18 @@ jobs:
         timeout-minutes: 5
         run: |
           lsof -i :3000
+      
+      - name: Run Cypress tests
+        run: npx cypress run --headed --browser chrome
 
-      - name: Start the app and run E2E tests
-        uses: cypress-io/github-action@v4
-        with:
-          wait-on: https://blessed-monthly-mongoose.ngrok-free.app
-          headless: true
-        env:
-          DEBUG: 'cypress:server:browsers:electron'
-          CI: true
-          VUE_APP_PUBLIC_KEY: ${{ secrets.ik_public_key }}
-          VUE_APP_PRIVATE_KEY: ${{ secrets.ik_private_key }}
-          VUE_APP_URL_ENDPOINT: "https://ik.imagekit.io/sdktestingik"
-          VUE_APP_AUTHENTICATION_ENDPOINT: http://localhost:3001/auth
+      # - name: Start the app and run E2E tests
+      #   uses: cypress-io/github-action@v4
+      #   with:
+      #     wait-on: https://blessed-monthly-mongoose.ngrok-free.app
+      #   env:
+      #     DEBUG: 'cypress:server:browsers:electron'
+      #     CI: true
+      #     VUE_APP_PUBLIC_KEY: ${{ secrets.ik_public_key }}
+      #     VUE_APP_PRIVATE_KEY: ${{ secrets.ik_private_key }}
+      #     VUE_APP_URL_ENDPOINT: "https://ik.imagekit.io/sdktestingik"
+      #     VUE_APP_AUTHENTICATION_ENDPOINT: http://localhost:3001/auth

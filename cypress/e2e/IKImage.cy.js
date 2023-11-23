@@ -2,11 +2,19 @@ describe('ImageKit Vue SDK', () => {
   const APP_HOST =  Cypress.env().APP_HOST;
   describe('Lazyload', () => {
     it('should have empty src before reaching lazyload threshold', () => {
+      cy.intercept('GET', '**/*', (req) => {
+        // Set the custom header
+        req.headers['ngrok-skip-browser-warning'] = 'true';
+      });
       cy.visit(APP_HOST, { timeout: 30000 });
       cy.get('.lazyload').should('have.attr', 'src').and('equal', '');
     });
 
     it('should have actual src after reaching lazyload threshold', () => {
+      cy.intercept('GET', '**/*', (req) => {
+        // Set the custom header
+        req.headers['ngrok-skip-browser-warning'] = 'true';
+      });
       cy.visit(APP_HOST, { timeout: 30000 });
       cy.get('.lazyload').scrollIntoView();
 
@@ -20,6 +28,10 @@ describe('ImageKit Vue SDK', () => {
 
   describe('Lazyload with LQIP', () => {
     it('should have lqip src before reaching threshold', () => {
+      cy.intercept('GET', '**/*', (req) => {
+        // Set the custom header
+        req.headers['ngrok-skip-browser-warning'] = 'true';
+      });
       cy.visit(APP_HOST, { timeout: 30000 });
       cy.get('.lazyload-lqip')
         .should('have.attr', 'src')
@@ -27,6 +39,10 @@ describe('ImageKit Vue SDK', () => {
     });
 
     it('should have actual src after reaching element', () => {
+      cy.intercept('GET', '**/*', (req) => {
+        // Set the custom header
+        req.headers['ngrok-skip-browser-warning'] = 'true';
+      });
       cy.visit(APP_HOST, { timeout: 30000 });
       cy.get('.lazyload-lqip').scrollIntoView();
 
@@ -41,6 +57,10 @@ describe('ImageKit Vue SDK', () => {
   describe('LQIP', () => {
     // unable to test this because actual image load always finishes too quickly
     it.skip('should have lqip src before image is loaded', () => {
+      cy.intercept('GET', '**/*', (req) => {
+        // Set the custom header
+        req.headers['ngrok-skip-browser-warning'] = 'true';
+      });
       cy.visit(APP_HOST, { timeout: 30000 });
       cy.get('.lqip')
         .should('have.attr', 'src')
@@ -48,6 +68,10 @@ describe('ImageKit Vue SDK', () => {
     });
 
     it('should have actual src after image is loaded', () => {
+      cy.intercept('GET', '**/*', (req) => {
+        // Set the custom header
+        req.headers['ngrok-skip-browser-warning'] = 'true';
+      });
       cy.visit(APP_HOST, { timeout: 30000 });
       cy.get('.lqip').scrollIntoView();
 

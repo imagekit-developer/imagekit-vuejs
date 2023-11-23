@@ -5,6 +5,10 @@ describe('ik-upload component', () => {
 
   describe('Image Upload', () => {
       it('should upload image and render same image', () => { 
+        cy.intercept('GET', '**/*', (req) => {
+          // Set the custom header
+          req.headers['ngrok-skip-browser-warning'] = 'true';
+        });
           // launch URL
           cy.visit(APP_HOST, { timeout: 30000 });
 
