@@ -75,13 +75,18 @@ jobs:
           cat .env
           npm install
 
+      - name: Start the app for Cypress
+        run: |
+          npm run start:test-app
+
+      - name: Wait for the app to start
+        run: |
+          npx wait-on http://localhost:3000
+
       - name: Start the app and run E2E tests
         uses: cypress-io/github-action@v4
         with:
-          start: npm run start:test-app
           wait-on: http://localhost:3000
-          browser: chrome
-          headed: true
           browser: chrome
           headed: true
         env:
