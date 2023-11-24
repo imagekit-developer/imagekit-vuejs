@@ -87,10 +87,10 @@ jobs:
           lsof -i :3000
           lsof -i :3001
 
-      - name: Start ngrok with NGROK_OPTS
-        run: npx ngrok http 3000 --authtoken 2Yat3ngA9XGNXZygaTiJxMOCm4F_2g5N7pXAyUaN5QnswEULN --inspect=false --log=stdout --host-header="localhost:3000" --domain=blessed-monthly-mongoose.ngrok-free.app
-        env:
-          NGROK_OPTS: "--ngrok-args=--skip-browser-update"
+      # - name: Start ngrok with NGROK_OPTS
+      #   run: npx ngrok http 3000 --authtoken 2Yat3ngA9XGNXZygaTiJxMOCm4F_2g5N7pXAyUaN5QnswEULN --inspect=false --log=stdout --host-header="localhost:3000" --domain=blessed-monthly-mongoose.ngrok-free.app
+      #   env:
+      #     NGROK_OPTS: "--ngrok-args=--skip-browser-update"
       
       - name: Run Cypress tests
         run: npx cypress run --headed --browser chrome
