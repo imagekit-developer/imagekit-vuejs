@@ -1,4 +1,4 @@
-<template>
+<template v-if="">
   <div class="sample-app">
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at ultrices odio, quis venenatis ex. Duis augue
       magna, aliquet et vehicula ut, consequat eu eros. Fusce consequat odio ac tincidunt pharetra. Proin molestie
@@ -129,6 +129,13 @@ export default {
     IKUpload,
   },
   data() {
+    console.log({
+      urlEndpoint: process.env.VUE_APP_URL_ENDPOINT,
+      publicKey: process.env.VUE_APP_PUBLIC_KEY,
+      path,
+      src: `${process.env.VUE_APP_URL_ENDPOINT}/${path}`,
+      uploadedImageSource: ''
+    })
     return {
       urlEndpoint: process.env.VUE_APP_URL_ENDPOINT,
       publicKey: process.env.VUE_APP_PUBLIC_KEY,
