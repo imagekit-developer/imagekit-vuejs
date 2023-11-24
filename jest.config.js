@@ -3,7 +3,7 @@ module.exports = {
   transform: {
     "^.+\\.vue$": "vue-jest",
     ".+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$":
-    "jest-transform-stub",
+      "jest-transform-stub",
     "^.+\\.jsx?$": "babel-jest"
   },
   setupFiles: ['<rootDir>/.jest/register-context.js'],
@@ -23,4 +23,3 @@ module.exports = {
   ],
   testURL: "http://localhost/"
 };
-  
