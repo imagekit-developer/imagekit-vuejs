@@ -80,7 +80,7 @@ jobs:
           npx wait-on http://localhost:3000
           echo "App is ready"
 
-      - name: Start the app and run E2E tests
+      - name: Run E2E tests
         uses: cypress-io/github-action@v4
         with:
           wait-on: http://localhost:3000
