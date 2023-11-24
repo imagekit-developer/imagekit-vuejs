@@ -129,13 +129,6 @@ export default {
     IKUpload,
   },
   data() {
-    console.log({
-      urlEndpoint: process.env.VUE_APP_URL_ENDPOINT,
-      publicKey: process.env.VUE_APP_PUBLIC_KEY,
-      path,
-      src: `${process.env.VUE_APP_URL_ENDPOINT}/${path}`,
-      uploadedImageSource: ''
-    })
     return {
       urlEndpoint: process.env.VUE_APP_URL_ENDPOINT,
       publicKey: process.env.VUE_APP_PUBLIC_KEY,

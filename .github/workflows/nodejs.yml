@@ -74,35 +74,20 @@ jobs:
           npm install
 
       - name: Start the app for Cypress
-        timeout-minutes: 5
         run: |
-          npm run start:test-app -- --host 0.0.0.0 > /dev/null 2>&1 &
+          npm run start:test-app > /dev/null 2>&1 &
           echo "App started successfully"
           npx wait-on http://localhost:3000
           echo "App is ready"
-      
-      - name: Check the app for Cypress
-        timeout-minutes: 5
-        run: |
-          lsof -i :3000
-          lsof -i :3001
 
-      # - name: Start ngrok with NGROK_OPTS
-      #   run: npx ngrok http 3000 --authtoken 2Yat3ngA9XGNXZygaTiJxMOCm4F_2g5N7pXAyUaN5QnswEULN --inspect=false --log=stdout --host-header="localhost:3000" --domain=blessed-monthly-mongoose.ngrok-free.app
-      #   env:
-      #     NGROK_OPTS: "--ngrok-args=--skip-browser-update"
-      
-      - name: Run Cypress tests
-        run: npx cypress run --headed --browser chrome
-
-      # - name: Start the app and run E2E tests
-      #   uses: cypress-io/github-action@v4
-      #   with:
-      #     wait-on: https://blessed-monthly-mongoose.ngrok-free.app
-      #   env:
-      #     DEBUG: 'cypress:server:browsers:electron'
-      #     CI: true
-      #     VUE_APP_PUBLIC_KEY: ${{ secrets.ik_public_key }}
-      #     VUE_APP_PRIVATE_KEY: ${{ secrets.ik_private_key }}
-      #     VUE_APP_URL_ENDPOINT: ${{ secrets.ik_url_endpoint }}
-      #     VUE_APP_AUTHENTICATION_ENDPOINT: http://localhost:3001/auth
+      - name: Start the app and run E2E tests
+        uses: cypress-io/github-action@v4
+        with:
+          wait-on: http://localhost:3000
+        env:
+          DEBUG: 'cypress:server:browsers:electron'
+          CI: true
+          VUE_APP_PUBLIC_KEY: ${{ secrets.ik_public_key }}
+          VUE_APP_PRIVATE_KEY: ${{ secrets.ik_private_key }}
+          VUE_APP_URL_ENDPOINT: ${{ secrets.ik_url_endpoint }}
+          VUE_APP_AUTHENTICATION_ENDPOINT: http://localhost:3001/auth

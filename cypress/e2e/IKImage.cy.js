@@ -2,20 +2,12 @@ describe('ImageKit Vue SDK', () => {
   const APP_HOST =  Cypress.env().APP_HOST;
   describe('Lazyload', () => {
     it('should have empty src before reaching lazyload threshold', () => {
-      cy.intercept('GET', '**/*', (req) => {
-        // Set the custom header
-        req.headers['ngrok-skip-browser-warning'] = 'true';
-      });
-      cy.visit(APP_HOST, { timeout: 30000 });
+      cy.visit(APP_HOST);
       cy.get('.lazyload').should('have.attr', 'src').and('equal', '');
     });
 
     it('should have actual src after reaching lazyload threshold', () => {
-      cy.intercept('GET', '**/*', (req) => {
-        // Set the custom header
-        req.headers['ngrok-skip-browser-warning'] = 'true';
-      });
-      cy.visit(APP_HOST, { timeout: 30000 });
+      cy.visit(APP_HOST);
       cy.get('.lazyload').scrollIntoView();
 
       cy.wait(500);
@@ -28,22 +20,14 @@ describe('ImageKit Vue SDK', () => {
 
   describe('Lazyload with LQIP', () => {
     it('should have lqip src before reaching threshold', () => {
-      cy.intercept('GET', '**/*', (req) => {
-        // Set the custom header
-        req.headers['ngrok-skip-browser-warning'] = 'true';
-      });
-      cy.visit(APP_HOST, { timeout: 30000 });
+      cy.visit(APP_HOST);
       cy.get('.lazyload-lqip')
         .should('have.attr', 'src')
         .and('include', 'tr:h-200,w-200:q-20,bl-30/default-image.jpg');
     });
 
     it('should have actual src after reaching element', () => {
-      cy.intercept('GET', '**/*', (req) => {
-        // Set the custom header
-        req.headers['ngrok-skip-browser-warning'] = 'true';
-      });
-      cy.visit(APP_HOST, { timeout: 30000 });
+      cy.visit(APP_HOST);
       cy.get('.lazyload-lqip').scrollIntoView();
 
       cy.wait(1000);
@@ -57,22 +41,14 @@ describe('ImageKit Vue SDK', () => {
   describe('LQIP', () => {
     // unable to test this because actual image load always finishes too quickly
     it.skip('should have lqip src before image is loaded', () => {
-      cy.intercept('GET', '**/*', (req) => {
-        // Set the custom header
-        req.headers['ngrok-skip-browser-warning'] = 'true';
-      });
-      cy.visit(APP_HOST, { timeout: 30000 });
+      cy.visit(APP_HOST);
       cy.get('.lqip')
         .should('have.attr', 'src')
         .and('include', 'tr:h-200,w-200:q-20,bl-30/default-image.jpg');
     });
 
     it('should have actual src after image is loaded', () => {
-      cy.intercept('GET', '**/*', (req) => {
-        // Set the custom header
-        req.headers['ngrok-skip-browser-warning'] = 'true';
-      });
-      cy.visit(APP_HOST, { timeout: 30000 });
+      cy.visit(APP_HOST);
       cy.get('.lqip').scrollIntoView();
 
       cy.wait(500);
