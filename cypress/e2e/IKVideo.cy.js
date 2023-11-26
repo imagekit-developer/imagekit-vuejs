@@ -3,11 +3,7 @@ describe('IKVideo Element', () => {
 
   describe('Video transformation', () => {
     it('should have element with transformation', () => {
-      cy.intercept('GET', '**/*', (req) => {
-        // Set the custom header
-        req.headers['ngrok-skip-browser-warning'] = 'true';
-      });
-      cy.visit(APP_HOST, { timeout: 30000 });
+      cy.visit(APP_HOST);
 
       cy.get('.ikvideo-default').scrollIntoView();
 
