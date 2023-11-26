@@ -1,4 +1,4 @@
-<template v-if="">
+<template>
   <div class="sample-app">
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at ultrices odio, quis venenatis ex. Duis augue
       magna, aliquet et vehicula ut, consequat eu eros. Fusce consequat odio ac tincidunt pharetra. Proin molestie
