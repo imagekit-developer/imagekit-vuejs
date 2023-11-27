@@ -9,39 +9,38 @@
 
 ImageKit Vue.js SDK allows you to use real-time [image resizing](https://docs.imagekit.io/features/image-transformations), [optimization](https://docs.imagekit.io/features/image-optimization), and [file uploading](https://docs.imagekit.io/api-reference/upload-file-api/client-side-file-upload) in client-side.
 
-## Changelog - SDK Version 2.0.0
-### Breaking changes
-**1. Authentication Process Update:**
-* Previously, when using this SDK, we had to pass `authenticationEndpoint` which is used by SDK internally for fetching security parameters i.e `signature`, `token`, and `expire`.
-* In version 2.0.0, we have deprecated the use of the `authenticationEndpoint` parameter. Instead, the SDK now introduces a new parameter named `authenticator`. This parameter expects an asynchronous function that resolves with an object containing the necessary security parameters i.e `signature`, `token`, and `expire`.
+## Breaking changes - Upgrading from 1.x to 2.x version
+2.x version has breaking changes as listed below.
+* In version 2.0.0, we have deprecated the use of the `authenticationEndpoint` parameter. Instead, the SDK has introduced a new parameter named `authenticator`. This parameter expects an asynchronous function that resolves with an object containing the necessary security parameters i.e `signature`, `token`, and `expire`.
 
-Example implementation for `authenticator` using `Fetch API`.
+An example implementation for `authenticator` using `Fetch API`.
 
 ``` javascript
-const authenticator = () => {
-    return new Promise((resolve, reject) => {
-      var url = "server_endpoint"; // Use the full URL with the protocol
 
-      // Make the Fetch API request
-      fetch(url, { method: "GET", mode: "cors" }) // Enable CORS mode
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then((body) => {
-          var obj = {
-            signature: body.signature,
-            expire: body.expire,
-            token: body.token,
-          };
-          resolve(obj);
-        })
-        .catch((error) => {
-          reject([error]);
+ const authenticator = async () => {
+    try {
+
+        // You can also pass headers and validate the request source in the backend, or you can use headers for any other use case.
+        const headers = {
+          'CustomHeader': 'CustomValue'
+        };
+
+        const response = await fetch('server_endpoint', {
+            headers
         });
-    });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Request failed with status ${response.status}: ${errorText}`);
+        }
+
+        const data = await response.json();
+        const { signature, expire, token } = data;
+        return { signature, expire, token };
+    } catch (error) {
+        throw new Error(`Authentication request failed: ${error.message}`);
+    }
+};
 ```
 
 *Note*: Avoid generating security parameters on the client side. Always send a request to your backend to retrieve security parameters, as the generation of these parameters necessitates the use of your Imagekit `privateKey`, which must not be included in client-side code.
@@ -69,7 +68,7 @@ yarn add imagekitio-vue
 ## Usage
 
 ### Initialization
-Register it as a plugin to globally install all components.
+Register it as a plugin to install all components globally.
 
 ```js
 import ImageKit from "imagekitio-vue"
@@ -249,7 +248,7 @@ app.use(ImageKit, {
   customCoordinates="10,10,100,100"
 /> 
   
-// This promise resolves with an object containing the necessary security parameters i.e `signature`, `token`, and `expire`.
+// This promise resolves with an object containing the necessary security parameters, i.e., `signature,` `token,` and `expire.`
 <IKContext publicKey="your_public_api_key" authenticator="()=>Promise">
   // Simple file upload and response handling
   <IKUpload
