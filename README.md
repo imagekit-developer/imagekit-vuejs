@@ -248,7 +248,7 @@ app.use(ImageKit, {
   customCoordinates="10,10,100,100"
 /> 
   
-// This promise resolves with an object containing the necessary security parameters, i.e., `signature,` `token,` and `expire.`
+// This promise resolves with an object containing the necessary security parameters i.e `signature`, `token`, and `expire`.
 <IKContext publicKey="your_public_api_key" authenticator="()=>Promise">
   // Simple file upload and response handling
   <IKUpload
