@@ -19,7 +19,7 @@ describe('ik-upload component', () => {
           cy.get('.file-upload-ik input[type="file"]').attachFile(p)
           cy.wait(1000);
           cy.get('@consoleLog').should('be.calledWith', 'Upload started')
-          // wait for 2 secs
+          // wait for 3 secs
           cy.wait(3000);
           cy.get('@consoleLog').should('be.calledWith', 'Upload inprogress ... (100.00% Done)')
 
