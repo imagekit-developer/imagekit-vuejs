@@ -276,7 +276,7 @@ app.use(ImageKit, {
 
 ### Components
 
-This SDK provides 4 global components, when registered as a plugin:
+This SDK provides 4 components, when registered as a plugin:
 * [`IKContext`](#IKContext) for defining options like `urlEndpoint`, `publicKey` or `authenticator` to all children elements. This component does not render anything.
 * `IKImage` for [image resizing](#image-resizing). This renders a `<img>` tag.
 * `IKVideo` for [video resizing](#video-resizing). This renders a `<video>` tag.
