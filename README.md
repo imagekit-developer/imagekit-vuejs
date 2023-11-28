@@ -11,6 +11,23 @@ ImageKit Vue.js SDK allows you to use real-time [image resizing](https://docs.im
 
 ## Breaking changes - Upgrading from 1.x to 2.x version
 2.x version has breaking changes as listed below.
+
+* In version 2.0.0, three global components, namely `ik-image`, `ik-upload`, and `ik-context`, are no longer supported. Instead, it is recommended to import these components individually.
+
+```javascript
+
+import { IKImage, IKContext, IKUpload } from "imagekitio-vue"
+
+export default {
+  components: {
+    IKImage,
+    IKContext,
+    IKUpload
+  }
+}
+
+```
+
 * In version 2.0.0, we have deprecated the use of the `authenticationEndpoint` parameter. Instead, the SDK has introduced a new parameter named `authenticator`. This parameter expects an asynchronous function that resolves with an object containing the necessary security parameters i.e `signature`, `token`, and `expire`.
 
 An example implementation for `authenticator` using `Fetch API`.
