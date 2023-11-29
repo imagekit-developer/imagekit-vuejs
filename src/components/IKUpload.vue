@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input type="file" @change="upload" @click="onUploadClick" />
+    <input type="file" @change="upload" />
   </div>
 </template>
 
@@ -105,17 +105,8 @@ export default {
         return;
       }
 
-
-      if (typeof props.validateFile === "function") {
-        const validationResult = props.validateFile(file.value);
-        if (validationResult && validationResult.error) {
-          if (typeof props.onError === "function") {
-            props.onError({
-              message: validationResult.message,
-            });
-          }
-          return;
-        }
+      if (typeof props.validateFile === "function" && !props.validateFile(file.value)) {
+        return;
       }
 
       if (typeof props.onUploadStart === "function") {
@@ -209,14 +200,10 @@ export default {
       }
     };
 
-    const onUploadClick = () => {
-      props.onUploadStart && props.onUploadStart();
-    };
 
     return {
       file,
       upload,
-      onUploadClick,
       abortUpload
     };
   },
