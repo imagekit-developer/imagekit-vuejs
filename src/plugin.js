@@ -1,13 +1,16 @@
-import IKContext from "./components/IKContext.vue";
+import { defineComponent } from 'vue';
 import IKImage from "./components/IKImage.vue";
-import IKUpload from "./components/IKUpload.vue";
+import IKContext from "./components/IKImage.vue";
+import IKVideo from "./components/IKVideo"
+import IKUpload from "./components/IKUpload"
 import ImageKit from 'imagekit-javascript';
 export const VERSION = "1.0.9";
 
 const componentMapping = {
-  "ik-context": IKContext,
   "ik-image": IKImage,
-  "ik-upload": IKUpload
+  "ik-context": IKContext,
+  "ik-video": IKVideo,
+  "ik-upload": IKUpload,
 };
 
 export function install(Vue, options) {
@@ -19,13 +22,11 @@ export function install(Vue, options) {
     sdkVersion: `vuejs-${VERSION}`,
     publicKey: options.publicKey,
     urlEndpoint: options.urlEndpoint,
-    authenticationEndpoint: options.authenticationEndpoint
   };
 
   options.IkClient = new ImageKit(options.defaultOptions)
 
   Vue.IkInstalled = true;
-
   initComponents(Vue, options);
 }
 
@@ -34,13 +35,13 @@ function initComponents(Vue, options) {
     let componentName = options.components[i];
     const component = componentMapping[componentName];
     if (component) {
-      Vue.component(componentName, {
+      defineComponent({
         ...component,
-        data() {
+        setup() {
           return {
-            ...(component.data ? component.data() : {}),
+            ...(component.setup ? component.setup() : {}),
             IkClient: options.IkClient,
-            defaultOptions : options.defaultOptions
+            defaultOptions: options.defaultOptions
           }
         }
       })

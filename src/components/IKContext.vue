@@ -1,16 +1,39 @@
 <script>
-export default {
-  name: "ik-context",
+import { defineComponent, ref, provide, onBeforeMount } from 'vue';
 
-  inheritAttrs: false,
+export default defineComponent({
+  name: 'ik-context',
+  props: {
+    publicKey: {
+      type: String,
+      required: true
+    },
+    urlEndpoint: {
+      type: String,
+      required: true
+    },
+    authenticator: {
+      type: Function
+    }
+  },
+  setup(props, { slots }) {
+    const contextConfigurations = ref({
+      publicKey: props.publicKey,
+      urlEndpoint: props.urlEndpoint,
+      authenticator: props.authenticator
+    });
 
-  provide() {
-    const contextConfigurations = {};
-    Object.assign(contextConfigurations, this.$attrs);
-    return { contextConfigurations: contextConfigurations };
+    onBeforeMount(() => {
+      provide('contextConfigurations', contextConfigurations);
+    });
+
+    return {
+      contextConfigurations,
+      slots
+    };
   },
   render() {
-    return this.$scopedSlots.default();
+    return this.$slots.default && this.$slots.default();
   }
-};
+});
 </script>
