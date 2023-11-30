@@ -85,105 +85,13 @@ yarn add imagekitio-vue
 ## Usage
 
 ### Initialization
-Register it as a plugin to install all components globally.
-
+Import components in your code:
 ```js
-import ImageKit from "imagekitio-vue"
-import { createApp } from 'vue';
-
-const app = createApp({});
-
-app.use(ImageKit, {
-  urlEndpoint: "your_url_endpoint", // Required. Default URL-endpoint is https://ik.imagekit.io/your_imagekit_id
-  publicKey: "your_public_api_key", // optional
-  // transformationPosition: "path" // optional
-})
-```
-`urlEndpoint` is required to use the SDK. You can get URL-endpoint from your ImageKit dashboard - https://imagekit.io/dashboard#url-endpoints.
-
-`publicKey` and `authenticator` parameters are required if you want to use the SDK for client-side file upload. You can get these parameters from the developer section in your ImageKit dashboard - https://imagekit.io/dashboard#developers.
-
-`transformationPosition` is optional. The default value for this parameter is `path`. Acceptable values are `path` & `query`
-
-_Note: Do not include your Private Key in any client-side code, including this SDK or its initialization. If you pass the `privateKey` parameter while initializing this SDK, it throws an error_
-
-Or, import components individually.
-```
-import { IKImage, IKVideo, IKContext, IKUpload } from "imagekitio-vue"
-
-export default {
-  components: {
-    IKImage,
-    IKVideo,
-    IKContext,
-    IKUpload
-  }
-}
+import { IKImage, IKUpload, IKContext, IKVideo, } from 'imagekitio-vue'
 ```
 
 ### Quick examples
 ```js
-import ImageKit from "imagekitio-vue"
-import { createApp } from 'vue';
-
-const app = createApp({});
-
-app.use(ImageKit, {
-  urlEndpoint: "your_url_endpoint", // Required. Default URL-endpoint is https://ik.imagekit.io/your_imagekit_id
-  publicKey: "your_public_api_key", // optional
-})
-
-// Rendering image using a relative file path
-<IKImage
-  path="/default-image.jpg"
-/>
-
-// Image resizing
-<IKImage
-  path="/default-image.jpg"
-  :transformation="[{height:300,width:400}]"
-/>
-
-// Using chained transformation
-<IKImage
-  path="/default-image.jpg"
-  :transformation="[{height:300,width:400}, {rotation:90}]"
-/>
-
-// Imgae from absolute file path
-<IKImage
-  src="https://custom-domain.com/default-image.jpg"
-  :transformation="[{height:300,width:400}, {rotation:90}]"
-/>
-
-// Lazy loading
-<IKImage
-  path="/default-image.jpg"
-  :transformation="[{height:300,width:400},{rotation:90}]"
-  loading="lazy"
-  height="300"
-  width="400"
-/>
-
-// Low-quality blurred image placeholder of original image
-<IKImage
-  path="/default-image.jpg"
-  :lqip="{active:true}"
-  :transformation="[{height:300,width:400},{rotation:90}]"
-  loading="lazy"
-  height="300"
-  width="400"
-/>
-
-// Controlling quality and blur value of placeholder image
-<IKImage
-  path="/default-image.jpg"
-  :lqip="{active:true, quality:30, blur: 5}" // default values are quality=20 and blur=6
-  :transformation="[{height:300,width:400},{rotation:90}]"
-  loading="lazy"
-  height="300"
-  width="400"
-/>
 
 <IKContext urlEndpoint="https://ik.imagekit.io/your_imagekit_id">
   // Render an image using a relative path - https://ik.imagekit.io/your_imagekit_id/default-image.jpg
@@ -193,12 +101,12 @@ app.use(ImageKit, {
   // Render an image using an absolute URL - https://www1.custom-domain.com/default-image.jpg?tr=w-100
   <IKImage src="https://www1.custom-domain.com/default-image.jpg?tr=w-100" />
   // Height and width manipulation - https://ik.imagekit.io/your_imagekit_id/tr:h-200,w-200/default-image.jpg
-  <IKImage path="/default-image.jpg" transformation={[{
+  <IKImage path="/default-image.jpg" :transformation={[{
     "height": "200",
     "width": "200"
   }]} />
   // Chained transformation - https://ik.imagekit.io/your_imagekit_id/tr:h-200,w-200:rt-90/default-image.jpg
-  <IKImage path="/default-image.jpg" transformation={[{
+  <IKImage path="/default-image.jpg" :transformation={[{
     "height": "200",
     "width": "200",
   },
@@ -208,7 +116,7 @@ app.use(ImageKit, {
   // Lazy loading image
   <IKImage
     path="/default-image.jpg"
-    transformation={[{
+    :transformation={[{
       "height": "200",
       "width": "200"
     }]}
@@ -220,69 +128,70 @@ app.use(ImageKit, {
   */
   <IKImage
     path="/default-image.jpg"
-    transformation={[{
+    :transformation={[{
       "height": "200",
       "width": "200"
     }]}
-    lqip={{ active: true }}
+    :lqip={{ active: true }}
   />
   // Low quality image placeholder with custom quality and blur values
   <IKImage
     path="/default-image.jpg"
-    transformation={[{
+    :transformation={[{
       "height": "200",
       "width": "200"
     }]}
-    lqip={{ active: true, quality: 20, blur: 10 }}
+    :lqip={{ active: true, quality: 20, blur: 10 }}
   />
   // Low quality image placeholder and lazy loading original image in the background
   <IKImage
     path="/default-image.jpg"
-    transformation={[{
+    :transformation={[{
       "height": "200",
       "width": "200"
     }]}
     loading="lazy"
-    lqip={{ active: true }}
+    :lqip={{ active: true }}
   />
   // Video element with basic transaformation, reduced quality by 50% using q: 50
 
   <IKVideo
     path={'/default-video.mp4'}
-    transformation={[{ height: 200, width: 200, q: 50 }]}
-    controls={true}
+    :transformation={[{ height: 200, width: 200, q: 50 }]}
+    :controls={true}
   />
 </IKContext>
 
-// File upload
-<IKUpload
-  :tags="['tag1','tag2']"
-  :responseFields="['tags']"
-  :onError="onError"
-  :onSuccess="onSuccess"
-  :useUniqueFileName=true
-  :isPrivateFile=false
-  customCoordinates="10,10,100,100"
-/> 
-  
+
+// Controlling quality and blur value of placeholder image
+<IKImage
+  urlEndpoint="https://ik.imagekit.io/your_imagekit_id"
+  path="/default-image.jpg"
+  :lqip="{active:true, quality:30, blur: 5}" // default values are quality=20 and blur=6
+  :transformation="[{height:300,width:400},{rotation:90}]"
+  loading="lazy"
+  height="300"
+  width="400"
+/>
 // This promise resolves with an object containing the necessary security parameters i.e `signature`, `token`, and `expire`.
-<IKContext publicKey="your_public_api_key" authenticator="()=>Promise">
+<IKContext publicKey="your_public_api_key" :authenticator="()=>Promise">
   // Simple file upload and response handling
   <IKUpload
-    onError={onError}
-    onSuccess={onSuccess}
+    :onError={onError}
+    :onSuccess={onSuccess}
   />
   // Passing different upload API options
   <IKUpload
     fileName="file-name.jpg"
-    tags={["sample-tag1", "sample-tag2"]}
-    customCoordinates={"10,10,10,10"}
-    isPrivateFile={false}
-    useUniqueFileName={true}
-    responseFields={["tags"]}
-    folder={"/sample-folder"}
-    inputRef={uploadRef}
-    onError={onError} onSuccess={onSuccess}
+    :tags={["sample-tag1", "sample-tag2"]}
+    customCoordinates="10,10,10,10"
+    :isPrivateFile={false}
+    :useUniqueFileName={true}
+    :responseFields={["tags"]}
+    folder="/sample-folder"
+    :ref={uploadRef}
+    :onError={onError} 
+    :onSuccess={onSuccess}
   />
 </IKContext>
 
@@ -293,7 +202,7 @@ app.use(ImageKit, {
 
 ### Components
 
-This SDK provides 4 components, when registered as a plugin:
+This SDK provides 4 components:
 * [`IKContext`](#IKContext) for defining options like `urlEndpoint`, `publicKey` or `authenticator` to all children elements. This component does not render anything.
 * `IKImage` for [image resizing](#image-resizing). This renders a `<img>` tag.
 * `IKVideo` for [video resizing](#video-resizing). This renders a `<video>` tag.
@@ -326,30 +235,6 @@ var imageURL = imagekit.url({
 In order to use the SDK, you need to provide it with a few configuration parameters. You can use a parent `IKContext` component to define common options for all children `IKImage`, `IKVideo` or `IKupload` compoents. For example:
 
 ```js
-// Register as plugin
-import ImageKit from "imagekitio-vue"
-import { createApp } from 'vue';
-
-const app = createApp({});
-
-app.use(ImageKit, {
-  urlEndpoint: "https://ik.imagekit.io/your_imagekit_id",
-})
-
-// Using global configuration
-// https://ik.imagekit.io/your_imagekit_id/default-image.jpg
-<IKImage 
-  path="/default-image.jpg"/>
-
-// Defining urlEndpoint in IKContext
-<IKContext
-  urlEndpoint="https://www.custom-domain.com/">
-    // https://www.custom-domain.com/default-image.jpg
-    // urlEndpoint is taken from the parent IKContext
-    <IKImage path="/default-image.jpg"/>
-</IKContext >
-
-// Using exported component
 <IKContext
   :publicKey="your_url_endpoint"
   :urlEndpoint="your_public_api_key"
@@ -365,13 +250,21 @@ app.use(ImageKit, {
 </IKContext>
 ```
 
+`urlEndpoint` is required to use the SDK. You can get URL-endpoint from your ImageKit dashboard - https://imagekit.io/dashboard#url-endpoints.
+
+`publicKey` and `authenticator` parameters are required if you want to use the SDK for client-side file upload. You can get these parameters from the developer section in your ImageKit dashboard - https://imagekit.io/dashboard#developers.
+
+`transformationPosition` is optional. The default value for this parameter is `path`. Acceptable values are `path` & `query`
+
+_Note: Do not include your Private Key in any client-side code, including this SDK or its initialization. If you pass the `privateKey` parameter while initializing this SDK, it throws an error_
+
 ## Image resizing
 
-`IKImage` components accept the following props:
+The `IKImage` component renders an `img` tag. It is used for rendering and manipulating images in real time. `IKImage` component accepts the following props:
 
 | Prop             | Type | Description                    |
 | :----------------| :----|:----------------------------- |
-| urlEndpoint      | String | Optional. The base URL to be appended before the path of the image. If not specified, the URL-endpoint specified at the time of [SDK initialization](#initialization) is used. For example, https://ik.imagekit.io/your_imagekit_id/endpoint/ |
+| urlEndpoint      | String | Optional. The base URL to be appended before the path of the image. If not specified, the URL-endpoint specified in the parent `IKContext` component is used. For example, https://ik.imagekit.io/your_imagekit_id/endpoint/ |
 | path             | String |Conditional. This is the path at which the image exists. For example, `/path/to/image.jpg`. Either the `path` or `src` parameter needs to be specified for URL generation. |
 | src              | String |Conditional. This is the complete URL of an image already mapped to ImageKit. For example, `https://ik.imagekit.io/your_imagekit_id/endpoint/path/to/image.jpg`. Either the `path` or `src` parameter needs to be specified for URL generation. |
 | transformation   | Array of objects |Optional. An array of objects specifying the transformation to be applied in the URL. The transformation name and the value should be specified as a key-value pair in the object. See list of [different tranformations](#list-of-supported-transformations). Different steps of a [chained transformation](https://docs.imagekit.io/features/image-transformations/chained-transformations) can be specified as the array's different objects. The complete list of supported transformations in the SDK and some examples of using them are given later. If you use a transformation name that is not specified in the SDK, it is applied in the URL as it is. |
@@ -384,26 +277,28 @@ app.use(ImageKit, {
 
 ```js
 // Image from related file path with no transformations - https://ik.imagekit.io/your_imagekit_id/default-image.jpg
-<IKImage
-  path="/default-image.jpg"
-/>
+<IKContext urlEndpoint="https://ik.imagekit.io/your_imagekit_id">
+  <IKImage
+    path="/default-image.jpg"
+  />
 
-// Image resizing - https://ik.imagekit.io/your_imagekit_id/tr:w-h-300,w-400/default-image.jpg
-<IKImage
-  path="/default-image.jpg"
-  :transformation="[{height:300,width:400}]"
-/>
+  // Image resizing - https://ik.imagekit.io/your_imagekit_id/tr:w-h-300,w-400/default-image.jpg
+  <IKImage
+    path="/default-image.jpg"
+    :transformation="[{height:300,width:400}]"
+  />
 
-// Loading imgae from an absolute file path with no transformations - https://www.custom-domain.com/default-image.jpg
-<IKImage
-  src="https://www.custom-domain.com/default-image.jpg"
-/>
+  // Loading imgae from an absolute file path with no transformations - https://www.custom-domain.com/default-image.jpg
+  <IKImage
+    src="https://www.custom-domain.com/default-image.jpg"
+  />
 
-// Using a new tranformation parameter which is not there in this SDK yet - https://ik.imagekit.io/your_imagekit_id/tr:custom-value/default-image.jpg
-<IKImage
-  path="/default-image.jpg"
-  :transformation="[{custom: 'value'}]"
-/>
+  // Using a new tranformation parameter which is not there in this SDK yet - https://ik.imagekit.io/your_imagekit_id/tr:custom-value/default-image.jpg
+  <IKImage
+    path="/default-image.jpg"
+    :transformation="[{custom: 'value'}]"
+  />
+</IKContext>
 ```
 
 The `transformation` prop is an array of objects. Each object can have the following properties. When you specify more than one object, each object is added as a chained transformation. For example:
@@ -494,6 +389,7 @@ See the complete list of transformations supported in ImageKit [here](https://do
 | effectContrast | e-contrast |
 | effectGray | e-grayscale |
 | original | orig |
+| raw | The string provided in raw will be added to the URL as it is. |
 
 </details>
 
@@ -524,6 +420,7 @@ Example usage:
 ```js
 // Lazy loading images
 <IKImage
+  urlEndpoint="https://ik.imagekit.io/your_imagekit_id"
   path="/default-image.jpg"
   :transformation="[{height:300,width:400},{rotation:90}]"
   loading="lazy"
@@ -538,6 +435,7 @@ To improve user experience, you can use a low-quality blurred variant of the ori
 ```js
 // Loading a blurred low quality image placeholder while the original image is being loaded
 <IKImage
+  urlEndpoint="https://ik.imagekit.io/your_imagekit_id"
   path="/default-image.jpg"
   :lqip="{active:true}"
 />
@@ -547,6 +445,7 @@ By default, the SDK uses the `quality:20` and `blur:6`. You can change this. For
 
 ```js
 <IKImage
+  urlEndpoint="https://ik.imagekit.io/your_imagekit_id"
   path="/default-image.jpg"
   :lqip="{active:true, quality: 40, blur: 5}"
 />
@@ -558,6 +457,7 @@ You have the option to lazy-load the original image only when the user scrolls n
 ```js
 // Loading a blurred low quality image placeholder and lazy-loading original when user scrolls near them
 <IKImage
+  urlEndpoint="https://ik.imagekit.io/your_imagekit_id"
   path="/default-image.jpg"
   :transformation="[{height:300,width:400},{rotation:90}]"
   :lqip="{active:true}"
@@ -570,29 +470,22 @@ You have the option to lazy-load the original image only when the user scrolls n
 ### Overriding urlEndpoint for a particular image
 You can use `urlEndpoint` prop in an individual `IKImage` to change url for that image. For example:
 ```js
-import ImageKit from "imagekitio-vue"
-import { createApp } from 'vue';
+<IKContext urlEndpoint="https://ik.imagekit.io/your_imagekit_id">
+  // Changing urlEndpoint
+  // https://www.custom-domain.com/tr:w-400,h-300/default-image.jpg
+  <IKImage
+    path="/default-image.jpg"
+    :transformation="[{height:300,width:400}]"
+    urlEndpoint="https://www.custom-domain.com"
+  />
 
-const app = createApp({});
-
-app.use(ImageKit, {
-  urlEndpoint: "https://ik.imagekit.io/your_imagekit_id"
-})
-
-// Changing urlEndpoint
-// https://www.custom-domain.com/tr:w-400,h-300/default-image.jpg
-<IKImage
-  path="/default-image.jpg"
-  :transformation="[{height:300,width:400}]"
-  urlEndpoint="https://www.custom-domain.com"
-/>
-
-// Without urlEndpoint
-// https://ik.imagekit.io/your_imagekit_id/tr:w-400,h-300/default-image.jpg
-<IKImage
-  path="/default-image.jpg"
-  :transformation="[{height:300,width:400}]"
-/>
+  // Without urlEndpoint
+  // https://ik.imagekit.io/your_imagekit_id/tr:w-400,h-300/default-image.jpg
+  <IKImage
+    path="/default-image.jpg"
+    :transformation="[{height:300,width:400}]"
+  />
+</IKContext>
 ```
 
 ## Video resizing
@@ -672,11 +565,14 @@ The SDK provides the `IKUpload` component to upload files to the [ImageKit Media
 | overwriteCustomMetadata   | Boolean | Optional. Default is true. If the request does not have customMetadata , overwriteCustomMetadata is set to true and a file already exists at the exact location, exiting customMetadata will be removed. In case the request body has customMetadata, setting overwriteCustomMetadata to false has no effect and request's customMetadata is set on the asset. |
 | customMetadata   | Object | Optional. JSON key-value data to be associated with the asset. |
 | ref   | Reference | Optional. Reference to the core HTMLInputElement.|
-| onSuccess   | Function callback | Optional. Called if the upload is successful. The first and only argument is the response JSON from the upload API |
+| onUploadStart | Function callback | Optional. Called before the upload is started. The first and only argument is the HTML input's change event |
+| onUploadProgress | Function callback | Optional. Called while an upload is in progress. The first and only argument is the ProgressEvent |
+| validateFile | Function callback | Optional. Called before the upload is started to run custom validation. The first and only argument is the file selected for upload. If the callback returns `true`, the upload is allowed to continue. But, if it returns `false`, the upload is not done |
+| onSuccess   | Function callback | Optional. Called if the upload is successful. The first and only argument is the response JSON from the upload API. The request-id, response headers, and HTTP status code are also accessible using the $ResponseMetadata key that is exposed from the [javascript sdk](https://github.com/imagekit-developer/imagekit-javascript#access-request-id-other-response-headers-and-http-status-code) |
 | onError   | Function callback | Optional. Called if upload results in an error. The first and only argument is the error received from the upload API |
-| urlEndpoint      | String | Optional. If not specified, the URL-endpoint specified at the time of [SDK initialization](#initialization) is used. For example, https://ik.imagekit.io/your_imagekit_id/endpoint/ |
-| publicKey      | String | Optional. If not specified, the `publicKey` specified at the time of [SDK initialization](#initialization) is used.|
-| authenticator      | ()=>Promise<{signature:string,token:string,expiry:number}> | Optional. If not specified, the `authenticator` specified at the time of [SDK initialization](#initialization) is used. |
+| urlEndpoint      | String | Optional. If not specified, the URL-endpoint specified in the parent `IKContext` component is used. For example, https://ik.imagekit.io/your_imagekit_id/endpoint/ |
+| publicKey      | String | Optional. If not specified, the `publicKey` specified in the parent `IKContext` component is used.|
+| authenticator      | ()=>Promise<{signature:string,token:string,expiry:number}> | Optional. If not specified, the `authenticator` specified in the parent `IKContext` component is used. |
 
 > Make sure that you have specified authenticator and publicKey in IKUpload or in the parent IKContext component as a prop. The authenticator expects an asynchronous function that resolves with an object containing the necessary security parameters i.e signature, token, and expire. 
 
@@ -697,14 +593,6 @@ Sample file upload:
 
 <script>
 import { IKUpload } from "imagekitio-vue"
-import { createApp } from 'vue';
-
-const app = createApp({});
-
-app.use(ImageKit, {
-  urlEndpoint: "your_url_endpoint", // Required. Default URL-endpoint is https://ik.imagekit.io/your_imagekit_id
-  publicKey: "your_public_api_key", // optional
-})
 
 export default {
   name: "app",
@@ -756,14 +644,6 @@ Example Usage
 
 <script>
 import { IKUpload } from "imagekitio-vue"
-import { createApp } from 'vue';
-
-const app = createApp({});
-
-app.use(ImageKit, {
-  urlEndpoint: "your_url_endpoint", // Required. Default URL-endpoint is https://ik.imagekit.io/your_imagekit_id
-  publicKey: "your_public_api_key", // optional
-})
 
 export default {
   name: "app",

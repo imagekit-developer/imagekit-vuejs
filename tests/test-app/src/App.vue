@@ -108,15 +108,7 @@
 
 <script>
 
-import ImageKit, { IKImage, IKUpload, IKContext, IKVideo, } from 'imagekitio-vue'
-import { createApp } from 'vue';
-
-const app = createApp({});
-
-app.use(ImageKit, {
-  urlEndpoint: process.env.VUE_APP_URL_ENDPOINT,
-  publicKey: process.env.VUE_APP_PUBLIC_KEY,
-})
+import { IKImage, IKUpload, IKContext, IKVideo, } from 'imagekitio-vue'
 
 let path = "/default-image.jpg";
 
