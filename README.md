@@ -12,7 +12,7 @@ ImageKit Vue.js SDK allows you to use real-time [image resizing](https://docs.im
 ## Breaking changes - Upgrading from 1.x to 2.x version
 2.x version has breaking changes as listed below.
 
-1. In version 2.0.0, three global components, namely `ik-image`, `ik-upload`, and `ik-context`, are no longer supported. Instead, it is recommended to import these components individually.
+1. In version 2.0.1, three global components, namely `ik-image`, `ik-upload`, and `ik-context`, are no longer supported. Instead, it is recommended to import these components individually.
 
       ```javascript
       
@@ -65,7 +65,7 @@ ImageKit Vue.js SDK allows you to use real-time [image resizing](https://docs.im
                           
 | IMAGEKIT-VUEJS VERSION             | VUEJS VERSION                    |
 | :----------------|:----------------------------- |
-| ^2.0.0 | ^3.0.0 |
+| ^2.0.1 | ^3.0.0 |
 | 1.0.9 | ^2.6.12 |
 | 1.0.5 and below | ^2.6.11 |
 
