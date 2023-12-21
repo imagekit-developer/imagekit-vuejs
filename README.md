@@ -236,8 +236,8 @@ In order to use the SDK, you need to provide it with a few configuration paramet
 
 ```js
 <IKContext
-  :publicKey="your_url_endpoint"
-  :urlEndpoint="your_public_api_key"
+  :publicKey="your_public_api_key"
+  :urlEndpoint="your_url_endpoint"
   :authenticator={()=>Promise} 
   // This promise  resolves with an object containing the necessary security parameters i.e `signature`, `token`, and `expire`.
 >
@@ -331,6 +331,7 @@ For example:
 ```js
 <IKImage
     path="/default-image.jpg"
+    urlEndpoint="https://ik.imagekit.io/your_imagekit_id/endpoint/"
     :transformation="[{ "width": 400, "height": 300, "raw": "l-text,i-Imagekit,fs-50,l-end" }]"
 />
 ```
@@ -348,6 +349,7 @@ For example:
 ```js
 <IKImage
     path="/default-image.jpg"
+    urlEndpoint="https://ik.imagekit.io/your_imagekit_id/endpoint/"
     :transformation="[{ "width": 400, "height": 300, "raw": "l-image,i-default-image.jpg,w-100,b-10_CDDC39,l-end" }]"
 />
 ```
@@ -365,6 +367,7 @@ For example:
 ```js
 <IKVideo
     path="/img/sample-video.mp4"
+    urlEndpoint="https://ik.imagekit.io/your_imagekit_id/endpoint/"
     :transformation="[{ "width": 400, "height": 300, "raw": "l-image,i-ik_canvas,bg-FF0000,w-300,h-100,l-end" }]"
 />
 ```
