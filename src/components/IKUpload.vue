@@ -33,7 +33,8 @@ export default {
     onSuccess: { type: Function, required: false },
     validateFile: { type: Function, required: false },
     onUploadStart: { type: Function, required: false },
-    onUploadProgress: { type: Function, required: false }
+    onUploadProgress: { type: Function, required: false },
+    transformation: { type: Object, required: false },
   },
   setup(props) {
     const xhrRef = ref(null);
@@ -157,7 +158,8 @@ export default {
               signature,
               token,
               expire,
-              xhr
+              xhr,
+              transformation: props.transformation
             },
             (err, result) => {
               if (err && typeof props.onError === "function") {
