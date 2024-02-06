@@ -395,6 +395,28 @@ For example:
 https://ik.imagekit.io/your_imagekit_id/tr:h-300,w-400,l-image,i-ik_canvas,bg-FF0000,w-300,h-100,l-end/img/sample-video.mp4
 ```
 
+### Arithmetic expressions in transformations
+
+ImageKit allows use of [arithmetic expressions](https://docs.imagekit.io/features/arithmetic-expressions-in-transformations) in certain dimension and position-related parameters, making media transformations more flexible and dynamic.
+
+For example:
+
+```js
+<IKImage
+    path="/default-image.jpg"
+    urlEndpoint="https://ik.imagekit.io/your_imagekit_id/"
+    :transformation="[{
+        "height": "ih_div_2",
+        "width": "iw_div_4",
+        "border": "cw_mul_0.05_yellow"
+    }]"
+/>
+```
+
+**Sample Result URL**
+```
+https://ik.imagekit.io/your_imagekit_id/default-image.jpg?tr=w-iw_div_4,h-ih_div_2,b-cw_mul_0.05_yellow
+```
 
 ### List of supported transformations
 <details>
