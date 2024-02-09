@@ -9,7 +9,17 @@
 
 ImageKit Vue.js SDK allows you to use real-time [image resizing](https://docs.imagekit.io/features/image-transformations), [optimization](https://docs.imagekit.io/features/image-optimization), and [file uploading](https://docs.imagekit.io/api-reference/upload-file-api/client-side-file-upload) in client-side.
 
-## Breaking changes - Upgrading from 1.x to 2.x version
+## Breaking changes 
+
+### Upgrading from 2.x to 3.x version
+
+1. Overlay syntax update
+
+* In version 3.0.0, we've removed the old overlay syntax parameters for transformations, such as `oi`, `ot`, `obg`, and [more](https://docs.imagekit.io/features/image-transformations/overlay). These parameters are deprecated and will start returning errors when used in URLs. Please migrate to the new layers syntax that supports overlay nesting, provides better positional control, and allows more transformations at the layer level. You can start with [examples](https://docs.imagekit.io/features/image-transformations/overlay-using-layers#examples) to learn quickly.
+* You can migrate to the new layers syntax using the `raw` transformation parameter.
+
+### Upgrading from 1.x to 2.x version
+
 2.x version has breaking changes as listed below.
 
 1. In version 2.0.1, three global components, namely `ik-image`, `ik-upload`, and `ik-context`, are no longer supported. Instead, it is recommended to import these components individually.
@@ -192,6 +202,15 @@ import { IKImage, IKUpload, IKContext, IKVideo, } from 'imagekitio-vue'
     :ref={uploadRef}
     :onError={onError} 
     :onSuccess={onSuccess}
+    :transformation="{
+      pre: 'l-text,i-Imagekit,fs-50,l-end', 
+      post: [
+          {
+              type: 'transformation', 
+              value: 'w-100'
+          }
+      ]
+    }"
   />
 </IKContext>
 
@@ -376,6 +395,28 @@ For example:
 https://ik.imagekit.io/your_imagekit_id/tr:h-300,w-400,l-image,i-ik_canvas,bg-FF0000,w-300,h-100,l-end/img/sample-video.mp4
 ```
 
+### Arithmetic expressions in transformations
+
+ImageKit allows use of [arithmetic expressions](https://docs.imagekit.io/features/arithmetic-expressions-in-transformations) in certain dimension and position-related parameters, making media transformations more flexible and dynamic.
+
+For example:
+
+```js
+<IKImage
+    path="/default-image.jpg"
+    urlEndpoint="https://ik.imagekit.io/your_imagekit_id/"
+    :transformation="[{
+        "height": "ih_div_2",
+        "width": "iw_div_4",
+        "border": "cw_mul_0.05_yellow"
+    }]"
+/>
+```
+
+**Sample Result URL**
+```
+https://ik.imagekit.io/your_imagekit_id/default-image.jpg?tr=w-iw_div_4,h-ih_div_2,b-cw_mul_0.05_yellow
+```
 
 ### List of supported transformations
 <details>
@@ -410,6 +451,8 @@ https://ik.imagekit.io/your_imagekit_id/tr:h-300,w-400,l-image,i-ik_canvas,bg-FF
 | effectUSM | e-usm |
 | effectContrast | e-contrast |
 | effectGray | e-grayscale |
+| effectShadow | e-shadow |
+| effectGradient | e-gradient |
 | original | orig |
 | raw | The string provided in raw will be added to the URL as it is. |
 
@@ -610,6 +653,15 @@ Sample file upload:
     :onError="onError"
     :onSuccess="onSuccess"
     customCoordinates="10,10,100,100"
+    :transformation="{
+      pre: 'l-text,i-Imagekit,fs-50,l-end', 
+      post: [
+          {
+              type: 'transformation', 
+              value: 'w-100'
+          }
+      ]
+    }"
   />
 </template>
 
@@ -660,6 +712,15 @@ Example Usage
     :onError="onError"
     :onSuccess="onSuccess"
     customCoordinates="10,10,100,100"
+    :transformation="{
+      pre: 'l-text,i-Imagekit,fs-50,l-end', 
+      post: [
+          {
+              type: 'transformation', 
+              value: 'w-100'
+          }
+      ]
+    }"
   />
   <button @click="abortChildUpload">Abort Child Upload</button>
 </template>
