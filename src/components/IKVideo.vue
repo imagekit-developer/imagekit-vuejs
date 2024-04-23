@@ -4,7 +4,7 @@
 
 <script>
 import ImageKit from 'imagekit-javascript';
-import { VERSION } from "../plugin";
+const VERSION = "2.0.2";
 
 export default {
   name: "ik-video",
@@ -27,7 +27,6 @@ export default {
   methods: {
     getMergedOptions: function () {
       return {
-        ...this.defaultOptions,
         ...this.contextConfigurations
       };
     },
@@ -60,7 +59,7 @@ export default {
     },
     videoAttrs: function () {
       const mergedOptions = this.getMergedOptions();
-      const IkClient = this.IkClient || this.getClient();
+      const IkClient = this.getClient();
 
       var options = {
         urlEndpoint: this.urlEndpoint ? this.urlEndpoint : mergedOptions.urlEndpoint,
