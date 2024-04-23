@@ -7,7 +7,7 @@
 <script>
 import ImageKit from "imagekit-javascript";
 import { inject, ref } from "vue";
-const VERSION = "2.0.2";
+const VERSION = "3.0.1";
 
 export default {
   name: "ik-upload",

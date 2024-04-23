@@ -4,7 +4,7 @@
 
 <script>
 import ImageKit from 'imagekit-javascript';
-const VERSION = "2.0.2";
+const VERSION = "3.0.1";
 
 export default {
   name: "ik-video",
