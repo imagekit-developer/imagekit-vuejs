@@ -6,15 +6,15 @@
 
 <script>
 import ImageKit from "imagekit-javascript";
-import { VERSION } from "../plugin";
 import { inject, ref } from "vue";
+const VERSION = "3.0.1";
 
 export default {
   name: "ik-upload",
   props: {
     urlEndpoint: { type: String, default: "", required: false },
     publicKey: { type: String, default: "", required: false },
-    authenticator: { type: Function, required: true },
+    authenticator: { type: Function, required: false },
     fileName: { type: String, default: "", required: false },
     useUniqueFileName: { type: Boolean, default: true, required: false },
     tags: { type: Array, required: false },

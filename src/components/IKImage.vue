@@ -5,7 +5,7 @@
 <script>
 import { defineComponent } from 'vue';
 import ImageKit from 'imagekit-javascript';
-import { VERSION } from "../plugin";
+const VERSION = "3.0.1";
 
 export default defineComponent({
   name: "ik-image",
@@ -31,7 +31,6 @@ export default defineComponent({
   methods: {
     getMergedOptions: function () {
       return {
-        ...this.defaultOptions,
         ...this.contextConfigurations
       };
     },
