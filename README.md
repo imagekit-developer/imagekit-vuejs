@@ -638,6 +638,7 @@ The SDK provides the `IKUpload` component to upload files to the [ImageKit Media
 | urlEndpoint      | String | Optional. If not specified, the URL-endpoint specified in the parent `IKContext` component is used. For example, https://ik.imagekit.io/your_imagekit_id/endpoint/ |
 | publicKey      | String | Optional. If not specified, the `publicKey` specified in the parent `IKContext` component is used.|
 | authenticator      | ()=>Promise<{signature:string,token:string,expiry:number}> | Optional. If not specified, the `authenticator` specified in the parent `IKContext` component is used. |
+| checks | String | Optional. Run server-side checks before uploading files. For example, `"'file.size' < '1mb'"` will check if the file size is less than 1 MB. Check [Upload API docs](https://imagekit.io/docs/api-reference/upload-file/upload-file#upload-api-checks) to learn more. Notice the quotes around `file.size` and `1mb`; otherwise, you will get an error `Your request contains invalid syntax for the checks parameter.` |
 
 > Make sure that you have specified authenticator and publicKey in IKUpload or in the parent IKContext component as a prop. The authenticator expects an asynchronous function that resolves with an object containing the necessary security parameters i.e signature, token, and expire. 
 
@@ -662,6 +663,7 @@ Sample file upload:
           }
       ]
     }"
+    checks= "'file.size' < '1mb'"
   />
 </template>
 
@@ -721,6 +723,7 @@ Example Usage
           }
       ]
     }"
+    checks= "'file.size' < '1mb'"
   />
   <button @click="abortChildUpload">Abort Child Upload</button>
 </template>

@@ -35,6 +35,7 @@ export default {
     onUploadStart: { type: Function, required: false },
     onUploadProgress: { type: Function, required: false },
     transformation: { type: Object, required: false },
+    checks: { type: String, required: false },
   },
   setup(props) {
     const xhrRef = ref(null);
@@ -159,7 +160,8 @@ export default {
               token,
               expire,
               xhr,
-              transformation: props.transformation
+              transformation: props.transformation,
+              checks: props.checks
             },
             (err, result) => {
               if (err && typeof props.onError === "function") {
