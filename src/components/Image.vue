@@ -1,23 +1,117 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+/**
+ * This is image js doc
+ */
 
-// minimal props: src (required) and alt (optional)
-const props = defineProps<{ 
-    /**
-     * JS doc for src
-     */
-   src: string;
-   alt?: string 
-  }>()
+// Import the defineProps function from Vue
+import { getResponsiveImageAttributes, buildSrc } from "@imagekit/javascript";
+import { computed, inject, useAttrs } from "vue";
+import type { IKImageProps, ImageKitProviderProps } from '../interface';
+import { ImageKitContextKey } from "../provider/keys";
 
-/* Example computed—replace with ImageKit logic later */
-const finalSrc = computed(() =>
-  props.src.startsWith('http')
-    ? props.src
-    : `https://example.cdn.com${props.src}`
-)
+const props = defineProps<IKImageProps>();
+const context = inject<ImageKitProviderProps>(ImageKitContextKey, {});
+
+/* ------------------------------------------------------------------ */
+/* helper: prop values override ONLY when not undefined               */
+/* ------------------------------------------------------------------ */
+function mergeDefined<T extends Record<string, any>>(base: ImageKitProviderProps, override: IKImageProps): T {
+  const out = { ...base } as Record<string, any>
+  for (const [k, v] of Object.entries(override)) {
+    if (v !== undefined) out[k] = v
+  }
+  return out as T
+}
+
+function getInt(x: unknown): number {
+  if (typeof x === "number") return Number.isFinite(x) ? x : NaN;
+  if (typeof x === "string" && /^[0-9]+$/.test(x)) return parseInt(x, 10);
+  return NaN;
+}
+
+const merged = computed(() => {
+  const m = mergeDefined(context, props)
+  return m
+})
+
+const imgData = computed(() => {
+  const {
+    src = "",
+    transformation = [],
+    queryParameters,
+    urlEndpoint,
+    transformationPosition,
+    sizes,
+    responsive = true,
+    deviceBreakpoints,
+    imageBreakpoints,
+    width,
+    loading = "lazy"
+  } = merged.value;
+
+  const normalSrc = buildSrc({
+    src,
+    transformation,
+    queryParameters,
+    urlEndpoint,
+    transformationPosition,
+  });
+
+  if (!urlEndpoint || urlEndpoint.trim() === "") {
+    console.error("urlEndpoint is neither provided in this component nor in the ImageKitContext.");
+    return { responsive: false, src: normalSrc, loading };
+  }
+
+  if(responsive === false) {
+    return { src: normalSrc, loading };
+  }
+
+  const widthInt = getInt(width);
+
+  const { src: newSrc, srcSet } = getResponsiveImageAttributes({
+    src,
+    transformation,
+    width: isNaN(widthInt) ? undefined : widthInt,
+    sizes,
+    queryParameters,
+    urlEndpoint,
+    transformationPosition,
+    deviceBreakpoints,
+    imageBreakpoints,
+  });
+
+  return { responsive, src: newSrc, loading, srcSet, sizes, normalSrc };
+});
+
+/* ------------------------------------------------------------------ */
+/* forward non-ImageKit attrs                                         */
+/* ------------------------------------------------------------------ */
+
+const IK_KEYS = [
+  "src",
+  "transformation",
+  "queryParameters",
+  "urlEndpoint",
+  "transformationPosition",
+  "sizes",
+  "responsive",
+  "deviceBreakpoints",
+  "imageBreakpoints",
+  "width",
+] as const;
+
+const attrs = useAttrs();
+const nonIKAttrs = computed(() => {
+  const obj: Record<string, unknown> = {};
+  for (const [k, v] of Object.entries(attrs)) {
+    if (!IK_KEYS.includes(k as (typeof IK_KEYS)[number])) obj[k] = v;
+  }
+  return obj;
+});
+
 </script>
 
 <template>
-  <img :src="finalSrc" :alt="alt" style="max-width: 100%; display: block;" />
+  <img v-bind="nonIKAttrs" :loading="imgData.loading" :src="imgData.src"
+    :srcset="imgData.responsive ? imgData.srcSet : undefined" :sizes="imgData.responsive ? imgData.sizes : undefined" />
 </template>
