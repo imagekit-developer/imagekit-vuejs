@@ -1,68 +1,30 @@
 {
-  "name": "imagekitio-vue",
-  "version": "3.1.0",
-  "scripts": {
-    "build:lib": "./node_modules/.bin/vue-cli-service build --target lib src/index.js",
-    "build": "./node_modules/.bin/vue-cli-service lint --fix; npm run build:lib",
-    "serve": "./node_modules/.bin/vue-cli-service serve",
-    "lint": "./node_modules/.bin/vue-cli-service lint",
-    "test:e2e": "cypress open",
-    "start:test-app": "npx serve -s tests/test-app/dist -p 3000 & cd tests/test-app/server && node server"
-  },
-  "main": "dist/imagekitio-vue.common.js",
-  "unpkg": "dist/imagekitio-vue.umd.min.js",
+  "name": "@imagekit/vue",
+  "version": "4.0.0-beta.1",
+  "main": "dist/index.cjs",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/imagekit-developer/imagekit-vuejs"
-  },
-  "dependencies": {
-    "babel-eslint": "^10.1.0",
-    "cypress-file-upload": "^5.0.8",
-    "imagekit-javascript": "^3.0.2"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.12.16",
-    "@babel/eslint-parser": "^7.12.16",
-    "@vue/cli-plugin-babel": "~5.0.8",
-    "@vue/cli-plugin-eslint": "~5.0.8",
-    "@vue/cli-plugin-unit-jest": "^5.0.8",
-    "@vue/cli-service": "~5.0.8",
-    "babel-loader": "^8.0.6",
-    "babel-preset-vue": "^2.0.2",
-    "cypress": "^13.6.0",
-    "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3",
-    "html-webpack-plugin": "^5.5.3",
-    "vue-loader": "^15.8.3",
-    "vue-template-compiler": "^2.6.11",
-    "webpack": "^5.89.0",
-    "webpack-cli": "^5.1.4"
+  "scripts": {
+    "dev": "vite",
+    "build": "rm -rf dist && vite build && npm pack && cp imagekit-vue* ../vue-ts/",
+    "type-check": "vue-tsc --build"
   },
   "peerDependencies": {
-    "vue": "^3.3.8"
+    "vue": ">=3.0.0"
   },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "@babel/eslint-parser"
-    }
-  },
-  "license": "MIT",
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead",
-    "not ie 11"
-  ]
+  "devDependencies": {
+    "@tsconfig/node22": "^22.0.1",
+    "@types/node": "^22.14.0",
+    "@vitejs/plugin-vue": "^5.2.3",
+    "@vue/tsconfig": "^0.7.0",
+    "npm-run-all2": "^7.0.2",
+    "typescript": "~5.8.0",
+    "vite": "^6.2.4",
+    "vite-plugin-dts": "^4.5.3",
+    "vite-plugin-vue-devtools": "^7.7.2",
+    "vue-tsc": "^2.2.8"
+  }
 }
