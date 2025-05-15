@@ -4,7 +4,7 @@
  */
 
 // Import the defineProps function from Vue
-import { getResponsiveImageAttributes, buildSrc } from "@imagekit/javascript";
+import { buildSrc, getResponsiveImageAttributes } from "@imagekit/javascript";
 import { computed, inject, useAttrs } from "vue";
 import type { IKImageProps, ImageKitProviderProps } from '../interface';
 import { ImageKitContextKey } from "../provider/keys";
@@ -49,20 +49,20 @@ const imgData = computed(() => {
     loading = "lazy"
   } = merged.value;
 
-  const normalSrc = buildSrc({
-    src,
-    transformation,
-    queryParameters,
-    urlEndpoint,
-    transformationPosition,
-  });
-
   if (!urlEndpoint || urlEndpoint.trim() === "") {
     console.error("urlEndpoint is neither provided in this component nor in the ImageKitContext.");
-    return { responsive: false, src: normalSrc, loading };
+    return { src, loading };
   }
 
-  if(responsive === false) {
+  if (responsive === false) {
+    const normalSrc = buildSrc({
+      src,
+      transformation,
+      queryParameters,
+      urlEndpoint,
+      transformationPosition,
+    });
+
     return { src: normalSrc, loading };
   }
 
@@ -80,7 +80,7 @@ const imgData = computed(() => {
     imageBreakpoints,
   });
 
-  return { responsive, src: newSrc, loading, srcSet, sizes, normalSrc };
+  return { responsive, src: newSrc, loading, srcSet, sizes };
 });
 
 /* ------------------------------------------------------------------ */
