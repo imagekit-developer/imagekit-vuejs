@@ -9,6 +9,8 @@ import { computed, inject, useAttrs } from "vue";
 import type { IKImageProps, ImageKitProviderProps } from '../interface';
 import { ImageKitContextKey } from "../provider/keys";
 
+defineOptions({ inheritAttrs: false });
+
 const props = defineProps<IKImageProps>();
 const context = inject<ImageKitProviderProps>(ImageKitContextKey, {});
 
@@ -97,6 +99,7 @@ const IK_KEYS = [
   "responsive",
   "deviceBreakpoints",
   "imageBreakpoints",
+  "srcSet",
 ] as const;
 
 const attrs = useAttrs();

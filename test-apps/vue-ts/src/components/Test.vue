@@ -24,6 +24,14 @@ import {Image, ImageKitProvider, Video} from "@imagekit/vue"
                     width=300
                 />
 
+                <!-- Custom srcset ignored -->
+                <Image
+                    src="/default-image.jpg"
+                    alt="Custom srcset ignored"
+                    height=300
+                    width=300
+                    srcset="default-image.jpg 1x, default-image.jpg 2x"
+                />
 
                 <!-- Width not number -->
                 <Image
