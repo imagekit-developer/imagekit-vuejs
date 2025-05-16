@@ -63,7 +63,7 @@ const imgData = computed(() => {
       transformationPosition,
     });
 
-    return { src: normalSrc, loading };
+    return { src: normalSrc, loading, width };
   }
 
   const widthInt = getInt(width);
@@ -80,7 +80,7 @@ const imgData = computed(() => {
     imageBreakpoints,
   });
 
-  return { responsive, src: newSrc, loading, srcSet, sizes };
+  return { responsive, src: newSrc, loading, srcSet, sizes, width };
 });
 
 /* ------------------------------------------------------------------ */
@@ -97,7 +97,6 @@ const IK_KEYS = [
   "responsive",
   "deviceBreakpoints",
   "imageBreakpoints",
-  "width",
 ] as const;
 
 const attrs = useAttrs();
@@ -112,6 +111,7 @@ const nonIKAttrs = computed(() => {
 </script>
 
 <template>
-  <img v-bind="nonIKAttrs" :loading="imgData.loading" :src="imgData.src"
-    :srcset="imgData.responsive ? imgData.srcSet : undefined" :sizes="imgData.responsive ? imgData.sizes : undefined" />
+  <img v-bind="nonIKAttrs" :width="width" :loading="imgData.loading"
+    :sizes="imgData.responsive ? imgData.sizes : undefined" :srcset="imgData.responsive ? imgData.srcSet : undefined"
+    :src="imgData.src" />
 </template>
