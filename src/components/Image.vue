@@ -50,14 +50,14 @@ const imgData = computed(() => {
   } = merged.value;
 
   if (!urlEndpoint || urlEndpoint.trim() === "") {
-    console.error("urlEndpoint is neither provided in this component nor in the ImageKitContext.");
+    console.error("urlEndpoint is neither provided in this component nor in any parent ImageKitProvider.");
     return { src, loading };
   }
 
   if (responsive === false) {
     const normalSrc = buildSrc({
       src,
-      transformation,
+      transformation: [...transformation],
       queryParameters,
       urlEndpoint,
       transformationPosition,
@@ -70,7 +70,7 @@ const imgData = computed(() => {
 
   const { src: newSrc, srcSet } = getResponsiveImageAttributes({
     src,
-    transformation,
+    transformation: [...transformation],
     width: isNaN(widthInt) ? undefined : widthInt,
     sizes,
     queryParameters,
