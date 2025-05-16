@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {Image, ImageKitProvider, Video} from "@imagekit/vue"
+import {Image, ImageKitProvider, Video, upload, type UploadOptions} from "@imagekit/vue"
 </script>
 
 <template>
