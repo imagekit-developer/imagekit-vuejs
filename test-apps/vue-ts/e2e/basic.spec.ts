@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
-test("CSR test case", async ({ page }) => {
-  await page.goto("/csr");
+test("Test case", async ({ page }) => {
+  await page.goto("/");
 
   // Scroll to the bottom of the page
   await page.evaluate(() => {

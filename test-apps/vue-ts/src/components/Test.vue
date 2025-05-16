@@ -34,9 +34,10 @@ import {Image, ImageKitProvider, Video} from "@imagekit/vue"
                 />
 
                 <!-- Width not number -->
+                <!-- @vue-ignore -->
                 <Image
                     src="/default-image.jpg"
-                    alt="Image with width not number, should produce larger srcset"
+                    alt="Image with width not number, should produce larger srcset"    
                     width="300px"
                 />
 

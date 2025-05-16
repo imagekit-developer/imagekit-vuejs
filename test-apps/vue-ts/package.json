@@ -9,7 +9,9 @@
     "start": "npm run build && npm run preview",
     "preview": "vite preview",
     "build-only": "vite build",
-    "type-check": "vue-tsc --build"
+    "type-check": "vue-tsc --build",
+    "test:e2e": "playwright test",
+    "test:e2e-update": "playwright test --update-snapshots"
   },
   "dependencies": {
     "@playwright/test": "^1.52.0",
