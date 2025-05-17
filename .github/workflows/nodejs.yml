@@ -61,7 +61,7 @@ jobs:
         with:
           name: imagekit-package        # puts .tgz into $GITHUB_WORKSPACE by default
 
-      - name: 🔧  Install demo-app deps + local package
+      - name: 🚀  Run E2E tests
         run: |
           # ── figure out the real .tgz filename (there’s only one) ───────────────
           PKG_TGZ="$(ls "$GITHUB_WORKSPACE"/imagekit-vue-*.tgz)"
@@ -71,11 +71,7 @@ jobs:
           cd test-apps/${{ matrix.app }}
           npm install
           npm install "$PKG_TGZ" --no-save
-
-      - name: 🧑‍💻  Install Playwright browsers
-        run: npx playwright install --with-deps
-
-      - name: 🚀  Run E2E tests
-        run: npm run test:e2e
+          npx playwright install --with-deps
+          npm run test:e2e
         env:
           CI: true
