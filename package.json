@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "rm -rf dist && vite build && npm pack && cp imagekit-vue* ../vue-ts/",
+    "build": "vite build",
     "type-check": "vue-tsc --build"
   },
   "peerDependencies": {
