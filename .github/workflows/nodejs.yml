@@ -63,10 +63,14 @@ jobs:
 
       - name: 🔧  Install demo-app deps + local package
         run: |
+          # ── figure out the real .tgz filename (there’s only one) ───────────────
+          PKG_TGZ="$(ls "$GITHUB_WORKSPACE"/imagekit-vue-*.tgz)"
+          echo "Installing $PKG_TGZ"
+
+          # ── now set up the demo app ───────────────────────────────────────────
           cd test-apps/${{ matrix.app }}
           npm install
-          # install your freshly-packed tarball from the workspace root
-          npm install "${{ github.workspace }}/imagekit-vue-*.tgz" --no-save
+          npm install "$PKG_TGZ" --no-save
 
       - name: 🧑‍💻  Install Playwright browsers
         run: npx playwright install --with-deps
