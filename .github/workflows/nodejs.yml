@@ -1,0 +1,70 @@
+name: Node CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  # 1️⃣ Build the package and publish it as an artifact
+  pack:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Check out code
+        uses: actions/checkout@v4
+
+      - name: 🟢 Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+
+      - name: 📦 Install, build, pack
+        run: |
+          npm ci
+          npm run build
+          npm pack
+        env:
+          CI: true
+
+      - name: 📤 Upload .tgz artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: imagekit-package
+          path: imagekit-vue-*.tgz
+
+  # 2️⃣ Matrix job: run E2E tests for each demo app in parallel
+  test:
+    needs: pack          # wait for the pack job
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        app: [vue-ts, nuxt]   # folders inside test-apps
+
+    steps:
+      - name: ⬇️ Check out code
+        uses: actions/checkout@v4
+
+      - name: 🟢 Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+
+      - name: 📥 Download package artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: imagekit-package
+          path: ./
+
+      - name: 🔧 Install app deps + local package
+        run: |
+          cd test-apps/${{ matrix.app }}
+          npm ci
+          npm install ../../imagekit-vue-*.tgz --no-save
+      - name: 🧑‍💻 Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: 🚀 Run E2E tests
+        run: npm run test:e2e
+        env:
+          CI: true
