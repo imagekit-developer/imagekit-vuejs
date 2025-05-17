@@ -64,7 +64,7 @@ jobs:
       - name: 🔧  Install demo-app deps + local package
         run: |
           cd test-apps/${{ matrix.app }}
-          npm ci
+          npm install
           # install your freshly-packed tarball from the workspace root
           npm install "${{ github.workspace }}/imagekit-vue-*.tgz" --no-save
 
