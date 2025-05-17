@@ -12,6 +12,10 @@
     "build": "vite build",
     "type-check": "vue-tsc --build"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imagekit-developer/imagekit-vuejs"
+  },
   "peerDependencies": {
     "vue": ">=3.0.0"
   },
