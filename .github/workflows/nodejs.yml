@@ -5,66 +5,73 @@ on:
   pull_request:
 
 jobs:
-  # 1️⃣ Build the package and publish it as an artifact
+  # ─────────────────────────────────────────────────────
+  # 1. Build the library and create the .tgz once
+  # ─────────────────────────────────────────────────────
   pack:
     runs-on: ubuntu-latest
 
     steps:
-      - name: ⬇️ Check out code
+      - name: ⬇️  Check out code
         uses: actions/checkout@v4
 
-      - name: 🟢 Set up Node 20
+      - name: 🟢  Set up Node 20
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
+          cache: npm
 
-      - name: 📦 Install, build, pack
+      - name: 📦  Install deps, build, pack
         run: |
           npm ci
           npm run build
-          npm pack
+          npm pack                      # ⇠ generates imagekit-vue-*.tgz in $GITHUB_WORKSPACE
         env:
           CI: true
 
-      - name: 📤 Upload .tgz artifact
+      - name: 📤  Upload package artifact
         uses: actions/upload-artifact@v4
         with:
           name: imagekit-package
-          path: imagekit-vue-*.tgz
+          path: imagekit-vue-*.tgz      # uploads exactly one .tgz
 
-  # 2️⃣ Matrix job: run E2E tests for each demo app in parallel
+  # ─────────────────────────────────────────────────────
+  # 2. Matrix: run demo-app tests in parallel
+  # ─────────────────────────────────────────────────────
   test:
-    needs: pack          # wait for the pack job
+    needs: pack                         # wait for the tarball
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        app: [vue-ts, nuxt]   # folders inside test-apps
+        app: [vue-ts, nuxt]             # sub-folders in test-apps
 
     steps:
-      - name: ⬇️ Check out code
+      - name: ⬇️  Check out code
         uses: actions/checkout@v4
 
-      - name: 🟢 Set up Node 20
+      - name: 🟢  Set up Node 20
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
+          cache: npm
 
-      - name: 📥 Download package artifact
+      - name: 📥  Download package artifact
         uses: actions/download-artifact@v4
         with:
-          name: imagekit-package
-          path: ./
+          name: imagekit-package        # puts .tgz into $GITHUB_WORKSPACE by default
 
-      - name: 🔧 Install app deps + local package
+      - name: 🔧  Install demo-app deps + local package
         run: |
           cd test-apps/${{ matrix.app }}
           npm ci
-          npm install ../../imagekit-vue-*.tgz --no-save
-      - name: 🧑‍💻 Install Playwright browsers
+          # install your freshly-packed tarball from the workspace root
+          npm install "${{ github.workspace }}/imagekit-vue-*.tgz" --no-save
+
+      - name: 🧑‍💻  Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: 🚀 Run E2E tests
+      - name: 🚀  Run E2E tests
         run: npm run test:e2e
         env:
           CI: true
