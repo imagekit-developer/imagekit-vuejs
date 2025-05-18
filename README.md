@@ -24,7 +24,7 @@ npm install @imagekit/vue
 
 ## TypeScript support
 
-The SDK provides first-class TypeScript support for Vue projects, giving you robust type-safety and IDE IntelliSense out of the box—no extra configuration required for your Vue + TypeScript apps.
+The SDK provides first-class TypeScript support for Vue projects, giving you robust type-safety and IDE IntelliSense out of the box—no extra configuration required.
 
 ## Documentation
 
