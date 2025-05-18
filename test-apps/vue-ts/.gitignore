@@ -29,7 +29,10 @@ coverage
 
 *.tsbuildinfo
 
+package-lock.json
 
-*.tgz
-
-.env
+/blob-report/
+/coverage
+/playwright/.cache/
+/playwright-report/
+/test-results/

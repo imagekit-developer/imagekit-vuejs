@@ -1,0 +1,77 @@
+name: Node CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  # ─────────────────────────────────────────────────────
+  # 1. Build the library and create the .tgz once
+  # ─────────────────────────────────────────────────────
+  pack:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️  Check out code
+        uses: actions/checkout@v4
+
+      - name: 🟢  Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: npm
+
+      - name: 📦  Install deps, build, pack
+        run: |
+          npm ci
+          npm run build
+          npm pack                      # ⇠ generates imagekit-vue-*.tgz in $GITHUB_WORKSPACE
+        env:
+          CI: true
+
+      - name: 📤  Upload package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: imagekit-package
+          path: imagekit-vue-*.tgz      # uploads exactly one .tgz
+
+  # ─────────────────────────────────────────────────────
+  # 2. Matrix: run demo-app tests in parallel
+  # ─────────────────────────────────────────────────────
+  test:
+    needs: pack                         # wait for the tarball
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        app: [vue-ts, nuxt]             # sub-folders in test-apps
+
+    steps:
+      - name: ⬇️  Check out code
+        uses: actions/checkout@v4
+
+      - name: 🟢  Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: npm
+
+      - name: 📥  Download package artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: imagekit-package        # puts .tgz into $GITHUB_WORKSPACE by default
+
+      - name: 🚀  Run E2E tests
+        run: |
+          # ── figure out the real .tgz filename (there’s only one) ───────────────
+          PKG_TGZ="$(ls "$GITHUB_WORKSPACE"/imagekit-vue-*.tgz)"
+          echo "Installing $PKG_TGZ"
+
+          # ── now set up the demo app ───────────────────────────────────────────
+          cd test-apps/${{ matrix.app }}
+          npm install
+          npm install "$PKG_TGZ" --no-save
+          npx playwright install --with-deps
+          npm run test:e2e
+        env:
+          CI: true
