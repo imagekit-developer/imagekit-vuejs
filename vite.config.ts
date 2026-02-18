@@ -21,11 +21,12 @@ export default defineConfig({
       fileName: format => `index.${format}.js`
     },
     rollupOptions: {
-      external: ['vue'],
+      external: ['vue', '@imagekit/javascript'],
 
       output: {
         globals: {
           vue: 'Vue',
+          '@imagekit/javascript': 'ImageKit',
         },
       },
     }
