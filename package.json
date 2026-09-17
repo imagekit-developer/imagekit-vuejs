@@ -33,6 +33,6 @@
     "vue-tsc": "^2.2.8"
   },
   "dependencies": {
-    "@imagekit/javascript": "^5.1.0"
+    "@imagekit/javascript": "^5.5.0"
   }
 }
