@@ -72,6 +72,9 @@ jobs:
           npm install
           npm install "$PKG_TGZ" --no-save
           npx playwright install --with-deps
+          # Build explicitly so a failing build prints its error here instead of
+          # being swallowed by Playwright's webServer wrapper.
+          npm run build
           npm run test:e2e
         env:
           CI: true
