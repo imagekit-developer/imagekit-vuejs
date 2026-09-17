@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.0.2](https://github.com/imagekit-developer/imagekit-vuejs/compare/4.0.1...4.0.2) (2026-09-17)
+
+
+### Bug Fixes
+
+* **deps:** require @imagekit/javascript ^5.5.0 and set up Release Please ([6c8a3ec](https://github.com/imagekit-developer/imagekit-vuejs/commit/6c8a3ece776c11c2348db219967bb0f372ac877c))
+* **deps:** require @imagekit/javascript ^5.5.0 for density transformation support ([834156c](https://github.com/imagekit-developer/imagekit-vuejs/commit/834156c35bb46f0cd8033942487b0237498fec91))
+
 ## 4.0.1
 
 Include `@imagekit/javascript` in external in Rollup config to prevent bundling it with the package, allowing users to be able to fetch the latest version of the SDK without needing to update the package. This also reduces the bundle size of the package and allows users to manage the SDK version separately.
