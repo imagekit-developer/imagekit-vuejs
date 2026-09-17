@@ -1,8 +1,10 @@
-name: Publish Package to npmjs
+name: Publish
 
 on:
   release:
     types: [published]
+  # Manual re-run from the default branch, e.g. when a release publish failed.
+  workflow_dispatch:
 
 jobs:
   publish:
@@ -11,22 +13,23 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - name: ⬇️  Check out code
-        uses: actions/checkout@v4
-      
-      - name: Setup .npmrc file to publish to npm
+      - uses: actions/checkout@v4
+      - name: Use Node.js 24.x
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: Build and Publish
+          node-version: 24.x
+          registry-url: https://registry.npmjs.org/
+      - name: Upgrade npm for OIDC trusted publishing
+        # Trusted publishing needs npm >= 11.5.1. Pin the 11 line: npm@latest
+        # is now 12.x, which refuses to install on older Node runners.
+        run: |
+          npm install -g npm@11
+          npm --version
+      - name: NPM Publish
         run: |
           npm ci
           npm run build
-          # print the NPM user name for validation
-          npm whoami
-          VERSION=$(node -p "require('./package.json').version" )
+          VERSION=$(node -p "require('./package.json').version")
           # Only publish stable versions to the latest tag
           if [[ "$VERSION" =~ ^[^-]+$ ]]; then
             NPM_TAG="latest"
@@ -36,5 +39,4 @@ jobs:
           echo "Publishing $VERSION with $NPM_TAG tag."
           npm publish --tag $NPM_TAG --provenance --access public
         env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
           CI: true
