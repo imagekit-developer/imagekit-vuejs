@@ -67,6 +67,10 @@ jobs:
           PKG_TGZ="$(ls "$GITHUB_WORKSPACE"/imagekit-vue-*.tgz)"
           echo "Installing $PKG_TGZ"
 
+          # ── root install: Vite's tsconfig loader walks up to the repo root
+          #    tsconfig.node.json, which extends @tsconfig/node22 ──────────────
+          npm ci --ignore-scripts
+
           # ── now set up the demo app ───────────────────────────────────────────
           cd test-apps/${{ matrix.app }}
           npm install
